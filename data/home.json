@@ -1,0 +1,20 @@
+{
+  "title": "Home - My Static Site",
+  "site_name": "My Static Site",
+  "heading": "Welcome to My Static Site",
+  "intro": "This is a static website generated using Jinja2 templates and JSON data.",
+  "features": [
+    {
+      "name": "Template-based",
+      "description": "Uses Jinja2 templating for flexible HTML generation"
+    },
+    {
+      "name": "Data-driven",
+      "description": "Content is managed in JSON files for easy updates"
+    },
+    {
+      "name": "Static Output",
+      "description": "Generates fast, deployable HTML files"
+    }
+  ]
+}

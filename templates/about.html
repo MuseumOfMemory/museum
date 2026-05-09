@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ heading }}</h1>
+<p>{{ description }}</p>
+
+<section class="team">
+    <h2>Our Team</h2>
+    {% for member in team %}
+    <div class="team-member">
+        <h3>{{ member.name }}</h3>
+        <p class="role">{{ member.role }}</p>
+        <p>{{ member.bio }}</p>
+    </div>
+    {% endfor %}
+</section>
+{% endblock %}

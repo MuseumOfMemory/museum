@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ heading }}</h1>
+<p>{{ intro }}</p>
+
+<section class="features">
+    <h2>Features</h2>
+    <ul>
+    {% for feature in features %}
+        <li>
+            <h3>{{ feature.name }}</h3>
+            <p>{{ feature.description }}</p>
+        </li>
+    {% endfor %}
+    </ul>
+</section>
+{% endblock %}
