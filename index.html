@@ -337,9 +337,39 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
   .htl-node p {
     margin: 0; font-size: 13px; color: var(--gray-700); line-height: 1.55;
   }
+  .htl-node .htl-meta {
+    margin-top: 10px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    color: var(--gray-500);
+  }
+  .htl-node .htl-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
   .htl-node a {
     display: inline-block; margin-top: 10px; font-size: 12px; font-weight: 600;
     color: var(--gray-700); border-bottom: 1px solid var(--gray-300); padding-bottom: 1px;
+  }
+  .htl-node .htl-note {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--gray-500);
+  }
+  .htl-track.is-loading {
+    display: block;
+    margin-top: 24px;
+    border-top: 1px solid var(--gray-200);
+    padding-top: 20px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gray-500);
   }
   .htl-node a:hover { color: var(--black); border-color: var(--black); }
   @media (max-width: 900px) {
@@ -454,7 +484,7 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
       </div>
     </div>
 
-    <div class="hero-timeline" data-stub>
+    <div class="hero-timeline">
       <div class="hero-timeline-head">
         <div>
           <div class="t-mono">The years, in brief</div>
@@ -463,44 +493,8 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
         <span class="t-small">A quick path into the archive's major periods.</span>
       </div>
 
-      <div class="htl">
-        <div class="htl-track">
-          <div class="htl-node is-key">
-            <div class="htl-dot"></div>
-            <div class="yr">2014</div>
-            <h4>The Salida protests</h4>
-            <p>The first wave of detentions opens the period this archive documents.</p>
-            <a href="archive.html?year=2014">14 people →</a>
-          </div>
-          <div class="htl-node is-key">
-            <div class="htl-dot"></div>
-            <div class="yr">2017</div>
-            <h4>Four months of protest</h4>
-            <p>Sustained demonstrations spread across the country.</p>
-            <a href="archive.html?year=2017">62 people →</a>
-          </div>
-          <div class="htl-node is-key">
-            <div class="htl-dot"></div>
-            <div class="yr">2019</div>
-            <h4>Migration accelerates</h4>
-            <p>Families separate across borders as the crisis deepens.</p>
-            <a href="archive.html?year=2019">38 people →</a>
-          </div>
-          <div class="htl-node is-key">
-            <div class="htl-dot"></div>
-            <div class="yr">2024</div>
-            <h4>Post-election detentions</h4>
-            <p>A new wave of arrests follows the disputed election.</p>
-            <a href="archive.html?year=2024">98 people →</a>
-          </div>
-          <div class="htl-node is-now">
-            <div class="htl-dot"></div>
-            <div class="yr">Today · 2026</div>
-            <h4>Still waiting</h4>
-            <p>Some names have come home. Many families are still waiting.</p>
-            <a href="archive.html">See the archive →</a>
-          </div>
-        </div>
+      <div class="htl" data-timeline-target="hero">
+        <div class="htl-track is-loading">Loading sourced timeline...</div>
       </div>
     </div>
   </div>
@@ -642,47 +636,11 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
         <span class="num">04 — Browse by year</span>
         <h2 class="t-h2" style="margin-top:12px;">The years, in brief</h2>
       </div>
-      <span class="t-small">Click any year to filter the archive</span>
+      <span class="t-small">Sourced context; record counts come from local profiles</span>
     </div>
 
-    <div class="htl" data-stub>
-      <div class="htl-track">
-        <div class="htl-node is-key">
-          <div class="htl-dot"></div>
-          <div class="yr">2014</div>
-          <h4>The Salida protests</h4>
-          <p>Mass demonstrations begin across Venezuela. The first wave of detentions opens the period this archive documents.</p>
-          <a href="archive.html?year=2014">14 people →</a>
-        </div>
-        <div class="htl-node is-key">
-          <div class="htl-dot"></div>
-          <div class="yr">2017</div>
-          <h4>Four months of street protest</h4>
-          <p>Sustained protests across the country following the Supreme Court's dissolution of the National Assembly.</p>
-          <a href="archive.html?year=2017">62 people →</a>
-        </div>
-        <div class="htl-node is-key">
-          <div class="htl-dot"></div>
-          <div class="yr">2019</div>
-          <h4>Mass migration accelerates</h4>
-          <p>By year-end, the United Nations counts more than 4 million Venezuelans abroad. Families separate across borders.</p>
-          <a href="archive.html?year=2019">38 people →</a>
-        </div>
-        <div class="htl-node is-key">
-          <div class="htl-dot"></div>
-          <div class="yr">2024</div>
-          <h4>The post-election detentions</h4>
-          <p>Following the disputed July 28 presidential election, more than 1,800 people are detained in three weeks. Most are under thirty.</p>
-          <a href="archive.html?year=2024">98 people →</a>
-        </div>
-        <div class="htl-node is-now">
-          <div class="htl-dot"></div>
-          <div class="yr">Today · 2026</div>
-          <h4>Liberations & families still waiting</h4>
-          <p>Some of the names in this archive have come home. Many have not. Some families are still waiting to be told what happened.</p>
-          <a href="archive.html">See the archive →</a>
-        </div>
-      </div>
+    <div class="htl" data-timeline-target="section">
+      <div class="htl-track is-loading">Loading sourced timeline...</div>
     </div>
   </div>
 </section>
@@ -791,6 +749,153 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
     document.querySelectorAll('.lang button').forEach(x => { x.classList.remove('on'); x.setAttribute('aria-pressed','false'); });
     b.classList.add('on'); b.setAttribute('aria-pressed','true');
   }));
+
+  const TIMELINE_DATA_URL = 'data/context/timeline.json';
+  const PEOPLE_INDEX_URL = 'data/people/index.json';
+
+  async function fetchJson(url) {
+    const response = await fetch(url, { cache: 'no-store' });
+    if (!response.ok) throw new Error(`Could not load ${url}`);
+    return response.json();
+  }
+
+  function getRecordYear(profile) {
+    const metadata = profile.metadata || {};
+    const explicitYear = metadata.archive_year || metadata.timeline_year || profile.archive_year;
+    if (explicitYear) return String(explicitYear);
+
+    const datedEvent = (profile.timeline || []).find(event =>
+      typeof event.date === 'string' && /^\d{4}/.test(event.date)
+    );
+    return datedEvent ? datedEvent.date.slice(0, 4) : null;
+  }
+
+  function countRecordsByYear(profiles) {
+    return profiles.reduce((counts, profile) => {
+      const year = getRecordYear(profile);
+      if (year) counts[year] = (counts[year] || 0) + 1;
+      return counts;
+    }, {});
+  }
+
+  function recordLabel(count) {
+    return `${count} Museum ${count === 1 ? 'record' : 'records'}`;
+  }
+
+  function sourceUrlFor(node) {
+    const source = (node.sources || []).find(item => item.url);
+    return source ? source.url : null;
+  }
+
+  function countForNode(node, countsByYear, totalRecords) {
+    if (node.count_scope === 'all_records') return totalRecords;
+    if (node.year) return countsByYear[String(node.year)] || 0;
+    return 0;
+  }
+
+  function appendTextElement(parent, tag, className, text) {
+    const element = document.createElement(tag);
+    if (className) element.className = className;
+    element.textContent = text;
+    parent.appendChild(element);
+    return element;
+  }
+
+  function renderTimeline(target, nodes, countsByYear, totalRecords, mode) {
+    const track = document.createElement('div');
+    track.className = 'htl-track';
+
+    nodes.forEach(node => {
+      const item = document.createElement('div');
+      item.className = `htl-node ${node.count_scope === 'all_records' ? 'is-now' : 'is-key'}`;
+
+      appendTextElement(item, 'div', 'htl-dot', '');
+      appendTextElement(item, 'div', 'yr', node.display_year);
+      appendTextElement(item, 'h4', '', mode === 'hero' ? (node.hero_title || node.title) : node.title);
+      appendTextElement(item, 'p', '', mode === 'hero' ? node.summary : (node.section_summary || node.summary));
+
+      if (node.external_metric && node.count_scope !== 'all_records') {
+        appendTextElement(item, 'div', 'htl-meta', node.external_metric.short_label);
+      }
+
+      const actions = document.createElement('div');
+      actions.className = 'htl-actions';
+
+      const recordCount = countForNode(node, countsByYear, totalRecords);
+      if (recordCount > 0) {
+        const archiveLink = document.createElement('a');
+        archiveLink.href = node.archive_filter_href || 'archive.html';
+        archiveLink.textContent = `${recordLabel(recordCount)} →`;
+        actions.appendChild(archiveLink);
+      } else if (node.count_scope !== 'all_records') {
+        appendTextElement(actions, 'span', 'htl-note', 'No Museum records yet');
+      }
+
+      const sourceUrl = sourceUrlFor(node);
+      if (sourceUrl) {
+        const sourceLink = document.createElement('a');
+        sourceLink.href = sourceUrl;
+        sourceLink.target = '_blank';
+        sourceLink.rel = 'noopener';
+        sourceLink.textContent = 'Source ↗';
+        actions.appendChild(sourceLink);
+      }
+
+      item.appendChild(actions);
+      track.appendChild(item);
+    });
+
+    target.replaceChildren(track);
+  }
+
+  async function loadMuseumProfiles() {
+    const index = await fetchJson(PEOPLE_INDEX_URL);
+    const entries = Array.isArray(index.people) ? index.people : [];
+    const profiles = await Promise.all(entries.map(async entry => {
+      try {
+        return await fetchJson(entry.path);
+      } catch (error) {
+        console.warn(error);
+        return null;
+      }
+    }));
+    return profiles.filter(Boolean);
+  }
+
+  async function hydrateTimelines() {
+    const targets = document.querySelectorAll('[data-timeline-target]');
+    if (!targets.length) return;
+
+    try {
+      const [timeline, profiles] = await Promise.all([
+        fetchJson(TIMELINE_DATA_URL),
+        loadMuseumProfiles()
+      ]);
+      const countsByYear = countRecordsByYear(profiles);
+      const nodes = Array.isArray(timeline.nodes) ? timeline.nodes : [];
+
+      targets.forEach(target => {
+        renderTimeline(
+          target,
+          nodes,
+          countsByYear,
+          profiles.length,
+          target.dataset.timelineTarget
+        );
+      });
+    } catch (error) {
+      console.warn(error);
+      targets.forEach(target => {
+        target.replaceChildren();
+        const message = document.createElement('div');
+        message.className = 'htl-track is-loading';
+        message.textContent = 'Timeline data unavailable';
+        target.appendChild(message);
+      });
+    }
+  }
+
+  hydrateTimelines();
 </script>
 </body>
 </html>
