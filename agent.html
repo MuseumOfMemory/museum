@@ -1,0 +1,807 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Editorial workflow — Museum of Memory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@400;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+/* Museum of Memory — shared stylesheet */
+:root {
+  --cream: #F0EDE8;
+  --cream-2: #E8E4DC;
+  --white: #FFFFFF;
+  --black: #1A1A1A;
+  --true-black: #0D0D0D;
+  --red: #CF142B;
+  --blue: #003893;
+  --blue-deep: #002564;
+  --yellow: #FCD116;
+  --yellow-deep: #C9A410;
+  --red-deep: #A31821;
+  --primary: #003893;
+  --primary-deep: #002564;
+  --amber: #C8820A;
+  --gray-900: #1F1F1F;
+  --gray-700: #3D3D3D;
+  --gray-500: #666666;
+  --gray-400: #888888;
+  --gray-300: #999999;
+  --gray-200: #D0CCC8;
+  --gray-100: #E5E1DA;
+  --cuba-blue: #0057A8;
+  --nicaragua-green: #2E7D32;
+  --venezuela-red: #B71C1C;
+
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-mono: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+
+  --max: 1320px;
+  --gutter: 32px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--font-sans);
+  background: var(--cream);
+  color: var(--black);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+
+/* ---------- Type scale ---------- */
+.t-hero { font-size: clamp(48px, 6vw, 84px); font-weight: 900; letter-spacing: -0.025em; line-height: 1.02; }
+.t-h1   { font-size: clamp(40px, 4.2vw, 56px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.05; }
+.t-h2   { font-size: clamp(28px, 2.8vw, 40px); font-weight: 800; letter-spacing: -0.015em; line-height: 1.1; }
+.t-h3   { font-size: 28px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.2; }
+.t-h4   { font-size: 20px; font-weight: 700; letter-spacing: -0.005em; line-height: 1.3; }
+.t-lead { font-size: 20px; font-weight: 400; line-height: 1.55; color: var(--gray-700); }
+.t-body { font-size: 16px; font-weight: 400; line-height: 1.65; }
+.t-small{ font-size: 13px; font-weight: 400; color: var(--gray-500); }
+.t-cap  { font-size: 12px; font-weight: 400; color: var(--gray-500); }
+.t-label{
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.12em; color: var(--blue);
+}
+.t-mono { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gray-500); }
+.t-quote{ font-family: var(--font-serif); font-weight: 700; font-size: clamp(28px, 3vw, 40px); line-height: 1.25; letter-spacing: -0.005em; color: var(--black); }
+
+/* ---------- Layout ---------- */
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+.section { padding: 96px 0; border-top: 1px solid var(--gray-200); }
+.section.tight { padding: 64px 0; }
+.section-head { display: flex; flex-direction: column; gap: 12px; margin-bottom: 48px; }
+.section-head .num { font-family: var(--font-mono); font-size: 12px; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.14em; }
+
+/* ---------- Header ---------- */
+.topband {
+  background: var(--true-black);
+  color: var(--cream);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.topband .wrap { display: flex; justify-content: space-between; align-items: center; padding-top: 10px; padding-bottom: 10px; gap: 24px; }
+.topband a { color: inherit; opacity: 0.7; }
+.topband a:hover { opacity: 1; }
+.topband .lang { display: inline-flex; gap: 8px; }
+.topband .lang button {
+  background: transparent; border: 1px solid rgba(255,255,255,0.2); color: var(--cream);
+  font: inherit; letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 4px 10px; cursor: pointer;
+}
+.topband .lang button.on { background: var(--cream); color: var(--true-black); border-color: var(--cream); }
+
+.nav {
+  background: var(--cream);
+  border-bottom: 1px solid var(--gray-200);
+  position: sticky; top: 0; z-index: 50;
+}
+.nav .wrap { display: flex; align-items: center; gap: 32px; padding-top: 16px; padding-bottom: 16px; }
+.brand { display: flex; align-items: center; gap: 12px; font-weight: 700; }
+.brand-mark {
+  width: 44px; height: 44px; background: var(--blue); color: var(--white);
+  display: grid; place-items: center; font-weight: 900; letter-spacing: -0.02em;
+  font-size: 16px;
+}
+.brand-text { display: flex; flex-direction: column; line-height: 1.15; }
+.brand-text strong { font-size: 15px; font-weight: 700; }
+.brand-text span { font-size: 12px; color: var(--gray-500); font-weight: 400; }
+.nav-links { display: flex; gap: 28px; margin-left: auto; align-items: center; }
+.nav-links a { font-size: 14px; color: var(--gray-700); }
+.nav-links a:hover, .nav-links a.active { color: var(--black); }
+.nav-actions { display: flex; align-items: center; gap: 12px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 20px; font-size: 14px; font-weight: 600;
+  border: 1px solid var(--black); background: var(--black); color: var(--cream);
+  cursor: pointer; transition: background 0.15s ease;
+}
+.btn:hover { background: var(--gray-700); }
+.btn.red { background: var(--blue); border-color: var(--blue); color: var(--white); }
+.btn.red:hover { background: var(--blue-deep); border-color: var(--blue-deep); }
+.btn.ghost { background: transparent; color: var(--black); }
+.btn.ghost:hover { background: var(--black); color: var(--cream); }
+.search-icon {
+  width: 40px; height: 40px; border-radius: 999px;
+  border: 1px solid var(--gray-200); background: var(--white);
+  display: grid; place-items: center; cursor: pointer;
+}
+
+/* ---------- Status pills ---------- */
+.pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 5px 10px; border: 1px solid currentColor;
+}
+.pill.imprisoned { color: var(--red); }
+.pill.exiled    { color: var(--amber); }
+.pill.liberated { color: var(--nicaragua-green); }
+.pill.killed    { color: var(--true-black); }
+.pill.disappeared { color: var(--gray-700); }
+.pill.family    { color: var(--cuba-blue); }
+.pill.solid { background: var(--red); color: var(--white); border-color: var(--red); }
+.pill.solid.amber { background: var(--amber); border-color: var(--amber); }
+.pill.solid.green { background: var(--nicaragua-green); border-color: var(--nicaragua-green); }
+
+/* ---------- Photo placeholder ---------- */
+.photo {
+  background: var(--cream-2);
+  position: relative;
+  overflow: hidden;
+  display: flex; align-items: flex-end; justify-content: flex-start;
+}
+.photo::before {
+  content: ""; position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(0,0,0,0.025) 0 1px,
+    transparent 1px 14px
+  );
+}
+.photo .photo-cap {
+  position: relative; z-index: 1;
+  font-family: var(--font-mono); font-size: 11px;
+  text-transform: uppercase; letter-spacing: 0.14em;
+  color: var(--gray-500);
+  padding: 12px 14px;
+}
+.photo.dark { background: var(--true-black); }
+.photo.dark::before { background-image: repeating-linear-gradient(-45deg, rgba(255,255,255,0.04) 0 1px, transparent 1px 14px); }
+.photo.dark .photo-cap { color: var(--gray-300); }
+
+/* ---------- Person card ---------- */
+.person-card {
+  display: block;
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.person-card:hover { border-color: var(--black); }
+.person-card .photo { aspect-ratio: 4/5; }
+.person-card .meta { padding: 18px 20px 22px; }
+.person-card .meta h4 { margin: 0 0 6px; font-size: 18px; font-weight: 700; letter-spacing: -0.005em; }
+.person-card .meta .sub { font-size: 13px; color: var(--gray-500); }
+.person-card .pill { margin-bottom: 12px; }
+
+/* ---------- Footer ---------- */
+.foot { background: var(--true-black); color: var(--cream); padding: 80px 0 40px; margin-top: 96px; }
+.foot a { color: var(--cream); opacity: 0.7; }
+.foot a:hover { opacity: 1; }
+.foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; }
+.foot-col h5 { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray-300); margin: 0 0 16px; font-family: var(--font-mono); font-weight: 400; }
+.foot-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; font-size: 14px; }
+.foot-bottom { margin-top: 64px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.12); display: flex; justify-content: space-between; font-size: 12px; color: var(--gray-300); font-family: var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase; }
+
+/* ---------- Stub data flag (preview mode) ---------- */
+[data-stub] { position: relative; }
+body.preview-on [data-stub] {
+  outline: 2px dashed var(--yellow-deep);
+  outline-offset: 2px;
+  background-image: linear-gradient(135deg, rgba(252,209,22,0.06) 0 8px, transparent 8px 16px);
+}
+body.preview-on [data-stub]::after {
+  content: "SAMPLE";
+  position: absolute; top: -10px; left: -2px;
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.16em; font-weight: 700;
+  background: var(--yellow); color: var(--black); padding: 2px 6px;
+  z-index: 5;
+}
+.preview-toggle {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  background: var(--yellow); color: var(--black); border: 0; padding: 4px 10px;
+  cursor: pointer;
+}
+.preview-toggle .dot { width: 6px; height: 6px; border-radius: 999px; background: var(--black); }
+body.preview-on .preview-toggle { background: var(--black); color: var(--yellow); }
+body.preview-on .preview-toggle .dot { background: var(--yellow); }
+
+/* ---------- Utilities ---------- */
+.hr { border: 0; border-top: 1px solid var(--gray-200); margin: 0; }
+.flag { width: 18px; height: 12px; display: inline-block; vertical-align: middle; border: 1px solid rgba(0,0,0,0.05); }
+.country-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+
+</style>
+<style>
+  body { background: var(--cream-2); }
+
+  /* App chrome */
+  .app-bar {
+    background: var(--true-black); color: var(--cream);
+    border-bottom: 1px solid #000;
+  }
+  .app-bar .wrap { display: flex; align-items: center; gap: 24px; padding: 14px var(--gutter); }
+  .app-bar .brand-mark { width: 32px; height: 32px; font-size: 13px; }
+  .app-bar .brand-text strong { color: var(--cream); font-size: 14px; }
+  .app-bar .brand-text span { color: var(--gray-400); font-size: 11px; }
+  .app-bar .editor-tag {
+    margin-left: 8px;
+    font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+    background: var(--red); color: var(--white); padding: 4px 10px;
+  }
+  .app-bar .right { margin-left: auto; display: flex; align-items: center; gap: 16px; font-size: 12px; }
+  .app-bar .who { display: flex; align-items: center; gap: 10px; color: var(--gray-300); }
+  .app-bar .avatar { width: 28px; height: 28px; border-radius: 999px; background: var(--red); color: var(--white); display: grid; place-items: center; font-size: 11px; font-weight: 700; }
+
+  /* Workflow stepper */
+  .stepper {
+    background: var(--white);
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .stepper .wrap { display: flex; align-items: stretch; padding: 0 var(--gutter); }
+  .step {
+    flex: 1; padding: 22px 28px;
+    border-right: 1px solid var(--gray-200);
+    display: flex; align-items: center; gap: 16px;
+    position: relative; cursor: pointer;
+    transition: background 0.15s;
+  }
+  .step:last-child { border-right: 0; }
+  .step:hover { background: var(--cream); }
+  .step .n {
+    width: 32px; height: 32px;
+    border: 1.5px solid var(--gray-300); color: var(--gray-500);
+    display: grid; place-items: center; font-family: var(--font-mono); font-size: 13px; font-weight: 500;
+    flex: 0 0 32px; border-radius: 999px;
+  }
+  .step.done .n { background: var(--nicaragua-green); border-color: var(--nicaragua-green); color: var(--white); }
+  .step.active .n { background: var(--red); border-color: var(--red); color: var(--white); }
+  .step .label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray-500); margin-bottom: 2px; }
+  .step .name { font-size: 15px; font-weight: 700; }
+  .step.active .name { color: var(--red); }
+  .step.done .name { color: var(--gray-700); }
+  .step .meta { font-size: 12px; color: var(--gray-500); margin-top: 2px; }
+
+  /* Two-pane layout */
+  .work {
+    display: grid;
+    grid-template-columns: 480px 1fr 380px;
+    min-height: calc(100vh - 130px);
+    background: var(--cream-2);
+  }
+
+  .pane { background: var(--white); border-right: 1px solid var(--gray-200); display: flex; flex-direction: column; min-height: 0; }
+  .pane:last-child { border-right: 0; }
+  .pane-head {
+    padding: 18px 24px; border-bottom: 1px solid var(--gray-200);
+    display: flex; align-items: center; gap: 12px; background: var(--cream);
+  }
+  .pane-head .lbl { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gray-500); }
+  .pane-head h3 { margin: 0; font-size: 15px; font-weight: 700; }
+  .pane-head .right { margin-left: auto; font-size: 12px; color: var(--gray-500); display: flex; align-items: center; gap: 8px; }
+  .pane-head .pulse { width: 8px; height: 8px; border-radius: 999px; background: var(--nicaragua-green); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:0.4;} }
+  .pane-body { padding: 24px; overflow: auto; flex: 1; }
+
+  /* LEFT — Sources panel (Find) */
+  .src-card {
+    background: var(--cream); border: 1px solid var(--gray-200);
+    padding: 16px 18px; margin-bottom: 12px;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .src-card .src-row { display: flex; align-items: center; gap: 10px; }
+  .src-card .ico { width: 28px; height: 28px; background: var(--white); border: 1px solid var(--gray-200); display: grid; place-items: center; font-family: var(--font-mono); font-size: 11px; color: var(--gray-700); flex: 0 0 28px; }
+  .src-card .ico.pdf { color: var(--red); }
+  .src-card .ico.aud { color: var(--cuba-blue); }
+  .src-card .ico.txt { color: var(--gray-700); }
+  .src-card .src-meta { flex: 1; min-width: 0; }
+  .src-card .src-meta .title { font-size: 13px; font-weight: 600; line-height: 1.3; }
+  .src-card .src-meta .sub { font-size: 11px; color: var(--gray-500); margin-top: 2px; font-family: var(--font-mono); letter-spacing: 0.04em; text-transform: uppercase; }
+  .src-card .check {
+    width: 18px; height: 18px; border: 1.5px solid var(--gray-300);
+    display: grid; place-items: center; flex: 0 0 18px;
+  }
+  .src-card.checked .check { background: var(--nicaragua-green); border-color: var(--nicaragua-green); color: var(--white); }
+  .src-card.checked .check::after { content: "✓"; font-size: 11px; font-weight: 700; line-height: 1; }
+  .src-card .extracted {
+    font-size: 11px; color: var(--gray-700); padding: 8px 10px;
+    background: var(--white); border-left: 2px solid var(--red);
+    line-height: 1.5; font-family: var(--font-mono);
+  }
+
+  .agent-trail { display: flex; flex-direction: column; gap: 0; margin-top: 8px; }
+  .trail-row {
+    display: flex; gap: 12px; padding: 12px 0;
+    border-bottom: 1px dashed var(--gray-200);
+    font-size: 12px;
+  }
+  .trail-row:last-child { border-bottom: 0; }
+  .trail-row .when {
+    font-family: var(--font-mono); color: var(--gray-400); font-size: 10px;
+    letter-spacing: 0.06em; flex: 0 0 64px; padding-top: 2px;
+  }
+  .trail-row .what { color: var(--gray-700); line-height: 1.55; }
+  .trail-row .what code { background: var(--cream); padding: 1px 6px; border: 1px solid var(--gray-200); font-family: var(--font-mono); font-size: 11px; color: var(--black); }
+  .trail-row.is-action .what { color: var(--black); font-weight: 500; }
+
+  /* CENTER — Preview */
+  .preview-pane { background: var(--cream); }
+  .preview-pane .pane-head { background: var(--white); }
+  .preview-frame {
+    margin: 28px;
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    box-shadow: 0 1px 0 rgba(0,0,0,0.04), 0 12px 30px rgba(0,0,0,0.06);
+    overflow: hidden;
+  }
+  .preview-frame .pf-head {
+    padding: 28px 36px 12px;
+    border-bottom: 1px solid var(--gray-200);
+    display: flex; gap: 24px; align-items: flex-start;
+  }
+  .preview-frame .pf-head .photo { width: 100px; height: 130px; flex: 0 0 100px; }
+  .preview-frame .pf-head .pf-meta { flex: 1; }
+  .preview-frame .pf-head .pill { margin-bottom: 8px; }
+  .preview-frame .pf-head h2 { margin: 0; font-size: 26px; font-weight: 800; letter-spacing: -0.01em; }
+  .preview-frame .pf-head .epi { font-family: var(--font-serif); font-style: italic; font-size: 14px; color: var(--gray-500); margin-top: 4px; }
+
+  .preview-frame .pf-body { padding: 24px 36px 36px; }
+  .preview-frame .pf-body p { font-size: 14px; line-height: 1.7; color: var(--gray-700); margin: 0 0 14px; }
+  .preview-frame .pf-body p strong { color: var(--black); font-weight: 600; }
+  .preview-frame .pf-body h4 { font-size: 13px; font-weight: 700; margin: 24px 0 8px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-500); }
+  .preview-frame .pf-facts {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    border-top: 1px solid var(--gray-200);
+    margin-top: 12px; margin-bottom: 8px;
+  }
+  .preview-frame .pf-facts .f {
+    padding: 10px 14px 10px 0;
+    border-bottom: 1px solid var(--gray-200);
+  }
+  .preview-frame .pf-facts .f:nth-child(even) { padding-left: 14px; padding-right: 0; border-left: 1px solid var(--gray-200); }
+  .preview-frame .pf-facts dt { font-family: var(--font-mono); font-size: 10px; color: var(--gray-500); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 4px; }
+  .preview-frame .pf-facts dd { margin: 0; font-size: 13px; font-weight: 600; }
+
+  /* Annotations */
+  .anno {
+    position: relative;
+  }
+  .anno-pin {
+    position: absolute; top: 12px; right: -42px;
+    width: 28px; height: 28px;
+    background: var(--amber); color: var(--white);
+    display: grid; place-items: center;
+    font-size: 11px; font-weight: 700; font-family: var(--font-mono);
+    border-radius: 999px;
+    box-shadow: 0 2px 6px rgba(200,130,10,0.4);
+  }
+  .anno-pin.red { background: var(--red); box-shadow: 0 2px 6px rgba(204,32,39,0.4); }
+  .anno-pin.green { background: var(--nicaragua-green); box-shadow: 0 2px 6px rgba(46,125,50,0.4); }
+
+  /* RIGHT — Review panel */
+  .approve-card { background: var(--cream); border: 1px solid var(--gray-200); padding: 18px; margin-bottom: 14px; }
+  .approve-card .row { display: flex; gap: 10px; align-items: flex-start; }
+  .approve-card .pin {
+    width: 22px; height: 22px;
+    background: var(--amber); color: var(--white);
+    display: grid; place-items: center;
+    font-size: 11px; font-weight: 700; font-family: var(--font-mono);
+    border-radius: 999px; flex: 0 0 22px;
+  }
+  .approve-card .pin.red { background: var(--red); }
+  .approve-card .pin.green { background: var(--nicaragua-green); }
+  .approve-card .text { flex: 1; }
+  .approve-card .label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray-500); margin-bottom: 4px; }
+  .approve-card h4 { margin: 0 0 6px; font-size: 14px; font-weight: 700; }
+  .approve-card p { margin: 0; font-size: 13px; color: var(--gray-700); line-height: 1.55; }
+  .approve-card .field-q {
+    margin-top: 10px; padding: 10px; background: var(--white); border: 1px solid var(--gray-200);
+    font-size: 12px; color: var(--black); line-height: 1.5;
+    font-family: var(--font-mono);
+  }
+  .approve-card .actions { display: flex; gap: 8px; margin-top: 12px; }
+  .mini {
+    font-size: 11px; font-weight: 600; padding: 6px 10px;
+    border: 1px solid var(--gray-200); background: var(--white); color: var(--gray-700); cursor: pointer;
+  }
+  .mini.primary { background: var(--black); border-color: var(--black); color: var(--cream); }
+  .mini.danger { color: var(--red); border-color: var(--red); }
+
+  .checklist {
+    display: flex; flex-direction: column; gap: 0;
+    border: 1px solid var(--gray-200); background: var(--cream);
+  }
+  .checklist .item {
+    padding: 12px 14px; display: flex; align-items: center; gap: 10px;
+    border-bottom: 1px solid var(--gray-200); font-size: 13px;
+  }
+  .checklist .item:last-child { border-bottom: 0; }
+  .checklist .check { width: 16px; height: 16px; border: 1.5px solid var(--gray-300); display: grid; place-items: center; flex: 0 0 16px; }
+  .checklist .item.done .check { background: var(--nicaragua-green); border-color: var(--nicaragua-green); color: var(--white); }
+  .checklist .item.done .check::after { content: "✓"; font-size: 11px; font-weight: 700; }
+  .checklist .item.warn .check { border-color: var(--amber); }
+  .checklist .item.warn .check::after { content: "!"; font-size: 11px; color: var(--amber); font-weight: 700; }
+  .checklist .item.done .label-c { color: var(--gray-500); text-decoration: line-through; }
+
+  .publish-card {
+    background: var(--true-black); color: var(--cream);
+    padding: 22px; margin-top: 18px;
+  }
+  .publish-card h4 { margin: 0 0 6px; font-size: 15px; }
+  .publish-card p { margin: 0 0 16px; font-size: 13px; color: var(--gray-300); line-height: 1.55; }
+  .publish-card .summary { display: flex; gap: 16px; font-size: 12px; color: var(--gray-300); margin-bottom: 16px; }
+  .publish-card .summary span strong { display: block; color: var(--cream); font-size: 18px; font-weight: 700; }
+  .publish-card .btn-row { display: flex; gap: 8px; }
+  .publish-card .btn { flex: 1; justify-content: center; }
+
+  @media (max-width: 1280px) {
+    .work { grid-template-columns: 380px 1fr 340px; }
+  }
+  @media (max-width: 1100px) {
+    .work { grid-template-columns: 1fr; }
+    .pane { border-right: 0; border-bottom: 1px solid var(--gray-200); }
+  }
+</style>
+</head>
+<body>
+
+<!-- APP BAR -->
+<header class="app-bar">
+  <div class="wrap" style="max-width: none;">
+    <div class="brand">
+      <span class="brand-mark">MoM</span>
+      <span class="brand-text"><strong>Museum of Memory</strong><span>Editorial workspace</span></span>
+    </div>
+    <span class="editor-tag">Internal · staff only</span>
+    <div class="right">
+      <span style="color: var(--gray-400);">Draft auto-saved · 11:42 a.m. CCS</span>
+      <a href="index.html" style="color: var(--gray-300); border-bottom: 1px solid rgba(255,255,255,0.2);">View public site →</a>
+      <div class="who"><div class="avatar">LR</div><span>Lucía R. — Editor</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- STEPPER -->
+<div class="stepper">
+  <div class="wrap" style="max-width: none;">
+    <div class="step done">
+      <div class="n">1</div>
+      <div>
+        <div class="label">Step 1</div>
+        <div class="name">Find</div>
+        <div class="meta">2 confirmed sources · 4 pending</div>
+      </div>
+    </div>
+    <div class="step active">
+      <div class="n">2</div>
+      <div>
+        <div class="label">Step 2 · in review</div>
+        <div class="name">Preview & approve</div>
+        <div class="meta">3 questions waiting on you</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="n">3</div>
+      <div>
+        <div class="label">Step 3</div>
+        <div class="name">Publish</div>
+        <div class="meta">After family sign-off + 2 approvals</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- WORKSPACE -->
+<div class="work">
+
+  <!-- LEFT: SOURCES + AGENT TRAIL -->
+  <div class="pane">
+    <div class="pane-head">
+      <span class="lbl">Step 1 · Find</span>
+      <h3>Sources & extraction</h3>
+      <div class="right"><span class="pulse"></span>Agent idle</div>
+    </div>
+    <div class="pane-body">
+      <div style="font-size: 12px; color: var(--gray-500); margin-bottom: 14px; line-height: 1.6;">
+        The agent assembled this profile from <strong style="color: var(--black);">2 confirmed sources</strong> — Carmen's signed
+        intake form and the family's report. Four further sources are pending. All claims in the preview must trace
+        to at least one checked source; un-cited or unconfirmed statements are flagged in the right pane.
+      </div>
+
+      <div class="src-card checked">
+        <div class="src-row">
+          <div class="check"></div>
+          <div class="ico txt">FORM</div>
+          <div class="src-meta">
+            <div class="title">Family intake form — submitted by Carmen Teresa Navas</div>
+            <div class="sub">Signed consent · 03.12.2026</div>
+          </div>
+        </div>
+        <div class="extracted">Carmen, 82 · son Víctor Hugo Quero Navas · detained 01.01.2025 · Tocorón Prison<br/>→ used in summary, fact panel, chronology rows 1–2</div>
+      </div>
+
+      <div class="src-card checked">
+        <div class="src-row">
+          <div class="check"></div>
+          <div class="ico pdf">PDF</div>
+          <div class="src-meta">
+            <div class="title">Family report — disappearance & reported death</div>
+            <div class="sub">3 pp · 08.04.2025</div>
+          </div>
+        </div>
+        <div class="extracted">No official whereabouts since transfer · unofficial word of death 07.27.2025<br/>→ used in summary, chronology rows 3–4 (flagged as unconfirmed)</div>
+      </div>
+
+      <div class="src-card">
+        <div class="src-row">
+          <div class="check"></div>
+          <div class="ico aud">AUD</div>
+          <div class="src-meta">
+            <div class="title">Carmen Teresa Navas — recorded interview</div>
+            <div class="sub">Pending · awaiting family-set date and consent</div>
+          </div>
+        </div>
+        <div class="extracted" style="border-color: var(--gray-300); color: var(--gray-500);">Off — recording not yet conducted. Voices section will remain a pending placeholder until then.</div>
+      </div>
+
+      <div class="src-card">
+        <div class="src-row">
+          <div class="check"></div>
+          <div class="ico pdf">PDF</div>
+          <div class="src-meta">
+            <div class="title">Foro Penal — case file (Víctor Hugo Quero Navas)</div>
+            <div class="sub">Requested · awaiting response</div>
+          </div>
+        </div>
+        <div class="extracted" style="border-color: var(--gray-300); color: var(--gray-500);">Off — independent corroboration not yet received. Will rebuild draft when available.</div>
+      </div>
+
+      <div class="src-card">
+        <div class="src-row">
+          <div class="check"></div>
+          <div class="ico pdf">PDF</div>
+          <div class="src-meta">
+            <div class="title">CEPAZ — monitoring report (2025 detentions)</div>
+            <div class="sub">Pending corroboration request</div>
+          </div>
+        </div>
+        <div class="extracted" style="border-color: var(--gray-300); color: var(--gray-500);">Off — context source. Toggle on if independently corroborated.</div>
+      </div>
+
+      <div class="src-card">
+        <div class="src-row">
+          <div class="check"></div>
+          <div class="ico txt">URL</div>
+          <div class="src-meta">
+            <div class="title">News article — second-hand reference</div>
+            <div class="sub">Excluded — second-hand quotation</div>
+          </div>
+        </div>
+        <div class="extracted" style="border-color: var(--gray-300); color: var(--gray-500);">Off — not used in current draft. Toggle on to include.</div>
+      </div>
+
+      <h4 style="margin: 28px 0 12px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray-500); font-family: var(--font-mono); font-weight: 400;">Agent trail</h4>
+      <div class="agent-trail">
+        <div class="trail-row is-action">
+          <div class="when">11:14</div>
+          <div class="what">Agent <code>profile-builder/v3</code> opened a new draft from intake form submitted by Carmen Teresa Navas.</div>
+        </div>
+        <div class="trail-row">
+          <div class="when">11:15</div>
+          <div class="what">Loaded family-provided documents (2). Independent corroboration (Foro Penal, CEPAZ) requested — pending.</div>
+        </div>
+        <div class="trail-row">
+          <div class="when">11:18</div>
+          <div class="what">Detention date 01.01.2025 confirmed by family. Reported death 07.27.2025 <strong style="color: var(--amber);">unconfirmed</strong> by any official source.</div>
+        </div>
+        <div class="trail-row">
+          <div class="when">11:22</div>
+          <div class="what">Generated draft summary (3 alternates). Selected version that qualifies every claim by source.</div>
+        </div>
+        <div class="trail-row is-action">
+          <div class="when">11:31</div>
+          <div class="what">Flagged <strong>3 statements that need editor or family review</strong> before publish.</div>
+        </div>
+        <div class="trail-row">
+          <div class="when">11:34</div>
+          <div class="what">Sent draft to family for review (Carmen). Voices section left as pending placeholder until recorded testimony exists.</div>
+        </div>
+        <div class="trail-row is-action">
+          <div class="when">11:42</div>
+          <div class="what">Handed off to editor <code>lucia.r</code> for sign-off.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CENTER: PREVIEW -->
+  <div class="pane preview-pane">
+    <div class="pane-head">
+      <span class="lbl">Step 2 · Preview</span>
+      <h3>Preview as it will appear publicly</h3>
+      <div class="right">
+        <span style="font-family: var(--font-mono); font-size: 11px;">/people/carmen-teresa-navas</span>
+        <button class="mini">Desktop</button>
+        <button class="mini" style="opacity:0.5;">Mobile</button>
+      </div>
+    </div>
+    <div class="pane-body" style="padding: 0; background: var(--cream-2);">
+      <div class="preview-frame">
+
+        <div class="pf-head">
+          <div class="photo"><span class="photo-cap" style="font-size: 8px; padding: 6px 8px;">PORTRAIT — PHOTO PENDING</span></div>
+          <div class="pf-meta">
+            <span class="pill family">Family of a disappeared person</span>
+            <h2>Carmen Teresa Navas</h2>
+            <div class="epi">Mother of Víctor Hugo Quero Navas. Still waiting to be told the truth.</div>
+          </div>
+        </div>
+
+        <div class="pf-body">
+          <h4>Summary</h4>
+          <div class="anno">
+            <div class="anno-pin green">✓</div>
+            <p>Carmen Teresa Navas is 82 years old. Her son <strong>Víctor Hugo Quero Navas was detained on January 1, 2025</strong> and transferred to Tocorón Prison. The family has been given no official information about his whereabouts since.</p>
+          </div>
+          <div class="anno">
+            <div class="anno-pin">2</div>
+            <p>According to information that has reached the family, Víctor Hugo died on <strong>July 27, 2025</strong>. <strong>His death has not been officially confirmed.</strong> What remains for Carmen is the absence of truth.</p>
+          </div>
+
+          <h4>Key facts</h4>
+          <dl class="pf-facts">
+            <div class="f"><dt>Age</dt><dd>82</dd></div>
+            <div class="f"><dt>Status</dt><dd>Family of a disappeared person</dd></div>
+            <div class="f"><dt>Country</dt><dd>Venezuela</dd></div>
+            <div class="f"><dt>Connected to</dt><dd>Víctor Hugo Quero Navas · son</dd></div>
+          </dl>
+
+          <h4>Pull quote</h4>
+          <div class="anno">
+            <div class="anno-pin red">3</div>
+            <p style="font-family: var(--font-serif); font-style: italic; font-size: 18px; color: var(--gray-500); border-left: 2px solid var(--blue); padding-left: 16px;">
+              Pending recorded testimony from Carmen — to be added on family approval. No invented quotes will appear in this profile.
+            </p>
+          </div>
+
+          <h4>Chronology · selected rows</h4>
+          <div class="anno">
+            <div class="anno-pin">1</div>
+            <p style="margin: 0; font-size: 13px; line-height: 1.6;">
+              <strong>Jan 1, 2025</strong> — Víctor Hugo Quero Navas detained, transferred to Tocorón Prison.<br/>
+              <strong>Jan 2025 →</strong> No official information provided to family. Considered forcibly disappeared.<br/>
+              <strong>Jul 27, 2025</strong> — Family receives unofficial word of death. Not confirmed by any authority.<br/>
+              <strong>Today</strong> — Carmen, 82, is still waiting to be told the truth.
+            </p>
+          </div>
+
+          <h4>How to support</h4>
+          <p style="font-size: 13px;">Three actions ready: <strong>written request to authorities</strong>, <strong>shareable card (EN/ES)</strong>, <strong>monthly gift to sustain verification work.</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: EDITOR REVIEW -->
+  <div class="pane">
+    <div class="pane-head">
+      <span class="lbl">Editor review</span>
+      <h3>3 questions before publish</h3>
+    </div>
+    <div class="pane-body">
+
+      <div class="approve-card">
+        <div class="row">
+          <div class="pin">1</div>
+          <div class="text">
+            <div class="label">Confirm framing</div>
+            <h4>Reported death — unconfirmed</h4>
+            <p>The draft states Víctor Hugo "reportedly died on July 27, 2025" and adds "his death has not been officially confirmed." Family-reported, not independently corroborated.</p>
+            <div class="field-q">Approve current qualified phrasing?</div>
+            <div class="actions">
+              <button class="mini primary">Approve</button>
+              <button class="mini">Stronger caveat: "according to information that has reached the family"</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="approve-card">
+        <div class="row">
+          <div class="pin">2</div>
+          <div class="text">
+            <div class="label">Source needed</div>
+            <h4>"Forcibly disappeared"</h4>
+            <p>Family characterizes the absence of official information as a forced disappearance. No independent corroboration yet (Foro Penal request pending).</p>
+            <div class="field-q">Action: keep with family-source attribution, or hold?</div>
+            <div class="actions">
+              <button class="mini primary">Keep — attribute to family</button>
+              <button class="mini danger">Hold until corroborated</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="approve-card">
+        <div class="row">
+          <div class="pin red">3</div>
+          <div class="text">
+            <div class="label">Sensitivity check</div>
+            <h4>Voices section — pending placeholder</h4>
+            <p>No recorded testimony from Carmen yet. Draft leaves the voices section as an explicit placeholder — no invented quotes anywhere on the page.</p>
+            <div class="field-q">Confirm: ship with pending placeholder?</div>
+            <div class="actions">
+              <button class="mini primary">Confirm placeholder</button>
+              <button class="mini">Hold until interview recorded</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <h4 style="margin: 28px 0 12px; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray-500); font-family: var(--font-mono); font-weight: 400;">Pre-publish checklist</h4>
+      <div class="checklist">
+        <div class="item done"><div class="check"></div><div class="label-c">Family consent received in writing</div></div>
+        <div class="item done"><div class="check"></div><div class="label-c">All facts traced to ≥1 source</div></div>
+        <div class="item done"><div class="check"></div><div class="label-c">No images of third parties</div></div>
+        <div class="item done"><div class="check"></div><div class="label-c">Spanish translation drafted</div></div>
+        <div class="item warn"><div class="check"></div><div>Family review of final draft <span style="color: var(--gray-500);">— sent 11:34, awaiting</span></div></div>
+        <div class="item warn"><div class="check"></div><div>Second editor sign-off</div></div>
+      </div>
+
+      <div class="publish-card">
+        <h4>Step 3 · Publish</h4>
+        <p>Once family confirmation and a second editor sign-off arrive, you can publish. Profile will appear at <span style="font-family: var(--font-mono); color: var(--cream);">/people/carmen-teresa-navas</span> in EN and ES.</p>
+        <div class="summary">
+          <span><strong>2</strong>confirmed sources</span>
+          <span><strong>4</strong>pending</span>
+          <span><strong>2</strong>languages</span>
+        </div>
+        <div class="btn-row">
+          <button class="btn" style="background: var(--gray-700); border-color: var(--gray-700);">Save draft</button>
+          <button class="btn red" disabled style="opacity: 0.6; cursor: not-allowed;">Publish · pending</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+  document.querySelectorAll('.src-card').forEach(c=>{
+    c.addEventListener('click',()=>c.classList.toggle('checked'));
+  });
+  document.querySelectorAll('.approve-card .mini.primary').forEach(b=>{
+    b.addEventListener('click', e=>{
+      const card = e.target.closest('.approve-card');
+      card.style.opacity = '0.5';
+      const pin = card.querySelector('.pin');
+      pin.classList.remove('red'); pin.classList.add('green');
+      pin.textContent = '✓';
+    });
+  });
+
+  document.getElementById('previewToggle')?.addEventListener('click',()=>document.body.classList.toggle('preview-on'));
+</script>
+</body>
+</html>

@@ -1,0 +1,689 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Carmen Teresa Navas — Museum of Memory</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet" />
+<style>
+/* Museum of Memory — shared stylesheet */
+:root {
+  --cream: #F0EDE8;
+  --cream-2: #E8E4DC;
+  --white: #FFFFFF;
+  --black: #1A1A1A;
+  --true-black: #0D0D0D;
+  --red: #CF142B;
+  --blue: #003893;
+  --blue-deep: #002564;
+  --yellow: #FCD116;
+  --yellow-deep: #C9A410;
+  --red-deep: #A31821;
+  --primary: #003893;
+  --primary-deep: #002564;
+  --amber: #C8820A;
+  --gray-900: #1F1F1F;
+  --gray-700: #3D3D3D;
+  --gray-500: #666666;
+  --gray-400: #888888;
+  --gray-300: #999999;
+  --gray-200: #D0CCC8;
+  --gray-100: #E5E1DA;
+  --cuba-blue: #0057A8;
+  --nicaragua-green: #2E7D32;
+  --venezuela-red: #B71C1C;
+
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-mono: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace, Menlo, monospace;
+
+  --max: 1320px;
+  --gutter: 32px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: var(--font-sans);
+  background: var(--cream);
+  color: var(--black);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+
+/* ---------- Type scale ---------- */
+.t-hero { font-size: clamp(48px, 6vw, 84px); font-weight: 900; letter-spacing: -0.025em; line-height: 1.02; }
+.t-h1   { font-size: clamp(40px, 4.2vw, 56px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.05; }
+.t-h2   { font-size: clamp(28px, 2.8vw, 40px); font-weight: 800; letter-spacing: -0.015em; line-height: 1.1; }
+.t-h3   { font-size: 28px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.2; }
+.t-h4   { font-size: 20px; font-weight: 700; letter-spacing: -0.005em; line-height: 1.3; }
+.t-lead { font-size: 20px; font-weight: 400; line-height: 1.55; color: var(--gray-700); }
+.t-body { font-size: 16px; font-weight: 400; line-height: 1.65; }
+.t-small{ font-size: 13px; font-weight: 400; color: var(--gray-500); }
+.t-cap  { font-size: 12px; font-weight: 400; color: var(--gray-500); }
+.t-label{
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.12em; color: var(--blue);
+}
+.t-mono { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gray-500); }
+.t-quote{ font-family: var(--font-serif); font-weight: 700; font-size: clamp(28px, 3vw, 40px); line-height: 1.25; letter-spacing: -0.005em; color: var(--black); }
+
+/* ---------- Layout ---------- */
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
+.section { padding: 96px 0; border-top: 1px solid var(--gray-200); }
+.section.tight { padding: 64px 0; }
+.section-head { display: flex; flex-direction: column; gap: 12px; margin-bottom: 48px; }
+.section-head .num { font-family: var(--font-mono); font-size: 12px; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.14em; }
+
+/* ---------- Header ---------- */
+.topband {
+  background: var(--true-black);
+  color: var(--cream);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.topband .wrap { display: flex; justify-content: space-between; align-items: center; padding-top: 10px; padding-bottom: 10px; gap: 24px; }
+.topband a { color: inherit; opacity: 0.7; }
+.topband a:hover { opacity: 1; }
+.topband .lang { display: inline-flex; gap: 8px; }
+.topband .lang button {
+  background: transparent; border: 1px solid rgba(255,255,255,0.2); color: var(--cream);
+  font: inherit; letter-spacing: 0.14em; text-transform: uppercase;
+  padding: 4px 10px; cursor: pointer;
+}
+.topband .lang button.on { background: var(--cream); color: var(--true-black); border-color: var(--cream); }
+
+.nav {
+  background: var(--cream);
+  border-bottom: 1px solid var(--gray-200);
+  position: sticky; top: 0; z-index: 50;
+}
+.nav .wrap { display: flex; align-items: center; gap: 32px; padding-top: 16px; padding-bottom: 16px; }
+.brand { display: flex; align-items: center; gap: 12px; font-weight: 700; }
+.brand-mark {
+  width: 44px; height: 44px; background: var(--blue); color: var(--white);
+  display: grid; place-items: center; font-weight: 900; letter-spacing: -0.02em;
+  font-size: 16px;
+}
+.brand-text { display: flex; flex-direction: column; line-height: 1.15; }
+.brand-text strong { font-size: 15px; font-weight: 700; }
+.brand-text span { font-size: 12px; color: var(--gray-500); font-weight: 400; }
+.nav-links { display: flex; gap: 28px; margin-left: auto; align-items: center; }
+.nav-links a { font-size: 14px; color: var(--gray-700); }
+.nav-links a:hover, .nav-links a.active { color: var(--black); }
+.nav-actions { display: flex; align-items: center; gap: 12px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 20px; font-size: 14px; font-weight: 600;
+  border: 1px solid var(--black); background: var(--black); color: var(--cream);
+  cursor: pointer; transition: background 0.15s ease;
+}
+.btn:hover { background: var(--gray-700); }
+.btn.red { background: var(--blue); border-color: var(--blue); color: var(--white); }
+.btn.red:hover { background: var(--blue-deep); border-color: var(--blue-deep); }
+.btn.ghost { background: transparent; color: var(--black); }
+.btn.ghost:hover { background: var(--black); color: var(--cream); }
+.search-icon {
+  width: 40px; height: 40px; border-radius: 999px;
+  border: 1px solid var(--gray-200); background: var(--white);
+  display: grid; place-items: center; cursor: pointer;
+}
+
+/* ---------- Status pills ---------- */
+.pill {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 5px 10px; border: 1px solid currentColor;
+}
+.pill.imprisoned { color: var(--red); }
+.pill.exiled    { color: var(--amber); }
+.pill.liberated { color: var(--nicaragua-green); }
+.pill.killed    { color: var(--true-black); }
+.pill.disappeared { color: var(--gray-700); }
+.pill.family    { color: var(--cuba-blue); }
+.pill.solid { background: var(--red); color: var(--white); border-color: var(--red); }
+.pill.solid.amber { background: var(--amber); border-color: var(--amber); }
+.pill.solid.green { background: var(--nicaragua-green); border-color: var(--nicaragua-green); }
+
+/* ---------- Photo placeholder ---------- */
+.photo {
+  background: var(--cream-2);
+  position: relative;
+  overflow: hidden;
+  display: flex; align-items: flex-end; justify-content: flex-start;
+}
+.photo::before {
+  content: ""; position: absolute; inset: 0;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    rgba(0,0,0,0.025) 0 1px,
+    transparent 1px 14px
+  );
+}
+.photo .photo-cap {
+  position: relative; z-index: 1;
+  font-family: var(--font-mono); font-size: 11px;
+  text-transform: uppercase; letter-spacing: 0.14em;
+  color: var(--gray-500);
+  padding: 12px 14px;
+}
+.photo.dark { background: var(--true-black); }
+.photo.dark::before { background-image: repeating-linear-gradient(-45deg, rgba(255,255,255,0.04) 0 1px, transparent 1px 14px); }
+.photo.dark .photo-cap { color: var(--gray-300); }
+
+/* ---------- Person card ---------- */
+.person-card {
+  display: block;
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.person-card:hover { border-color: var(--black); }
+.person-card .photo { aspect-ratio: 4/5; }
+.person-card .meta { padding: 18px 20px 22px; }
+.person-card .meta h4 { margin: 0 0 6px; font-size: 18px; font-weight: 700; letter-spacing: -0.005em; }
+.person-card .meta .sub { font-size: 13px; color: var(--gray-500); }
+.person-card .pill { margin-bottom: 12px; }
+
+/* ---------- Footer ---------- */
+.foot { background: var(--true-black); color: var(--cream); padding: 80px 0 40px; margin-top: 96px; }
+.foot a { color: var(--cream); opacity: 0.7; }
+.foot a:hover { opacity: 1; }
+.foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; }
+.foot-col h5 { font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray-300); margin: 0 0 16px; font-family: var(--font-mono); font-weight: 400; }
+.foot-col ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; font-size: 14px; }
+.foot-bottom { margin-top: 64px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.12); display: flex; justify-content: space-between; font-size: 12px; color: var(--gray-300); font-family: var(--font-mono); letter-spacing: 0.1em; text-transform: uppercase; }
+
+/* ---------- Stub data flag (preview mode) ---------- */
+[data-stub] { position: relative; }
+body.preview-on [data-stub] {
+  outline: 2px dashed var(--yellow-deep);
+  outline-offset: 2px;
+  background-image: linear-gradient(135deg, rgba(252,209,22,0.06) 0 8px, transparent 8px 16px);
+}
+body.preview-on [data-stub]::after {
+  content: "SAMPLE";
+  position: absolute; top: -10px; left: -2px;
+  font-family: var(--font-mono); font-size: 9px; letter-spacing: 0.16em; font-weight: 700;
+  background: var(--yellow); color: var(--black); padding: 2px 6px;
+  z-index: 5;
+}
+.preview-toggle {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase;
+  background: var(--yellow); color: var(--black); border: 0; padding: 4px 10px;
+  cursor: pointer;
+}
+.preview-toggle .dot { width: 6px; height: 6px; border-radius: 999px; background: var(--black); }
+body.preview-on .preview-toggle { background: var(--black); color: var(--yellow); }
+body.preview-on .preview-toggle .dot { background: var(--yellow); }
+
+/* ---------- Utilities ---------- */
+.hr { border: 0; border-top: 1px solid var(--gray-200); margin: 0; }
+.flag { width: 18px; height: 12px; display: inline-block; vertical-align: middle; border: 1px solid rgba(0,0,0,0.05); }
+.country-tag { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+
+</style>
+<style>
+  .crumbs { padding: 24px 0 0; font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray-500); }
+  .crumbs a { color: var(--gray-500); border-bottom: 1px solid var(--gray-200); padding-bottom: 1px; }
+  .crumbs a:hover { color: var(--black); border-color: var(--black); }
+
+  .profile-head { padding: 48px 0 64px; border-bottom: 1px solid var(--gray-200); }
+  .ph-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 64px; align-items: start; }
+  .ph-grid .photo { aspect-ratio: 4/5; }
+  .ph-meta .pill { margin-bottom: 18px; }
+  .ph-meta h1 { margin: 0 0 6px; font-size: clamp(40px, 4.4vw, 60px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.05; }
+  .ph-meta .epithet { font-family: var(--font-serif); font-style: italic; font-size: 22px; color: var(--gray-700); margin-bottom: 28px; font-weight: 400; }
+  .ph-meta .summary { font-size: 18px; line-height: 1.65; color: var(--gray-700); margin: 0 0 28px; max-width: 56ch; }
+  .ph-meta .summary strong { color: var(--black); font-weight: 600; }
+
+  .facts {
+    border-top: 1px solid var(--gray-200);
+    margin-top: 32px;
+    display: grid; grid-template-columns: 1fr 1fr;
+  }
+  .facts dl { display: contents; }
+  .facts .row { display: contents; }
+  .fact {
+    padding: 18px 0;
+    border-bottom: 1px solid var(--gray-200);
+    border-right: 1px solid var(--gray-200);
+    padding-right: 24px;
+  }
+  .fact:nth-child(even) { padding-right: 0; padding-left: 24px; border-right: 0; }
+  .fact dt { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-500); margin-bottom: 6px; }
+  .fact dd { margin: 0; font-size: 16px; font-weight: 600; color: var(--black); }
+  .fact dd .sub { display: block; font-size: 12px; color: var(--gray-500); font-weight: 400; margin-top: 2px; }
+
+  .actions { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
+
+  /* Story body */
+  .story { padding: 96px 0; }
+  .story-grid { display: grid; grid-template-columns: 200px 1fr; gap: 64px; align-items: start; }
+  .story-grid .marker { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--red); padding-top: 8px; position: sticky; top: 96px; }
+  .story-grid h2 { margin: 0 0 24px; font-size: 36px; font-weight: 800; letter-spacing: -0.015em; }
+  .story-grid h3 { margin: 36px 0 12px; font-size: 22px; font-weight: 700; }
+  .story-grid p { font-size: 17px; line-height: 1.75; color: var(--gray-700); margin: 0 0 20px; }
+  .story-grid p:first-of-type::first-letter { font-family: var(--font-serif); font-size: 64px; font-weight: 700; float: left; line-height: 0.9; padding-right: 12px; padding-top: 6px; color: var(--black); }
+  .story-grid p strong { color: var(--black); font-weight: 600; }
+  .story-grid .max { max-width: 64ch; }
+
+  /* Pull quote inline */
+  .pull {
+    border-top: 1px solid var(--gray-200);
+    border-bottom: 1px solid var(--gray-200);
+    padding: 48px 0;
+    margin: 48px 0;
+  }
+  .pull .qmark { font-family: var(--font-serif); font-size: 64px; color: var(--red); line-height: 0.6; margin-bottom: 8px; }
+  .pull p { font-family: var(--font-serif); font-weight: 700; font-size: 32px; line-height: 1.25; color: var(--black); margin: 0 0 16px; }
+  .pull cite { font-style: normal; font-size: 13px; color: var(--gray-500); font-family: var(--font-sans); }
+
+  /* Timeline of detention */
+  .det-timeline { display: flex; flex-direction: column; }
+  .det-row { display: grid; grid-template-columns: 160px 24px 1fr; gap: 24px; padding: 24px 0; border-top: 1px solid var(--gray-200); align-items: start; }
+  .det-row:last-child { border-bottom: 1px solid var(--gray-200); }
+  .det-row .when { font-family: var(--font-mono); font-size: 13px; color: var(--gray-700); letter-spacing: 0.06em; padding-top: 4px; }
+  .det-row .dot { display: grid; place-items: center; padding-top: 10px; }
+  .det-row .dot::before { content: ""; width: 10px; height: 10px; border-radius: 999px; background: var(--gray-300); }
+  .det-row.is-key .dot::before { background: var(--red); }
+  .det-row .what h4 { margin: 0 0 6px; font-size: 17px; font-weight: 700; }
+  .det-row .what p { margin: 0; color: var(--gray-700); font-size: 15px; line-height: 1.6; max-width: 60ch; }
+  .det-row .what .src { font-size: 11px; color: var(--gray-400); margin-top: 8px; font-style: italic; }
+
+  /* Family voices */
+  .voices2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .voice {
+    background: var(--white); border: 1px solid var(--gray-200);
+    padding: 32px; display: flex; flex-direction: column; gap: 16px;
+  }
+  .voice .qmark { font-family: var(--font-serif); font-size: 48px; line-height: 0.5; color: var(--red); }
+  .voice .text { font-size: 17px; line-height: 1.65; color: var(--black); margin: 0; }
+  .voice .who { display: flex; align-items: center; gap: 12px; margin-top: auto; }
+  .voice .who .ph { width: 44px; height: 44px; background: var(--cream-2); flex: 0 0 44px; }
+  .voice .who .name { font-weight: 700; font-size: 14px; }
+  .voice .who .role { font-size: 12px; color: var(--gray-500); }
+
+  /* Support */
+  .support {
+    background: var(--true-black); color: var(--cream); padding: 88px 0;
+  }
+  .support h2 { color: var(--cream); margin: 0 0 16px; }
+  .support .lede { color: rgba(240,237,232,0.75); font-size: 18px; max-width: 720px; margin: 0 0 48px; line-height: 1.65; }
+  .support-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.12); }
+  .support-grid > div { background: var(--true-black); padding: 36px 32px; }
+  .support-grid h4 { margin: 0 0 10px; font-size: 20px; font-weight: 700; color: var(--cream); }
+  .support-grid p { margin: 0 0 18px; color: rgba(240,237,232,0.7); font-size: 14px; line-height: 1.6; }
+  .support-grid .num { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; color: var(--red); text-transform: uppercase; margin-bottom: 14px; display: block; }
+
+  /* Sources */
+  .sources { padding: 64px 0; background: var(--cream-2); }
+  .sources h3 { margin: 0 0 18px; font-size: 16px; font-weight: 700; }
+  .sources ol { padding-left: 20px; margin: 0; color: var(--gray-700); font-size: 13px; line-height: 1.8; }
+  .sources li::marker { color: var(--gray-400); }
+
+  /* Related */
+  .related-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .related-grid .person-card .photo { aspect-ratio: 4/5; }
+
+  @media (max-width: 1000px) {
+    .ph-grid, .story-grid, .voices2, .support-grid, .related-grid, .foot-grid { grid-template-columns: 1fr; gap: 32px; }
+    .related-grid { grid-template-columns: repeat(2, 1fr); }
+    .story-grid .marker { position: static; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topband">
+  <div class="wrap">
+    <div>An independent archive · Honoring families and the disappeared of Venezuela</div>
+    <div class="lang"><button class="on">EN</button><button>ES</button></div>
+    <button class="preview-toggle" id="previewToggle"><span class="dot"></span>Preview · highlight stubs</button>
+  </div>
+</div>
+
+<header class="nav">
+  <div class="wrap">
+    <a href="index.html" class="brand">
+      <span class="brand-mark">MoM</span>
+      <span class="brand-text"><strong>Museum of Memory</strong><span>An archive of the families of Venezuela</span></span>
+    </a>
+    <nav class="nav-links">
+      <a href="archive.html" class="active">The Archive</a>
+      <a href="#">Stories</a>
+      <a href="#">Countries</a>
+      <a href="#">Timeline</a>
+      <a href="#">About</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="search-icon" aria-label="Search"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="7" cy="7" r="5"/><path d="M11 11l3 3"/></svg></button>
+      <a class="btn red" href="index.html#help">Support Justice</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="crumbs"><a href="archive.html">The Archive</a> &nbsp;/&nbsp; <a href="archive.html?country=ve">Venezuela</a> &nbsp;/&nbsp; Family of victim &nbsp;/&nbsp; Carmen Teresa Navas</div>
+</div>
+
+<!-- HEAD -->
+<section class="profile-head">
+  <div class="wrap">
+    <div class="ph-grid">
+      <div class="photo">
+        <span class="photo-cap">PORTRAIT — CARMEN TERESA NAVAS · PHOTO PENDING FAMILY APPROVAL</span>
+      </div>
+      <div class="ph-meta">
+        <span class="pill family">Family of a disappeared person</span>
+        <h1>Carmen Teresa Navas</h1>
+        <div class="epithet">Mother of Víctor Hugo Quero Navas. Still waiting to be told the truth.</div>
+        <p class="summary">
+          Carmen Teresa Navas is 82 years old. Her son <strong>Víctor Hugo Quero Navas was detained
+          on January 1, 2025</strong> and transferred to Tocorón Prison. The family reports that
+          since then he has been forcibly disappeared — they have never been given official
+          information about his whereabouts. According to information that has reached them,
+          Víctor Hugo died on July 27, 2025. <strong>His death has not been officially
+          confirmed.</strong> What remains for Carmen is the absence of truth.
+        </p>
+
+        <dl class="facts">
+          <div class="fact">
+            <dt>Age</dt>
+            <dd>82</dd>
+          </div>
+          <div class="fact">
+            <dt>Country</dt>
+            <dd>Venezuela</dd>
+          </div>
+          <div class="fact">
+            <dt>Status</dt>
+            <dd>Family of a disappeared person <span class="sub">Mother</span></dd>
+          </div>
+          <div class="fact">
+            <dt>Connected to</dt>
+            <dd>Víctor Hugo Quero Navas (son) <span class="sub">Detained 01.01.2025 · Tocorón Prison</span></dd>
+          </div>
+          <div class="fact" data-stub>
+            <dt>Profile added</dt>
+            <dd>Pending <span class="sub">Awaiting family approval</span></dd>
+          </div>
+          <div class="fact" data-stub>
+            <dt>Last verified</dt>
+            <dd>Pending <span class="sub">Sources still being collected</span></dd>
+          </div>
+        </dl>
+
+        <div class="actions">
+          <a class="btn red" href="#support">How to stand with Carmen</a>
+          <a class="btn ghost" href="#">Share this profile</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HER STORY -->
+<section class="story">
+  <div class="wrap">
+    <div class="story-grid">
+      <div class="marker">What is known</div>
+      <div class="max">
+        <h2>What we know, and what we do not</h2>
+        <p>
+          Carmen Teresa Navas is the mother of Víctor Hugo Quero Navas. On January 1, 2025,
+          her son was detained and transferred to Tocorón Prison. From the moment of that
+          transfer, his family has not been given official information about where he is,
+          how he is, or whether he is alive.
+        </p>
+        <p>
+          On July 27, 2025, Carmen received word — through unofficial channels — that
+          Víctor Hugo had died. <strong>That word has not been confirmed by any authority.</strong>
+          No body has been delivered. No certificate has been issued. No explanation has
+          been given. For the family, this is not the end of a story. It is the absence
+          of one.
+        </p>
+
+        <div class="pull">
+          <div class="qmark" style="color: var(--blue);">"</div>
+          <p data-stub>Pending direct testimony from the family — to be added on family approval. Until then, this profile speaks only in facts that have been confirmed by Carmen herself or by the documentary record.</p>
+          <cite>— Editor's note</cite>
+        </div>
+
+        <h3>The right to know</h3>
+        <p>
+          Under international human rights law, families of the disappeared have the right
+          to know the truth: where their loved one is held, what condition they are in,
+          and — if they are no longer alive — when, where, and how they died, and where
+          their remains rest. Carmen Teresa Navas has not been given any of this.
+        </p>
+        <p>
+          This profile exists because she has asked for it to exist. It will be updated
+          the moment any official information is delivered. Until then, the record will
+          stand as it is — incomplete, because so is the truth.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="section" style="border-top: 1px solid var(--gray-200);">
+  <div class="wrap">
+    <div class="story-grid">
+      <div class="marker">Chronology</div>
+      <div class="max" style="max-width: 100%;">
+        <h2>The years, in brief</h2>
+        <div class="det-timeline">
+          <div class="det-row is-key">
+            <div class="when">January 1, 2025</div>
+            <div class="dot"></div>
+            <div class="what">
+              <h4>Víctor Hugo Quero Navas is detained</h4>
+              <p>Víctor Hugo, son of Carmen Teresa Navas, is detained and shortly afterward transferred to Tocorón Prison.</p>
+              <div class="src">Source: family report · pending corroboration</div>
+            </div>
+          </div>
+          <div class="det-row is-key">
+            <div class="when">January 2025 — onward</div>
+            <div class="dot"></div>
+            <div class="what">
+              <h4>No official information</h4>
+              <p>Since the transfer, the family has not been given any official information about Víctor Hugo's whereabouts, condition, or status. They consider him forcibly disappeared.</p>
+              <div class="src">Source: family report</div>
+            </div>
+          </div>
+          <div class="det-row is-key">
+            <div class="when">July 27, 2025</div>
+            <div class="dot"></div>
+            <div class="what">
+              <h4>Reported death — unconfirmed</h4>
+              <p>The family receives word, through unofficial channels, that Víctor Hugo has died. As of this profile's last update, no authority has confirmed his death. No body or remains have been delivered. No certificate has been issued.</p>
+              <div class="src">Source: family report · unconfirmed by any official source</div>
+            </div>
+          </div>
+          <div class="det-row">
+            <div class="when">Today</div>
+            <div class="dot"></div>
+            <div class="what">
+              <h4>Carmen is still waiting to be told the truth</h4>
+              <p>Carmen Teresa Navas, 82, continues to ask the only question a mother can ask: where is my son.</p>
+              <div class="src">Last update on this profile: pending family review</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VOICES -->
+<section class="section" data-stub>
+  <div class="wrap">
+    <div class="story-grid">
+      <div class="marker">Family Voices</div>
+      <div class="max" style="max-width: 100%;">
+        <h2>Voices — pending</h2>
+        <p style="color: var(--gray-700); font-size: 17px; line-height: 1.7; max-width: 64ch;">
+          Direct testimonies from Carmen and from those who know the family will appear here when collected and consented to.
+          We do not publish voices without explicit, recorded consent. This space is intentionally left open.
+        </p>
+        <div class="voices2" style="margin-top: 32px;">
+          <div class="voice">
+            <div class="qmark" style="color: var(--blue);">"</div>
+            <p class="text" style="color: var(--gray-500); font-style: italic;">Awaiting recorded testimony from Carmen Teresa Navas.</p>
+            <div class="who"><div class="ph"></div><div><div class="name">Carmen Teresa Navas</div><div class="role">Pending interview · with consent</div></div></div>
+          </div>
+          <div class="voice">
+            <div class="qmark" style="color: var(--blue);">"</div>
+            <p class="text" style="color: var(--gray-500); font-style: italic;">Awaiting testimony from a member of Carmen's family.</p>
+            <div class="who"><div class="ph"></div><div><div class="name">—</div><div class="role">Pending</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUPPORT -->
+<section class="support" id="support">
+  <div class="wrap">
+    <div class="t-mono" style="color: var(--gray-300); margin-bottom: 18px;">How to stand with Carmen</div>
+    <h2 class="t-h2">Three things you can do, today.</h2>
+    <p class="lede">No family in this archive asks for your sympathy. They ask only that the truth be told,
+       and that their loved ones not be forgotten. Here are three concrete things you can do — none of them take more than ten minutes.</p>
+
+    <div class="support-grid" data-stub>
+      <div>
+        <span class="num" style="color: var(--yellow);">01 — Ask</span>
+        <h4>Ask the question Carmen is asking</h4>
+        <p>Send a written request to the relevant authorities asking for the whereabouts and status of Víctor Hugo Quero Navas. We provide the addresses and a template letter in two languages.</p>
+        <a href="#" style="color: var(--cream); border-bottom: 1px solid var(--cream); padding-bottom: 2px; font-weight: 600;">Open the template →</a>
+      </div>
+      <div>
+        <span class="num" style="color: var(--yellow);">02 — Carry the name</span>
+        <h4>Share Carmen and Víctor Hugo's profile</h4>
+        <p>A short shareable card in two languages. The smallest form of accompaniment a family of the disappeared can receive is the act of someone, somewhere, knowing their name.</p>
+        <a href="#" style="color: var(--cream); border-bottom: 1px solid var(--cream); padding-bottom: 2px; font-weight: 600;">Get the share card →</a>
+      </div>
+      <div>
+        <span class="num" style="color: var(--yellow);">03 — Sustain</span>
+        <h4>Sustain the work that holds the record</h4>
+        <p>This archive is built by hand by a small staff. A monthly gift sustains the work — verification, family interviews, legal review, and translation in both languages.</p>
+        <a href="#" style="color: var(--cream); border-bottom: 1px solid var(--cream); padding-bottom: 2px; font-weight: 600;">Give monthly →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOURCES -->
+<section class="sources">
+  <div class="wrap">
+    <div style="display:grid; grid-template-columns: 200px 1fr; gap: 64px; align-items: start;">
+      <div class="t-mono" style="color: var(--blue);">Sources & Method</div>
+      <div style="max-width: 80ch;">
+        <h3>How this profile was built</h3>
+        <p style="font-size: 14px; line-height: 1.7; color: var(--gray-700); margin: 0 0 18px;">
+          This profile is being built from the family's own report. As of this draft, the only confirmed
+          source is direct family testimony provided to the Museum of Memory. We do not publish unverified
+          claims as fact. Where information has not been confirmed by an official source, we say so plainly.
+        </p>
+        <ol>
+          <li><strong>Confirmed by the family:</strong> Carmen Teresa Navas is 82 years old. Her son Víctor Hugo Quero Navas was detained on January 1, 2025, and transferred to Tocorón Prison.</li>
+          <li><strong>Reported by the family:</strong> Since the transfer, no official information has been provided about Víctor Hugo's whereabouts. They report him as forcibly disappeared.</li>
+          <li><strong>Reported, unconfirmed:</strong> On July 27, 2025, the family received word that Víctor Hugo had died. No authority has confirmed this. No remains have been delivered.</li>
+          <li data-stub><em>Pending:</em> Recorded testimony from Carmen, on her terms and with her consent.</li>
+          <li data-stub><em>Pending:</em> Independent corroboration from monitoring organizations (e.g. Foro Penal, CEPAZ).</li>
+          <li data-stub><em>Pending:</em> Any official communication from authorities regarding Víctor Hugo's whereabouts or status.</li>
+        </ol>
+        <p style="font-size: 12px; color: var(--gray-500); margin-top: 24px;">
+          Photographs are placeholders. We do not publish images of family members or of the disappeared without
+          explicit consent from the family. This page will be updated the moment any new information — official
+          or otherwise — becomes available.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RELATED -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="num">Connected stories</span>
+      <h2 class="t-h2" style="margin-top: 12px;">Names connected to Carmen's</h2>
+    </div>
+    <div class="related-grid" data-stub>
+      <a href="#" class="person-card">
+        <div class="photo"><span class="photo-cap">PORTRAIT — V. H. QUERO NAVAS</span></div>
+        <div class="meta">
+          <span class="pill disappeared">Disappeared</span>
+          <h4>Víctor Hugo Quero Navas</h4>
+          <span class="sub">Carmen's son · Last known: Tocorón Prison · Detained 01.01.25</span>
+        </div>
+      </a>
+      <a href="#" class="person-card">
+        <div class="photo"><span class="photo-cap">PLACEHOLDER</span></div>
+        <div class="meta">
+          <span class="pill family">Family of victim</span>
+          <h4>Pending profile</h4>
+          <span class="sub">Other families of disappeared persons — to be added</span>
+        </div>
+      </a>
+      <a href="#" class="person-card">
+        <div class="photo"><span class="photo-cap">PLACEHOLDER</span></div>
+        <div class="meta">
+          <span class="pill family">Family of victim</span>
+          <h4>Pending profile</h4>
+          <span class="sub">Pending</span>
+        </div>
+      </a>
+      <a href="#" class="person-card">
+        <div class="photo"><span class="photo-cap">PLACEHOLDER</span></div>
+        <div class="meta">
+          <span class="pill family">Family of victim</span>
+          <h4>Pending profile</h4>
+          <span class="sub">Pending</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-col">
+        <div class="brand" style="color: var(--cream);">
+          <span class="brand-mark">MoM</span>
+          <span class="brand-text"><strong>Museum of Memory</strong><span style="color: var(--gray-300);">Honoring the families of Venezuela</span></span>
+        </div>
+        <p style="color: var(--gray-300); margin-top: 18px; max-width: 360px; font-size: 14px; line-height: 1.6;">An independent archive of political prisoners, exiles and families.</p>
+      </div>
+      <div class="foot-col"><h5>The Archive</h5><ul><li><a href="archive.html">Browse all</a></li><li><a href="#">By country</a></li><li><a href="#">By year</a></li><li><a href="#">By status</a></li></ul></div>
+      <div class="foot-col"><h5>How to help</h5><ul><li><a href="index.html#help">Write a letter</a></li><li><a href="index.html#help">Share a story</a></li><li><a href="index.html#help">Sustain the archive</a></li><li><a href="#">Submit a name</a></li></ul></div>
+      <div class="foot-col"><h5>About</h5><ul><li><a href="#">Methodology</a></li><li><a href="#">Ethics policy</a></li><li><a href="#">Press inquiries</a></li><li><a href="agent.html">Editorial workflow</a></li></ul></div>
+    </div>
+    <div class="foot-bottom"><span>© 2026 Museum of Memory · Independent archive</span><span>Caracas · Miami · Managua</span></div>
+  </div>
+</footer>
+
+<script>
+  const ptg=document.getElementById('previewToggle'); if(ptg) ptg.addEventListener('click',()=>document.body.classList.toggle('preview-on'));
+  document.querySelectorAll('.lang button').forEach(b=>b.addEventListener('click',()=>{
+    document.querySelectorAll('.lang button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+  }));
+</script>
+</body>
+</html>
