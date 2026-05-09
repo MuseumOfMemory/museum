@@ -242,6 +242,30 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
   .hero .meta-row .num { font-size: 44px; font-weight: 800; letter-spacing: -0.02em; line-height: 1; }
   .hero .meta-row .lbl { font-size: 13px; color: var(--gray-500); margin-top: 6px; max-width: 240px; }
   .hero .meta-row .src { font-size: 11px; color: var(--gray-400); margin-top: 8px; font-style: italic; }
+  .hero-timeline {
+    margin-top: 56px;
+    padding-top: 32px;
+    border-top: 1px solid var(--gray-200);
+  }
+  .hero-timeline-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .hero-timeline h2 {
+    margin: 8px 0 0;
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.005em;
+    line-height: 1.15;
+  }
+  .hero-timeline .t-small {
+    max-width: 320px;
+    text-align: right;
+  }
+  .hero-timeline .htl-track { margin-top: 24px; }
 
   .why { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: start; }
   .why p { font-size: 17px; line-height: 1.7; color: var(--gray-700); margin: 0 0 18px; }
@@ -319,6 +343,7 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
   }
   .htl-node a:hover { color: var(--black); border-color: var(--black); }
   @media (max-width: 900px) {
+    .hero-timeline .t-small { text-align: left; }
     .htl-track { grid-template-columns: 1fr; gap: 0; }
     .htl-track::before, .htl-track::after { display: none; }
     .htl-node { border-top: 1px solid var(--gray-200); padding: 20px 0; }
@@ -426,6 +451,56 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
         <div class="num">312</div>
         <div class="lbl">People whose stories are kept in this archive</div>
         <div class="src">Updated weekly · last 04.28.26</div>
+      </div>
+    </div>
+
+    <div class="hero-timeline" data-stub>
+      <div class="hero-timeline-head">
+        <div>
+          <div class="t-mono">The years, in brief</div>
+          <h2>Follow the record by year</h2>
+        </div>
+        <span class="t-small">A quick path into the archive's major periods.</span>
+      </div>
+
+      <div class="htl">
+        <div class="htl-track">
+          <div class="htl-node is-key">
+            <div class="htl-dot"></div>
+            <div class="yr">2014</div>
+            <h4>The Salida protests</h4>
+            <p>The first wave of detentions opens the period this archive documents.</p>
+            <a href="archive.html?year=2014">14 people →</a>
+          </div>
+          <div class="htl-node is-key">
+            <div class="htl-dot"></div>
+            <div class="yr">2017</div>
+            <h4>Four months of protest</h4>
+            <p>Sustained demonstrations spread across the country.</p>
+            <a href="archive.html?year=2017">62 people →</a>
+          </div>
+          <div class="htl-node is-key">
+            <div class="htl-dot"></div>
+            <div class="yr">2019</div>
+            <h4>Migration accelerates</h4>
+            <p>Families separate across borders as the crisis deepens.</p>
+            <a href="archive.html?year=2019">38 people →</a>
+          </div>
+          <div class="htl-node is-key">
+            <div class="htl-dot"></div>
+            <div class="yr">2024</div>
+            <h4>Post-election detentions</h4>
+            <p>A new wave of arrests follows the disputed election.</p>
+            <a href="archive.html?year=2024">98 people →</a>
+          </div>
+          <div class="htl-node is-now">
+            <div class="htl-dot"></div>
+            <div class="yr">Today · 2026</div>
+            <h4>Still waiting</h4>
+            <p>Some names have come home. Many families are still waiting.</p>
+            <a href="archive.html">See the archive →</a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
