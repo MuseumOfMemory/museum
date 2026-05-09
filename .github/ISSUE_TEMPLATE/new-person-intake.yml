@@ -1,0 +1,177 @@
+name: New person intake
+description: Create an editorial work order for a new Museum of Memory profile.
+title: "[Intake] "
+labels:
+  - intake
+  - needs-review
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this issue as the editorial work order for a new profile.
+
+        Content rule: record only what was actually provided or sourced. If a detail is missing, write `unknown` or `not provided`. Do not infer names, dates, locations, relationships, quotes, consent, approvals, or source status.
+
+        Privacy rule: do not include private contact information, unconsented testimony, or sensitive unpublished details unless this repository is approved for that material.
+
+  - type: input
+    id: person_name
+    attributes:
+      label: Person full name
+      description: Use the exact name provided.
+      placeholder: unknown / not provided
+    validations:
+      required: true
+
+  - type: input
+    id: age
+    attributes:
+      label: Age
+      description: Use only the provided age. Leave as unknown if not provided.
+      placeholder: unknown / not provided
+    validations:
+      required: false
+
+  - type: input
+    id: country
+    attributes:
+      label: Country
+      description: Use only the provided country or current/last known country.
+      placeholder: unknown / not provided
+    validations:
+      required: false
+
+  - type: dropdown
+    id: category
+    attributes:
+      label: Profile category
+      description: Choose the closest category supported by the profile data model.
+      options:
+        - unknown / not provided
+        - family_of_disappeared_person
+        - family_of_victim
+        - imprisoned
+        - liberated
+        - in_exile
+        - disappeared
+        - killed
+    validations:
+      required: true
+
+  - type: input
+    id: role_label
+    attributes:
+      label: Role label
+      description: Short public role label if provided, such as Mother, Father, Wife, Son, Political prisoner, Exile.
+      placeholder: unknown / not provided
+    validations:
+      required: false
+
+  - type: textarea
+    id: submitted_content
+    attributes:
+      label: Submitted content
+      description: Paste the content exactly as provided, or summarize only factual details that were provided.
+      placeholder: |
+        Raw submitted text, notes, or transcript excerpt.
+        Do not add details that are not in the submitted material.
+    validations:
+      required: true
+
+  - type: textarea
+    id: relationship
+    attributes:
+      label: Relationship or connected person
+      description: Fill only the fields that were provided.
+      placeholder: |
+        relationship type:
+        relationship label:
+        connected person name:
+        connected person status:
+        last known location:
+        detained on:
+    validations:
+      required: false
+
+  - type: textarea
+    id: sources
+    attributes:
+      label: Sources provided
+      description: List every source provided. Include source type, title/description, date, consent status, and what it supports when known.
+      placeholder: |
+        - type:
+          title or description:
+          date:
+          consent:
+          status:
+          supports:
+    validations:
+      required: false
+
+  - type: textarea
+    id: claims
+    attributes:
+      label: Factual claims to preserve
+      description: One factual claim per line. Only include claims present in the submitted content or sources.
+      placeholder: |
+        - claim:
+          source:
+          status: confirmed / pending / unknown
+    validations:
+      required: false
+
+  - type: dropdown
+    id: consent_status
+    attributes:
+      label: Consent status
+      description: Choose what is known today. Do not mark consent confirmed unless the source exists.
+      options:
+        - unknown / not provided
+        - written consent confirmed
+        - verbal consent confirmed
+        - consent pending
+        - do not publish until consent is confirmed
+    validations:
+      required: true
+
+  - type: textarea
+    id: sensitive_or_excluded
+    attributes:
+      label: Sensitive details or do-not-publish notes
+      description: List any content that should be withheld, softened, anonymized, or reviewed before publication.
+      placeholder: unknown / not provided
+    validations:
+      required: false
+
+  - type: textarea
+    id: open_questions
+    attributes:
+      label: Open questions for review
+      description: What does the bot or editor need to verify before this can become public?
+      placeholder: unknown / not provided
+    validations:
+      required: false
+
+  - type: dropdown
+    id: requested_state
+    attributes:
+      label: Requested profile state
+      description: Drafts can be previewed, but publication still requires approval gates.
+      options:
+        - draft only
+        - ready for internal preview
+        - ready for editorial review
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: content_rules
+    attributes:
+      label: Content rules
+      options:
+        - label: I have not invented or inferred missing details.
+          required: true
+        - label: Missing details are marked unknown or not provided.
+          required: true
+        - label: Consent and source status are marked only when actually known.
+          required: true

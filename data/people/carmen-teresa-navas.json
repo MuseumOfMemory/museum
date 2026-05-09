@@ -1,0 +1,325 @@
+{
+  "schema_version": 1,
+  "id": "person:carmen-teresa-navas",
+  "slug": "carmen-teresa-navas",
+  "public_path": "carmen.html",
+  "agent_path": "agent.html",
+  "languages": ["en", "es"],
+  "person": {
+    "name": "Carmen Teresa Navas",
+    "age": 82,
+    "country": "Venezuela",
+    "category": "family_of_disappeared_person",
+    "category_label": "Family of a disappeared person",
+    "role_label": "Mother",
+    "epithet": "Mother of Víctor Hugo Quero Navas. Still waiting to be told the truth.",
+    "portrait_status": "PHOTO PENDING FAMILY APPROVAL"
+  },
+  "relationships": [
+    {
+      "type": "mother_of",
+      "label": "son",
+      "person": {
+        "name": "Víctor Hugo Quero Navas",
+        "status": "Disappeared",
+        "last_known": "Tocorón Prison",
+        "detained_on": "2025-01-01"
+      }
+    }
+  ],
+  "metadata": {
+    "profile_added": null,
+    "last_verified": null,
+    "profile_status": "in_review",
+    "last_update_note": "Pending family review",
+    "source_count_confirmed": 2,
+    "source_count_pending": 4
+  },
+  "sources": [
+    {
+      "id": "source:intake-form",
+      "type": "form",
+      "icon_label": "FORM",
+      "title": "Family intake form - submitted by Carmen Teresa Navas",
+      "date": "2026-03-12",
+      "status": "confirmed",
+      "status_label": "Signed consent",
+      "consent": true,
+      "extracted": "Carmen, 82; son Víctor Hugo Quero Navas; detained 01.01.2025; Tocorón Prison",
+      "used_in": ["summary", "fact panel", "chronology rows 1-2"]
+    },
+    {
+      "id": "source:family-report",
+      "type": "pdf",
+      "icon_label": "PDF",
+      "title": "Family report - disappearance and reported death",
+      "date": "2025-08-04",
+      "status": "confirmed",
+      "status_label": "3 pp",
+      "consent": true,
+      "extracted": "No official whereabouts since transfer; unofficial word of death 07.27.2025",
+      "used_in": ["summary", "chronology rows 3-4"],
+      "flag": "unconfirmed_by_official_source"
+    },
+    {
+      "id": "source:recorded-interview",
+      "type": "audio",
+      "icon_label": "AUD",
+      "title": "Carmen Teresa Navas - recorded interview",
+      "status": "pending",
+      "status_label": "Pending - awaiting family-set date and consent",
+      "consent": false,
+      "extracted": "Recording not yet conducted. Voices section remains a pending placeholder until then."
+    },
+    {
+      "id": "source:foro-penal-case-file",
+      "type": "pdf",
+      "icon_label": "PDF",
+      "title": "Foro Penal - case file for Víctor Hugo Quero Navas",
+      "status": "requested",
+      "status_label": "Requested - awaiting response",
+      "consent": false,
+      "extracted": "Independent corroboration not yet received. Rebuild draft when available."
+    },
+    {
+      "id": "source:cepaz-monitoring-report",
+      "type": "pdf",
+      "icon_label": "PDF",
+      "title": "CEPAZ - monitoring report for 2025 detentions",
+      "status": "pending",
+      "status_label": "Pending corroboration request",
+      "consent": false,
+      "extracted": "Context source. Include only if independently corroborated."
+    },
+    {
+      "id": "source:second-hand-news-reference",
+      "type": "url",
+      "icon_label": "URL",
+      "title": "News article - second-hand reference",
+      "status": "excluded",
+      "status_label": "Excluded - second-hand quotation",
+      "consent": false,
+      "extracted": "Not used in current draft."
+    }
+  ],
+  "claims": [
+    {
+      "id": "claim:carmen-age",
+      "text": "Carmen Teresa Navas is 82 years old.",
+      "status": "confirmed_by_family",
+      "source_ids": ["source:intake-form"]
+    },
+    {
+      "id": "claim:victor-detention",
+      "text": "Víctor Hugo Quero Navas was detained on January 1, 2025 and transferred to Tocorón Prison.",
+      "status": "confirmed_by_family",
+      "source_ids": ["source:intake-form"]
+    },
+    {
+      "id": "claim:no-official-information",
+      "text": "The family has not been given official information about Víctor Hugo's whereabouts since the transfer.",
+      "status": "reported_by_family",
+      "source_ids": ["source:family-report"],
+      "qualification": "The public page attributes this to the family's report."
+    },
+    {
+      "id": "claim:reported-death",
+      "text": "The family received unofficial information that Víctor Hugo died on July 27, 2025.",
+      "status": "reported_unconfirmed",
+      "source_ids": ["source:family-report"],
+      "qualification": "According to information that has reached the family; not officially confirmed."
+    }
+  ],
+  "summary": [
+    {
+      "segments": [
+        { "text": "Carmen Teresa Navas is 82 years old. Her son " },
+        { "text": "Víctor Hugo Quero Navas was detained on January 1, 2025", "strong": true },
+        { "text": " and transferred to Tocorón Prison. The family reports that since then he has been forcibly disappeared - they have never been given official information about his whereabouts. According to information that has reached them, Víctor Hugo died on July 27, 2025. " },
+        { "text": "His death has not been officially confirmed.", "strong": true },
+        { "text": " What remains for Carmen is the absence of truth." }
+      ]
+    }
+  ],
+  "story": {
+    "heading": "What we know, and what we do not",
+    "paragraphs": [
+      [
+        { "text": "Carmen Teresa Navas is the mother of Víctor Hugo Quero Navas. On January 1, 2025, her son was detained and transferred to Tocorón Prison. From the moment of that transfer, his family has not been given official information about where he is, how he is, or whether he is alive." }
+      ],
+      [
+        { "text": "On July 27, 2025, Carmen received word - through unofficial channels - that Víctor Hugo had died. " },
+        { "text": "That word has not been confirmed by any authority.", "strong": true },
+        { "text": " No body has been delivered. No certificate has been issued. No explanation has been given. For the family, this is not the end of a story. It is the absence of one." }
+      ],
+      [
+        { "text": "Under international human rights law, families of the disappeared have the right to know the truth: where their loved one is held, what condition they are in, and - if they are no longer alive - when, where, and how they died, and where their remains rest. Carmen Teresa Navas has not been given any of this." }
+      ],
+      [
+        { "text": "This profile exists because she has asked for it to exist. It will be updated the moment any official information is delivered. Until then, the record will stand as it is - incomplete, because so is the truth." }
+      ]
+    ],
+    "pull_note": "Pending direct testimony from the family - to be added on family approval. Until then, this profile speaks only in facts that have been confirmed by Carmen herself or by the documentary record."
+  },
+  "timeline": [
+    {
+      "date": "2025-01-01",
+      "display_date": "January 1, 2025",
+      "title": "Víctor Hugo Quero Navas is detained",
+      "body": "Víctor Hugo, son of Carmen Teresa Navas, is detained and shortly afterward transferred to Tocorón Prison.",
+      "source_label": "Source: family report - pending corroboration",
+      "is_key": true
+    },
+    {
+      "date": "2025-01",
+      "display_date": "January 2025 - onward",
+      "title": "No official information",
+      "body": "Since the transfer, the family has not been given any official information about Víctor Hugo's whereabouts, condition, or status. They consider him forcibly disappeared.",
+      "source_label": "Source: family report",
+      "is_key": true
+    },
+    {
+      "date": "2025-07-27",
+      "display_date": "July 27, 2025",
+      "title": "Reported death - unconfirmed",
+      "body": "The family receives word, through unofficial channels, that Víctor Hugo has died. As of this profile's last update, no authority has confirmed his death. No body or remains have been delivered. No certificate has been issued.",
+      "source_label": "Source: family report - unconfirmed by any official source",
+      "is_key": true
+    },
+    {
+      "date": null,
+      "display_date": "Today",
+      "title": "Carmen is still waiting to be told the truth",
+      "body": "Carmen Teresa Navas, 82, continues to ask the only question a mother can ask: where is my son.",
+      "source_label": "Last update on this profile: pending family review",
+      "is_key": false
+    }
+  ],
+  "voices": {
+    "status": "pending",
+    "policy": "We do not publish voices without explicit, recorded consent.",
+    "entries": [
+      {
+        "speaker": "Carmen Teresa Navas",
+        "role": "Pending interview - with consent",
+        "text": "Awaiting recorded testimony from Carmen Teresa Navas.",
+        "status": "pending"
+      },
+      {
+        "speaker": null,
+        "role": "Pending",
+        "text": "Awaiting testimony from a member of Carmen's family.",
+        "status": "pending"
+      }
+    ]
+  },
+  "support_actions": [
+    {
+      "label": "01 - Ask",
+      "title": "Ask the question Carmen is asking",
+      "body": "Send a written request to the relevant authorities asking for the whereabouts and status of Víctor Hugo Quero Navas. We provide the addresses and a template letter in two languages.",
+      "cta": "Open the template"
+    },
+    {
+      "label": "02 - Carry the name",
+      "title": "Share Carmen and Víctor Hugo's profile",
+      "body": "A short shareable card in two languages. The smallest form of accompaniment a family of the disappeared can receive is the act of someone, somewhere, knowing their name.",
+      "cta": "Get the share card"
+    },
+    {
+      "label": "03 - Sustain",
+      "title": "Sustain the work that holds the record",
+      "body": "This archive is built by hand by a small staff. A monthly gift sustains the work - verification, family interviews, legal review, and translation in both languages.",
+      "cta": "Give monthly"
+    }
+  ],
+  "review_questions": [
+    {
+      "id": "review:reported-death",
+      "label": "Confirm framing",
+      "title": "Reported death - unconfirmed",
+      "body": "The draft states that Víctor Hugo reportedly died on July 27, 2025 and adds that his death has not been officially confirmed. Family-reported, not independently corroborated.",
+      "question": "Approve current qualified phrasing?",
+      "primary_action": "Approve",
+      "secondary_action": "Stronger caveat: according to information that has reached the family",
+      "severity": "warn"
+    },
+    {
+      "id": "review:forced-disappearance",
+      "label": "Source needed",
+      "title": "Forcibly disappeared",
+      "body": "Family characterizes the absence of official information as a forced disappearance. No independent corroboration yet; Foro Penal request pending.",
+      "question": "Action: keep with family-source attribution, or hold?",
+      "primary_action": "Keep - attribute to family",
+      "secondary_action": "Hold until corroborated",
+      "severity": "warn"
+    },
+    {
+      "id": "review:voices-placeholder",
+      "label": "Sensitivity check",
+      "title": "Voices section - pending placeholder",
+      "body": "No recorded testimony from Carmen yet. Draft leaves the voices section as an explicit placeholder - no invented quotes anywhere on the page.",
+      "question": "Confirm: ship with pending placeholder?",
+      "primary_action": "Confirm placeholder",
+      "secondary_action": "Hold until interview recorded",
+      "severity": "blocker"
+    }
+  ],
+  "publish_gates": [
+    { "id": "gate:family-consent", "label": "Family consent received in writing", "status": "done", "required": true },
+    { "id": "gate:facts-sourced", "label": "All facts traced to at least one source", "status": "done", "required": true },
+    { "id": "gate:no-third-party-images", "label": "No images of third parties", "status": "done", "required": true },
+    { "id": "gate:spanish-draft", "label": "Spanish translation drafted", "status": "done", "required": true },
+    { "id": "gate:family-final-review", "label": "Family review of final draft", "status": "pending", "required": true, "note": "sent 11:34, awaiting" },
+    { "id": "gate:second-editor-signoff", "label": "Second editor sign-off", "status": "pending", "required": true }
+  ],
+  "agent_trail": [
+    {
+      "time": "11:14",
+      "kind": "action",
+      "text": "Agent profile-builder/v3 opened a new draft from intake form submitted by Carmen Teresa Navas."
+    },
+    {
+      "time": "11:15",
+      "kind": "info",
+      "text": "Loaded family-provided documents (2). Independent corroboration from Foro Penal and CEPAZ requested - pending."
+    },
+    {
+      "time": "11:18",
+      "kind": "info",
+      "text": "Detention date 01.01.2025 confirmed by family. Reported death 07.27.2025 remains unconfirmed by any official source."
+    },
+    {
+      "time": "11:22",
+      "kind": "info",
+      "text": "Generated draft summary (3 alternates). Selected version that qualifies every claim by source."
+    },
+    {
+      "time": "11:31",
+      "kind": "action",
+      "text": "Flagged 3 statements that need editor or family review before publish."
+    },
+    {
+      "time": "11:34",
+      "kind": "info",
+      "text": "Sent draft to family for review. Voices section left as pending placeholder until recorded testimony exists."
+    },
+    {
+      "time": "11:42",
+      "kind": "action",
+      "text": "Handed off to editor Lucía.r for sign-off."
+    }
+  ],
+  "related": [
+    {
+      "name": "Víctor Hugo Quero Navas",
+      "label": "Disappeared",
+      "description": "Carmen's son - Last known: Tocorón Prison - Detained 01.01.25"
+    },
+    {
+      "name": "Pending profile",
+      "label": "Family of victim",
+      "description": "Other families of disappeared persons - to be added"
+    }
+  ]
+}

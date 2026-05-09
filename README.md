@@ -1,23 +1,22 @@
-# museum
+# Museum of Memory
 
-A static site generator using Jinja2 templates, JSON data, and CSS.
+A static prototype for the Museum of Memory public archive and editorial
+workspace. Profile content lives in structured JSON so public pages and
+agent/editor review screens can be built from one source of truth.
 
 ## Project Structure
 
 ```
-museum/
-├── templates/          # Jinja2 HTML templates
-│   ├── base.html      # Base template
-│   ├── index.html     # Home page template
-│   └── about.html     # About page template
-├── data/              # JSON data files
-│   ├── home.json      # Home page data
-│   └── about.json     # About page data
-├── static/            # Static assets (CSS, images, etc.)
-│   └── style.css      # Site stylesheet
-├── output/            # Generated site (created after build)
-├── generate_site.py   # Site generator script
-└── requirements.txt   # Python dependencies
+museam/
+├── index.html                         # Public home page prototype
+├── archive.html                       # Archive listing prototype
+├── carmen.html                        # Public profile page shell
+├── agent.html                         # Internal editorial/agent workspace shell
+├── data/people/carmen-teresa-navas.json
+│                                      # Shared profile/source/review data
+├── output/                            # Generated deploy artifact
+├── generate_site.py                   # Renders site + validates profiles
+└── requirements.txt
 ```
 
 ## Building the Site
@@ -34,7 +33,9 @@ pip install -r requirements.txt
 python generate_site.py
 ```
 
-This will create the static site in the `output/` directory.
+This renders the homepage, archive listing, profile pages, and agent/editor
+workspace from JSON, copies static assets and structured data into `output/`,
+and writes profile validation reports to `output/validation/`.
 
 ## Previewing Locally
 
@@ -82,22 +83,17 @@ Your site will be automatically built and deployed to `https://YOUR_USERNAME.git
 
 ## Customizing the Site
 
-### Adding New Pages
+### Adding New Profiles
 
-1. Create a template in `templates/` (e.g., `contact.html`)
-2. Create corresponding data in `data/` (e.g., `contact.json`)
-3. Add the page to `generate_site.py`:
-   ```python
-   pages = [
-       ('index.html', 'home.json', 'index.html'),
-       ('about.html', 'about.json', 'about.html'),
-       ('contact.html', 'contact.json', 'contact.html'),  # New page
-   ]
-   ```
+1. Add a JSON profile under `data/people/`.
+2. Include sources, claims, review questions, and publish gates.
+3. Run `python generate_site.py` and inspect the validation report.
+4. Preview `output/` locally. The profile will appear automatically on the
+   homepage, archive, and generated public profile page.
 
 ### Updating Content
 
-Edit the JSON files in the `data/` directory and rebuild the site.
+Edit the JSON files in `data/people/` and rebuild the site.
 
 ### Modifying Styles
 

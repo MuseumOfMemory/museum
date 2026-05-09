@@ -146,8 +146,8 @@ a { color: inherit; text-decoration: none; }
 .pill.imprisoned { color: var(--red); }
 .pill.exiled    { color: var(--amber); }
 .pill.liberated { color: var(--nicaragua-green); }
-.pill.killed    { color: var(--true-black); }
-.pill.disappeared { color: var(--gray-700); }
+.pill.killed    { color: var(--red-deep); }
+.pill.disappeared { color: var(--black); }
 .pill.family    { color: var(--cuba-blue); }
 .pill.solid { background: var(--red); color: var(--white); border-color: var(--red); }
 .pill.solid.amber { background: var(--amber); border-color: var(--amber); }
@@ -515,6 +515,7 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
 <div class="work">
 
   <!-- LEFT: SOURCES + AGENT TRAIL -->
+  <!-- PROFILE_SECTION:agent_sources:start -->
   <div class="pane">
     <div class="pane-head">
       <span class="lbl">Step 1 · Find</span>
@@ -633,8 +634,10 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
       </div>
     </div>
   </div>
+  <!-- PROFILE_SECTION:agent_sources:end -->
 
   <!-- CENTER: PREVIEW -->
+  <!-- PROFILE_SECTION:agent_preview:start -->
   <div class="pane preview-pane">
     <div class="pane-head">
       <span class="lbl">Step 2 · Preview</span>
@@ -701,8 +704,10 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
       </div>
     </div>
   </div>
+  <!-- PROFILE_SECTION:agent_preview:end -->
 
   <!-- RIGHT: EDITOR REVIEW -->
+  <!-- PROFILE_SECTION:agent_review:start -->
   <div class="pane">
     <div class="pane-head">
       <span class="lbl">Editor review</span>
@@ -784,6 +789,7 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
 
     </div>
   </div>
+  <!-- PROFILE_SECTION:agent_review:end -->
 
 </div>
 
