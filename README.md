@@ -48,6 +48,18 @@ python -m http.server 8000
 
 Then open http://localhost:8000 in your browser.
 
+## Pull Request Previews
+
+This repository includes a `netlify.toml` file for Netlify Deploy Previews.
+After connecting `MuseumOfMemory/museum` to Netlify, pull requests will build
+with:
+
+```bash
+python3 -m pip install -r requirements.txt && python3 generate_site.py
+```
+
+Netlify should publish the generated `output/` directory.
+
 ## Deploying to GitHub Pages
 
 ### Automatic Deployment with GitHub Actions
