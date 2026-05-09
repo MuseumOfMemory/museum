@@ -297,22 +297,29 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
   /* Horizontal hero timeline */
   .htl { padding: 16px 0 0; }
   .htl-track {
+    --htl-gap: 24px;
+    --htl-dot-center: 9px;
+    --htl-column: calc((100% - (4 * var(--htl-gap))) / 5);
     position: relative;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    gap: 24px;
+    gap: var(--htl-gap);
     margin-top: 32px;
   }
   .htl-track::before {
     content: ""; position: absolute;
-    left: 8%; right: 8%; top: 28px;
+    left: var(--htl-dot-center);
+    right: calc(var(--htl-column) - var(--htl-dot-center));
+    top: 28px;
     height: 2px; background: var(--gray-200);
     z-index: 0;
   }
   .htl-track::after {
     content: ""; position: absolute;
-    left: 8%; top: 27px;
-    width: 60%; height: 4px; background: var(--blue);
+    left: var(--htl-dot-center);
+    top: 27px;
+    width: calc(3 * (var(--htl-column) + var(--htl-gap)));
+    height: 4px; background: var(--blue);
     z-index: 1;
   }
   .htl-node { position: relative; z-index: 2; padding-top: 0; }
@@ -827,8 +834,6 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
         archiveLink.href = node.archive_filter_href || 'archive.html';
         archiveLink.textContent = `${recordLabel(recordCount)} →`;
         actions.appendChild(archiveLink);
-      } else if (node.count_scope !== 'all_records') {
-        appendTextElement(actions, 'span', 'htl-note', 'No Museum records yet');
       }
 
       const sourceUrl = sourceUrlFor(node);
