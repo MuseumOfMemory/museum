@@ -387,15 +387,6 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
     .htl-dot { margin: 0 0 12px; }
   }
 
-  /* Voices section */
-  .voices { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
-  .voices blockquote { margin: 0; }
-  .voices .qmark { font-family: var(--font-serif); font-size: 80px; color: var(--blue); line-height: 0.6; margin-bottom: 8px; }
-  .voices .attr { margin-top: 28px; }
-  .voices .attr .who { font-weight: 700; font-size: 15px; }
-  .voices .attr .role { font-size: 13px; color: var(--gray-500); margin-top: 2px; }
-  .voices .photo { aspect-ratio: 4/3; }
-
   /* How to help */
   .help-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
   .help-card {
@@ -414,7 +405,7 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
   .about-strip .num { color: var(--gray-400); }
 
   @media (max-width: 900px) {
-    .why, .voices, .recent-grid, .help-grid, .foot-grid { grid-template-columns: 1fr; gap: 40px; }
+    .why, .recent-grid, .help-grid, .foot-grid { grid-template-columns: 1fr; gap: 40px; }
     .nav-links { display: none; }
   }
 </style>
@@ -604,33 +595,6 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
           </div>
         </a>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- VOICES / PULL QUOTE -->
-<section class="section">
-  <div class="wrap">
-    <div class="section-head">
-      <span class="num">03 — Voices</span>
-      <h2 class="t-h2" style="margin-top:12px;">Recorded with consent. Never invented.</h2>
-    </div>
-    <div class="voices" data-stub>
-      <div class="photo" style="aspect-ratio: 4/3;">
-        <span class="photo-cap">PORTRAIT — PENDING RECORDED INTERVIEW</span>
-      </div>
-      <blockquote>
-        <div class="qmark">"</div>
-        <p class="t-quote" style="color: var(--gray-500); font-style: italic;">
-          A recorded testimony will appear here once a family has shared one with us, on their
-          terms and with their explicit consent. We do not publish voices we have not heard.
-          Until that recording exists, this space is intentionally left open.
-        </p>
-        <div class="attr">
-          <div class="who">Pending — first family interview</div>
-          <div class="role">Editor's note · No invented quotes appear anywhere on this site</div>
-        </div>
-      </blockquote>
     </div>
   </div>
 </section>
