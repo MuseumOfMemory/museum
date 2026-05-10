@@ -236,7 +236,21 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
 <style>
   /* Home-only */
   .hero { padding: 88px 0 96px; }
+  .hero-main {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(320px, 0.72fr);
+    gap: 56px;
+    align-items: start;
+  }
   .hero .lede { max-width: 920px; }
+  .hero-media {
+    margin: 0;
+  }
+  .hero-media img {
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--gray-200);
+  }
   .hero h1 { margin: 24px 0 28px; }
   .hero-quote {
     position: relative;
@@ -438,6 +452,7 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
   }
   .htl-node a:hover { color: var(--black); border-color: var(--black); }
   @media (max-width: 900px) {
+    .hero-main { grid-template-columns: 1fr; gap: 40px; }
     .hero-timeline .t-small { text-align: left; }
     .htl-track { grid-template-columns: 1fr; gap: 0; }
     .htl-track::before, .htl-track::after { display: none; }
@@ -555,22 +570,33 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
 <!-- HERO / MISSION -->
 <section class="hero">
   <div class="wrap">
-    <div class="lede">
-      <div class="t-mono">Memory of Venezuela · Since 2014</div>
-      <h1 class="t-hero">Every name<br/>matters. Every<br/>story is kept.</h1>
-      <blockquote class="hero-quote">
-        <p>
-          Venezuela has not forgotten. And the world cannot forget. Since February 12, 2014,
-          thousands of Venezuelans were killed, imprisoned, tortured and forced into exile for
-          daring to dream of a free country. This memorial exists for one reason only: HONOR.
-          Honor to the fallen. To the prisoners. To the freed. To the exiled. Their names will
-          not disappear. Their story will not be erased. Their sacrifice was not in vain.
-        </p>
-        <footer>
-          <cite>- Lilian Tintori</cite>
-          <span class="quote-role">Human Rights Activist</span>
-        </footer>
-      </blockquote>
+    <div class="hero-main">
+      <div class="lede">
+        <div class="t-mono">Memory of Venezuela · Since 2014</div>
+        <h1 class="t-hero">Every name<br/>matters. Every<br/>story is kept.</h1>
+        <blockquote class="hero-quote">
+          <p>
+            Venezuela has not forgotten. And the world cannot forget. Since February 12, 2014,
+            thousands of Venezuelans were killed, imprisoned, tortured and forced into exile for
+            daring to dream of a free country. This memorial exists for one reason only: HONOR.
+            Honor to the fallen. To the prisoners. To the freed. To the exiled. Their names will
+            not disappear. Their story will not be erased. Their sacrifice was not in vain.
+          </p>
+          <footer>
+            <cite>- Lilian Tintori</cite>
+            <span class="quote-role">Human Rights Activist</span>
+          </footer>
+        </blockquote>
+      </div>
+
+      <figure class="hero-media">
+        <img
+          src="https://www.hrw.org/sites/default/files/styles/opengraph/public/media_2023/12/202312americas_venezuela_wr.jpg?h=c6980913&amp;itok=huCeAE41"
+          alt="Venezuelans gathered at a public demonstration"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </figure>
     </div>
 
     <div class="meta-row">
