@@ -52,6 +52,46 @@ class StaticSiteGenerator:
             shutil.copytree(self.static_dir, output_static)
             print(f"Copied static files to {output_static}")
 
+    def load_person_by_slug(self, slug):
+        """Load a person's data from data/people/{slug}.json"""
+        try:
+            person_file = f"people/{slug}.json"
+            person_data = self.load_json_data(person_file)
+            person_data['slug'] = slug
+            return person_data
+        except Exception as e:
+            print(f"Warning: Could not load person '{slug}': {e}")
+            return None
+
+    def hydrate_person_references(self, data):
+        """
+        Hydrate person references in the data.
+        Looks for 'recent_additions.featured' and 'recent_additions.others'
+        and loads full person data from people/*.json files.
+        """
+        if 'recent_additions' in data:
+            # Hydrate featured person
+            if 'featured' in data['recent_additions']:
+                ref = data['recent_additions']['featured']
+                if isinstance(ref, dict) and 'slug' in ref:
+                    person_data = self.load_person_by_slug(ref['slug'])
+                    if person_data:
+                        data['recent_additions']['featured'] = person_data
+
+            # Hydrate others list
+            if 'others' in data['recent_additions']:
+                hydrated_others = []
+                for ref in data['recent_additions']['others']:
+                    if isinstance(ref, dict) and 'slug' in ref:
+                        person_data = self.load_person_by_slug(ref['slug'])
+                        if person_data:
+                            hydrated_others.append(person_data)
+                    else:
+                        hydrated_others.append(ref)
+                data['recent_additions']['others'] = hydrated_others
+
+        return data
+
     def generate_page(self, template_name, data_file, output_file):
         """
         Generate a single page.
@@ -63,6 +103,10 @@ class StaticSiteGenerator:
         """
         # Load data
         data = self.load_json_data(data_file)
+
+        # Hydrate person references for home template
+        if template_name == 'home.html':
+            data = self.hydrate_person_references(data)
 
         # Wrap person data if using person template
         if template_name == 'person.html':
