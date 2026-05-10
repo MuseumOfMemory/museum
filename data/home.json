@@ -4,6 +4,10 @@
     "featured": {
       "slug": "carmen-teresa-navas"
     },
-    "others": [ ]
+    "others": [
+      {
+        "slug": "leopoldo-lopez"
+      }
+    ]
   }
 }
