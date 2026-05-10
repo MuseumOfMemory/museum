@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Museum of Memory — Honoring the families of Venezuela{% endblock %}
+{% block title %}Memory of Venezuela — In honor of our people{% endblock %}
 
 {% block extra_styles %}
 <style>
@@ -8,6 +8,48 @@
   .hero { padding: 88px 0 96px; }
   .hero .lede { max-width: 920px; }
   .hero h1 { margin: 24px 0 28px; }
+  .hero-quote {
+    position: relative;
+    max-width: 820px;
+    margin: 0;
+    padding: 24px 0 24px 32px;
+    border-left: 4px solid var(--blue);
+  }
+  .hero-quote::before {
+    content: "\201C";
+    display: block;
+    margin: 0 0 -8px -6px;
+    font-family: var(--font-serif);
+    font-size: 76px;
+    font-weight: 700;
+    line-height: 0.8;
+    color: var(--blue);
+  }
+  .hero-quote p {
+    margin: 0;
+    font-family: var(--font-sans);
+    font-size: 20px;
+    font-style: normal;
+    line-height: 1.55;
+    color: var(--black);
+  }
+  .hero-quote footer {
+    margin-top: 18px;
+    color: var(--gray-700);
+  }
+  .hero-quote cite {
+    display: block;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+  }
+  .hero-quote .quote-role {
+    display: block;
+    margin-top: 3px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--gray-500);
+  }
   .hero .meta-row { display: flex; gap: 32px; margin-top: 56px; padding-top: 32px; border-top: 1px solid var(--gray-200); flex-wrap: wrap; }
   .hero .meta-row .meta-item { min-width: 220px; }
   .hero .meta-row .num { font-size: 44px; font-weight: 800; letter-spacing: -0.02em; line-height: 1; }
@@ -187,31 +229,35 @@
 <section class="hero">
   <div class="wrap">
     <div class="lede">
-      <div class="t-mono">Museum of Memory · Edition 2026</div>
+      <div class="t-mono">Memory of Venezuela · Since 2014</div>
       <h1 class="t-hero">Every name<br/>matters. Every<br/>story is kept.</h1>
-      <p class="t-lead" style="max-width: 760px;">
-        We document the lives of political prisoners, exiles and the families who wait for them.
-        We record what happened, who it happened to, and what it cost — so that one day,
-        when the cells are emptied and the ledgers opened, no one will be missing from the record.
-      </p>
+      <blockquote class="hero-quote">
+        <p>
+          Venezuela has not forgotten. And the world cannot forget. Since February 12, 2014,
+          thousands of Venezuelans were killed, imprisoned, tortured and forced into exile for
+          daring to dream of a free country. This memorial exists for one reason only: HONOR.
+          Honor to the fallen. To the prisoners. To the freed. To the exiled. Their names will
+          not disappear. Their story will not be erased. Their sacrifice was not in vain.
+        </p>
+        <footer>
+          <cite>- Lilian Tintori</cite>
+          <span class="quote-role">Human Rights Activist</span>
+        </footer>
+      </blockquote>
     </div>
 
-    <div class="meta-row" data-stub>
-      <!-- Mission stats: blend of real (Foro Penal numbers) and stubbed -->
+    <div class="meta-row">
       <div class="meta-item">
-        <div class="num">851</div>
-        <div class="lbl">Political prisoners currently held in Venezuela</div>
-        <div class="src">Foro Penal · April 2026</div>
+        <div class="num">17,882</div>
+        <div class="lbl">arbitrary political arrests</div>
       </div>
       <div class="meta-item">
-        <div class="num">7.9M</div>
-        <div class="lbl">Venezuelans who have left the country since 2014</div>
-        <div class="src">UN Refugee Agency · 2025</div>
+        <div class="num">300+</div>
+        <div class="lbl">civilians killed in protests</div>
       </div>
       <div class="meta-item">
-        <div class="num">312</div>
-        <div class="lbl">People whose stories are kept in this archive</div>
-        <div class="src">Updated weekly · last 04.28.26</div>
+        <div class="num">8 million</div>
+        <div class="lbl">Venezuelans forced into exile</div>
       </div>
     </div>
 
@@ -246,7 +292,7 @@
           Many have been told to forget. Many have refused.
         </p>
         <p>
-          The Museum of Memory exists to keep their record. <strong>Each profile is built from
+          Memory of Venezuela exists to keep their record. <strong>Each profile is built from
           court documents, family testimony and the words of those who have lived it.</strong>
           Nothing is dramatized. Nothing is invented. Names are added only with the consent
           of the person or their family.
@@ -385,7 +431,7 @@
   <div class="wrap">
     <div class="t-mono num" style="margin-bottom: 18px;">06 — About this work</div>
     <h2 class="t-h2" style="color: var(--cream);">We are the only organization in the world keeping a full record of Venezuela's political prisoners, the families who wait for them, and those who have come home.</h2>
-    <p>The Museum of Memory is an independent, non-partisan archive. We do not endorse parties or candidates in any country. We document state repression as a matter of public record. Our methodology, sources, and ethics policy are published openly.</p>
+    <p>Memory of Venezuela is an independent, non-partisan archive. We do not endorse parties or candidates in any country. We document state repression as a matter of public record. Our methodology, sources, and ethics policy are published openly.</p>
     <div style="margin-top: 36px; display:flex; gap:16px; flex-wrap:wrap;">
       <a class="btn red" href="#">Read the methodology</a>
       <a class="btn ghost" style="color: var(--cream); border-color: var(--cream);" href="#">Independent ethics review</a>
