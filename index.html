@@ -264,9 +264,20 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
   }
   .hero-quote footer {
     margin-top: 18px;
-    font-size: 14px;
-    font-weight: 700;
     color: var(--gray-700);
+  }
+  .hero-quote cite {
+    display: block;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+  }
+  .hero-quote .quote-role {
+    display: block;
+    margin-top: 3px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--gray-500);
   }
   .hero .meta-row { display: flex; gap: 32px; margin-top: 56px; padding-top: 32px; border-top: 1px solid var(--gray-200); flex-wrap: wrap; }
   .hero .meta-row .meta-item { min-width: 220px; }
@@ -512,7 +523,10 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
           Honor to the fallen. To the prisoners. To the freed. To the exiled. Their names will
           not disappear. Their story will not be erased. Their sacrifice was not in vain.
         </p>
-        <footer>- Lilian Tintori</footer>
+        <footer>
+          <cite>- Lilian Tintori</cite>
+          <span class="quote-role">Human Rights Activist</span>
+        </footer>
       </blockquote>
     </div>
 
