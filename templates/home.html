@@ -180,17 +180,6 @@
     font-size: 12px;
     color: var(--gray-500);
   }
-  .htl-track.is-loading {
-    display: block;
-    margin-top: 24px;
-    border-top: 1px solid var(--gray-200);
-    padding-top: 20px;
-    font-family: var(--font-mono);
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--gray-500);
-  }
   .htl-node a:hover { color: var(--black); border-color: var(--black); }
   @media (max-width: 900px) {
     .hero-timeline .t-small { text-align: left; }
@@ -223,6 +212,66 @@
   }
 </style>
 {% endblock %}
+
+{% macro timeline_track() %}
+<div class="htl">
+  <div class="htl-track">
+    <div class="htl-node is-key">
+      <div class="htl-dot"></div>
+      <div class="yr">2014</div>
+      <h4>The Salida protests</h4>
+      <p>Mass demonstrations and a wave of detentions opened the period this archive tracks.</p>
+      <div class="htl-meta">9,286 protests</div>
+      <div class="htl-actions">
+        <a href="https://www.observatoriodeconflictos.org.ve/tendencias-de-la-conflictividad/informe-conflictividad-social-en-venezuela-en-2014" target="_blank" rel="noopener">Source ↗</a>
+      </div>
+    </div>
+
+    <div class="htl-node is-key">
+      <div class="htl-dot"></div>
+      <div class="yr">2017</div>
+      <h4>Four months of protest</h4>
+      <p>Protests spread after the Supreme Court attempted to take over legislative powers.</p>
+      <div class="htl-meta">Months of protests</div>
+      <div class="htl-actions">
+        <a href="https://www.hrw.org/video-photos/photo-essay/2017/11/20/2017-crackdown-dissent-venezuela" target="_blank" rel="noopener">Source ↗</a>
+      </div>
+    </div>
+
+    <div class="htl-node is-key">
+      <div class="htl-dot"></div>
+      <div class="yr">2019</div>
+      <h4>Migration accelerates</h4>
+      <p>UNHCR and IOM reported more than four million Venezuelan refugees and migrants worldwide by mid-2019.</p>
+      <div class="htl-meta">4M+ migrants</div>
+      <div class="htl-actions">
+        <a href="https://data.unhcr.org/es/news/22095" target="_blank" rel="noopener">Source ↗</a>
+      </div>
+    </div>
+
+    <div class="htl-node is-key">
+      <div class="htl-dot"></div>
+      <div class="yr">2024</div>
+      <h4>Post-election detentions</h4>
+      <p>Human rights groups documented mass arrests and abuses after the disputed July 28 election.</p>
+      <div class="htl-meta">1,062 detained in four days</div>
+      <div class="htl-actions">
+        <a href="https://www.amnesty.org/en/documents/amr53/8390/2024/en/" target="_blank" rel="noopener">Source ↗</a>
+      </div>
+    </div>
+
+    <div class="htl-node is-now">
+      <div class="htl-dot"></div>
+      <div class="yr">Today · 2026</div>
+      <h4>Still waiting</h4>
+      <p>We are still waiting for release, the truth, freedom and justice</p>
+      <div class="htl-actions">
+        <a href="archive.html">See the archive →</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endmacro %}
 
 {% block content %}
 <!-- HERO / MISSION -->
@@ -270,9 +319,7 @@
         <span class="t-small">A quick path into the archive's major periods.</span>
       </div>
 
-      <div class="htl" data-timeline-target="hero">
-        <div class="htl-track is-loading">Loading sourced timeline...</div>
-      </div>
+      {{ timeline_track() }}
     </div>
   </div>
 </section>
@@ -389,9 +436,7 @@
       <span class="t-small">Sourced context; record counts come from local profiles</span>
     </div>
 
-    <div class="htl" data-timeline-target="section">
-      <div class="htl-track is-loading">Loading sourced timeline...</div>
-    </div>
+    {{ timeline_track() }}
   </div>
 </section>
 
@@ -439,150 +484,4 @@
   </div>
 </section>
 
-<script>
-  const TIMELINE_DATA_URL = 'data/context/timeline.json';
-  const PEOPLE_INDEX_URL = 'data/people/index.json';
-
-  async function fetchJson(url) {
-    const response = await fetch(url, { cache: 'no-store' });
-    if (!response.ok) throw new Error(`Could not load ${url}`);
-    return response.json();
-  }
-
-  function getRecordYear(profile) {
-    const metadata = profile.metadata || {};
-    const explicitYear = metadata.archive_year || metadata.timeline_year || profile.archive_year;
-    if (explicitYear) return String(explicitYear);
-
-    const datedEvent = (profile.timeline || []).find(event =>
-      typeof event.date === 'string' && /^\d{4}/.test(event.date)
-    );
-    return datedEvent ? datedEvent.date.slice(0, 4) : null;
-  }
-
-  function countRecordsByYear(profiles) {
-    return profiles.reduce((counts, profile) => {
-      const year = getRecordYear(profile);
-      if (year) counts[year] = (counts[year] || 0) + 1;
-      return counts;
-    }, {});
-  }
-
-  function recordLabel(count) {
-    return `${count} Museum ${count === 1 ? 'record' : 'records'}`;
-  }
-
-  function sourceUrlFor(node) {
-    const source = (node.sources || []).find(item => item.url);
-    return source ? source.url : null;
-  }
-
-  function countForNode(node, countsByYear, totalRecords) {
-    if (node.count_scope === 'all_records') return totalRecords;
-    if (node.year) return countsByYear[String(node.year)] || 0;
-    return 0;
-  }
-
-  function appendTextElement(parent, tag, className, text) {
-    const element = document.createElement(tag);
-    if (className) element.className = className;
-    element.textContent = text;
-    parent.appendChild(element);
-    return element;
-  }
-
-  function renderTimeline(target, nodes, countsByYear, totalRecords, mode) {
-    const track = document.createElement('div');
-    track.className = 'htl-track';
-
-    nodes.forEach(node => {
-      const item = document.createElement('div');
-      item.className = `htl-node ${node.count_scope === 'all_records' ? 'is-now' : 'is-key'}`;
-
-      appendTextElement(item, 'div', 'htl-dot', '');
-      appendTextElement(item, 'div', 'yr', node.display_year);
-      appendTextElement(item, 'h4', '', mode === 'hero' ? (node.hero_title || node.title) : node.title);
-      appendTextElement(item, 'p', '', mode === 'hero' ? node.summary : (node.section_summary || node.summary));
-
-      if (node.external_metric && node.count_scope !== 'all_records') {
-        appendTextElement(item, 'div', 'htl-meta', node.external_metric.short_label);
-      }
-
-      const actions = document.createElement('div');
-      actions.className = 'htl-actions';
-
-      const recordCount = countForNode(node, countsByYear, totalRecords);
-      if (recordCount > 0) {
-        const archiveLink = document.createElement('a');
-        archiveLink.href = node.archive_filter_href || 'archive.html';
-        archiveLink.textContent = `${recordLabel(recordCount)} →`;
-        actions.appendChild(archiveLink);
-      }
-
-      const sourceUrl = sourceUrlFor(node);
-      if (sourceUrl) {
-        const sourceLink = document.createElement('a');
-        sourceLink.href = sourceUrl;
-        sourceLink.target = '_blank';
-        sourceLink.rel = 'noopener';
-        sourceLink.textContent = 'Source ↗';
-        actions.appendChild(sourceLink);
-      }
-
-      item.appendChild(actions);
-      track.appendChild(item);
-    });
-
-    target.replaceChildren(track);
-  }
-
-  async function loadMuseumProfiles() {
-    const index = await fetchJson(PEOPLE_INDEX_URL);
-    const entries = Array.isArray(index.people) ? index.people : [];
-    const profiles = await Promise.all(entries.map(async entry => {
-      try {
-        return await fetchJson(entry.path);
-      } catch (error) {
-        console.warn(error);
-        return null;
-      }
-    }));
-    return profiles.filter(Boolean);
-  }
-
-  async function hydrateTimelines() {
-    const targets = document.querySelectorAll('[data-timeline-target]');
-    if (!targets.length) return;
-
-    try {
-      const [timeline, profiles] = await Promise.all([
-        fetchJson(TIMELINE_DATA_URL),
-        loadMuseumProfiles()
-      ]);
-      const countsByYear = countRecordsByYear(profiles);
-      const nodes = Array.isArray(timeline.nodes) ? timeline.nodes : [];
-
-      targets.forEach(target => {
-        renderTimeline(
-          target,
-          nodes,
-          countsByYear,
-          profiles.length,
-          target.dataset.timelineTarget
-        );
-      });
-    } catch (error) {
-      console.warn(error);
-      targets.forEach(target => {
-        target.replaceChildren();
-        const message = document.createElement('div');
-        message.className = 'htl-track is-loading';
-        message.textContent = 'Timeline data unavailable';
-        target.appendChild(message);
-      });
-    }
-  }
-
-  hydrateTimelines();
-</script>
 {% endblock %}
