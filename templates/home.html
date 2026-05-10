@@ -6,7 +6,22 @@
 <style>
   /* Home-only */
   .hero { padding: 88px 0 96px; }
+  .hero-main {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(320px, 0.72fr);
+    gap: 64px;
+    align-items: start;
+  }
   .hero .lede { max-width: 920px; }
+  .hero-media {
+    margin: 0;
+  }
+  .hero-media img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4/5;
+    object-fit: cover;
+  }
   .hero h1 { margin: 24px 0 28px; }
   .hero-quote {
     position: relative;
@@ -242,6 +257,7 @@
   .help-card h4 { font-size: 28px; font-weight: 800; letter-spacing: -0.01em; line-height: 1; margin: 0; }
 
   @media (max-width: 900px) {
+    .hero-main { grid-template-columns: 1fr; gap: 40px; }
     .why, .recent-grid, .help-grid, .foot-grid { grid-template-columns: 1fr; gap: 40px; }
     .nav-links { display: none; }
   }
@@ -252,22 +268,33 @@
 <!-- HERO / MISSION -->
 <section class="hero">
   <div class="wrap">
-    <div class="lede">
-      <div class="t-mono">Memory of Venezuela · Since 2014</div>
-      <h1 class="t-hero">Every name<br/>matters. Every<br/>story is kept.</h1>
-      <blockquote class="hero-quote">
-        <p>
-          Venezuela has not forgotten. And the world cannot forget. Since February 12, 2014,
-          thousands of Venezuelans were killed, imprisoned, tortured and forced into exile for
-          daring to dream of a free country. This memorial exists for one reason only: HONOR.
-          Honor to the fallen. To the prisoners. To the freed. To the exiled. Their names will
-          not disappear. Their story will not be erased. Their sacrifice was not in vain.
-        </p>
-        <footer>
-          <cite>- Lilian Tintori</cite>
-          <span class="quote-role">Human Rights Activist</span>
-        </footer>
-      </blockquote>
+    <div class="hero-main">
+      <div class="lede">
+        <div class="t-mono">Memory of Venezuela · Since 2014</div>
+        <h1 class="t-hero">Every name<br/>matters. Every<br/>story is kept.</h1>
+        <blockquote class="hero-quote">
+          <p>
+            Venezuela has not forgotten. And the world cannot forget. Since February 12, 2014,
+            thousands of Venezuelans were killed, imprisoned, tortured and forced into exile for
+            daring to dream of a free country. This memorial exists for one reason only: HONOR.
+            Honor to the fallen. To the prisoners. To the freed. To the exiled. Their names will
+            not disappear. Their story will not be erased. Their sacrifice was not in vain.
+          </p>
+          <footer>
+            <cite>- Lilian Tintori</cite>
+            <span class="quote-role">Human Rights Activist</span>
+          </footer>
+        </blockquote>
+      </div>
+
+      <figure class="hero-media">
+        <img
+          src="https://www.hrw.org/sites/default/files/styles/opengraph/public/media_2023/12/202312americas_venezuela_wr.jpg?h=c6980913&amp;itok=huCeAE41"
+          alt="Venezuelans gathered at a public demonstration"
+          fetchpriority="high"
+          decoding="async"
+        />
+      </figure>
     </div>
 
     <div class="meta-row">
@@ -355,27 +382,43 @@
 </section>
 
 <!-- WHY THIS EXISTS -->
-<section class="section">
+<section class="section" id="why">
   <div class="wrap">
     <div class="section-head">
       <span class="num">01 — Why this archive exists</span>
     </div>
     <div class="why">
-      <h2 class="t-h2">A record kept by hand,<br/>one person at a time.</h2>
+      <h2 class="t-h2">Because without memory there is no justice.</h2>
       <div>
         <p>
-          For more than a decade, families across Venezuela have searched
-          for the people they love — through prison gates, across borders, into silence.
-          Many have been told to forget. Many have refused.
+          Justice is born in memory.
         </p>
         <p>
-          Memory of Venezuela exists to keep their record. <strong>Each profile is built from
-          court documents, family testimony and the words of those who have lived it.</strong>
-          Nothing is dramatized. Nothing is invented. Names are added only with the consent
-          of the person or their family.
+          It is born when someone — a mother, a brother, an entire people — refuses to forget.<br/>
+          When someone holds up the photo of their murdered child and says:<br/>
+          "This name existed. This pain is real. This crime happened."
         </p>
         <p>
-          We are the only organization documenting all three at once — the people still imprisoned, the families and exiles who carry the weight outside, and those who have come home.
+          The International Criminal Court is investigating Venezuela for crimes against humanity committed since February 12, 2014.<br/>
+          The United Nations documented torture, extrajudicial executions, and systematic repression.<br/>
+          Foro Penal recorded 17,882 arbitrary arrests.
+        </p>
+        <p>
+          But the names behind those numbers are at risk of being lost.<br/>
+          Of becoming nothing more than statistics.<br/>
+          Of disappearing twice — first in life, then in memory.
+        </p>
+        <p>
+          This memorial exists so that does not happen.
+        </p>
+        <p>
+          Every name recorded here is an act of justice.<br/>
+          Every story documented is evidence the world cannot ignore.<br/>
+          Every photograph preserved is a testimony that no regime can erase.
+        </p>
+        <p>
+          Memory is the first step toward justice.<br/>
+          And justice, toward freedom.
         </p>
       </div>
     </div>
@@ -383,7 +426,7 @@
 </section>
 
 <!-- RECENT ADDITIONS -->
-<section class="section">
+<section class="section" id="stories">
   <div class="wrap">
     <div class="section-head" style="display:flex; flex-direction:row; justify-content:space-between; align-items:end;">
       <div>
@@ -443,15 +486,107 @@
   </div>
 </section>
 
-<!-- TIMELINE / BROWSE BY YEAR -->
-<section class="section">
+<!-- COLLECTIVE TRAUMA -->
+<section class="section" id="collective">
   <div class="wrap">
-    <div class="section-head" style="display:flex; flex-direction:row; justify-content:space-between; align-items:end;">
+    <div class="section-head">
+      <span class="num">03 — Collective trauma</span>
+    </div>
+    <div class="why">
+      <h2 class="t-h2">Because trauma needs to be seen in order to heal</h2>
       <div>
-        <span class="num">04 — Browse by year</span>
-        <h2 class="t-h2" style="margin-top:12px;">The years, in brief</h2>
+        <p>
+          There are wounds that do not bleed outward.
+        </p>
+        <p>
+          The families of political prisoners know what it means to fall asleep not knowing whether their loved one was tortured that night.<br/>
+          Former prisoners know what it means to walk out of a cell and not know how to live again.<br/>
+          The exiled know what it means to grieve a homeland from another continent, unable to return.<br/>
+          The mothers of the fallen know what it means to love — forever — someone who no longer exists.
+        </p>
+        <p>
+          That invisible pain is real.<br/>
+          That collective trauma is part of Venezuela.<br/>
+          And a people cannot heal what they cannot name.
+        </p>
+        <p>
+          This memorial is not just a historical archive.<br/>
+          It is a space of mourning.<br/>
+          It is a place where Venezuelan pain finally has a name, a face, a date.<br/>
+          Where families can say: "Here is our loved one. The world knows them. The world remembers them."
+        </p>
+        <p>
+          Because the first step to healing trauma is for someone to look you in the eyes and say:<br/>
+          "What was done to you was real. It matters. You are not alone."
+        </p>
+        <p>
+          This memorial says that.<br/>
+          To every victim. To every family. To every exile.<br/>
+          To every Venezuelan who carries the weight of what could have been.
+        </p>
       </div>
-      <span class="t-small">Sourced context; record counts come from local profiles</span>
+    </div>
+  </div>
+</section>
+
+<!-- HISTORICAL MEMORY -->
+<section class="section" id="pillars">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="num">04 — The 3 pillars of historical memory</span>
+    </div>
+    <div class="why">
+      <h2 class="t-h2">What happened must be known</h2>
+      <div>
+        <p>
+          <strong>1 — Truth</strong>
+        </p>
+        <p>
+          A country cannot move forward without first establishing the full, documented truth of what occurred. Historical memory creates an official, permanent, irrefutable record that no regime can rewrite, deny, or erase. It names the victims, identifies the perpetrators, and establishes the timeline of violations.
+        </p>
+        <p>
+          <em>"The truth is not just a right of the victims — it is an obligation of the State and a need of society."</em><br/>
+          — UN Commission on Human Rights
+        </p>
+        <p>
+          Without truth, crimes repeat themselves. Without a documented record, oppressors rewrite history and future generations inherit lies.
+        </p>
+        <p>
+          <strong>2 — Justice</strong><br/>
+          <em>"Accountability must follow"</em>
+        </p>
+        <p>
+          Historical memory is the foundation of legal accountability. Every name documented, every testimony preserved, every photograph archived becomes evidence — before national courts, before the International Criminal Court, before the tribunal of history itself. Memory transforms victims into witnesses and witnesses into the driving force of justice.
+        </p>
+        <p>
+          <em>"Where there is no justice, there can be no lasting peace."</em><br/>
+          — Nelson Mandela
+        </p>
+        <p>
+          Without memory, there is impunity. With impunity, perpetrators are emboldened to do it again. Historical memory makes impunity impossible.
+        </p>
+        <p>
+          <strong>3 — Non-repetition</strong><br/>
+          <em>"It must never happen again"</em>
+        </p>
+        <p>
+          The deepest purpose of historical memory is not the past — it is the future. By documenting what happened, a society builds the moral and educational foundation to ensure it never happens again. It becomes a school of dignity, a warning to future generations, a compass for building free and just institutions.
+        </p>
+        <p>
+          <em>"Those who cannot remember the past are condemned to repeat it."</em><br/>
+          — George Santayana
+        </p>
+        <p>
+          This is why the Holocaust Museum exists. This is why Mandela's Robben Island became a monument. This is why The Memory of Venezuela must exist — so that a free Venezuela is built, never again, on silence.
+        </p>
+        <p>
+          <strong>In one sentence:</strong><br/>
+          Truth tells us what happened. Justice holds accountable those who did it. Non-repetition ensures it never happens again.
+        </p>
+        <p>
+          These three together are not just reasons — they are the moral obligation of every free society toward its victims.
+        </p>
+      </div>
     </div>
   </div>
 </section>
