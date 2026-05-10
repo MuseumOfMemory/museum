@@ -364,63 +364,51 @@
     </div>
 
     <div class="recent-grid" data-stub>
-      <a href="carmen.html" class="person-card featured">
+      {% if recent_additions and recent_additions.featured %}
+      <a href="{{ recent_additions.featured.slug }}.html" class="person-card featured">
         <div class="photo" style="aspect-ratio: 4/5;">
-          <span class="photo-cap">PORTRAIT — CARMEN TERESA NAVAS · PHOTO PENDING FAMILY APPROVAL</span>
+          <span class="photo-cap">{{ recent_additions.featured.photo_caption }}</span>
         </div>
         <div class="meta">
-          <span class="pill family">Family of a disappeared person</span>
-          <h3>Carmen Teresa Navas</h3>
-          <p>Carmen, 82, is the mother of Víctor Hugo Quero Navas. He was detained on January 1, 2025 and transferred to Tocorón Prison. Since then, the family has been given no official information about his whereabouts. Carmen is still waiting to be told the truth.</p>
-          <span class="t-small">Venezuela · Profile in progress</span>
+          <span class="pill {{ recent_additions.featured.status_class }}">{{ recent_additions.featured.status_label }}</span>
+          <h3>{{ recent_additions.featured.name }}</h3>
+          <p>{{ recent_additions.featured.epithet }}</p>
+          <span class="t-small">{{ recent_additions.featured.country }} · Profile in progress</span>
         </div>
       </a>
+      {% endif %}
 
+      {% if recent_additions and recent_additions.others %}
       <div class="stack">
-        <a href="#" class="person-card">
+        {% for person in recent_additions.others[:2] %}
+        <a href="{{ person.slug }}.html" class="person-card">
           <div class="photo">
-            <span class="photo-cap">PORTRAIT — J. M. CONTRERAS</span>
+            <span class="photo-cap">{{ person.photo_caption }}</span>
           </div>
           <div class="meta">
-            <span class="pill liberated">Liberated</span>
-            <h4>Javier Martín Contreras</h4>
-            <span class="sub">Venezuela · Released 02.02.26 after 9 yrs</span>
+            <span class="pill {{ person.status_class }}">{{ person.status_label }}</span>
+            <h4>{{ person.name }}</h4>
+            <span class="sub">{{ person.subtitle }}</span>
           </div>
         </a>
-        <a href="#" class="person-card">
-          <div class="photo">
-            <span class="photo-cap">PORTRAIT — A. R. SUÁREZ</span>
-          </div>
-          <div class="meta">
-            <span class="pill imprisoned">Imprisoned</span>
-            <h4>Andrea Rodríguez Suárez</h4>
-            <span class="sub">Venezuela · Detained since 08.04.24</span>
-          </div>
-        </a>
+        {% endfor %}
       </div>
 
       <div class="stack">
-        <a href="#" class="person-card">
+        {% for person in recent_additions.others[2:4] %}
+        <a href="{{ person.slug }}.html" class="person-card">
           <div class="photo">
-            <span class="photo-cap">PORTRAIT — D. PÉREZ</span>
+            <span class="photo-cap">{{ person.photo_caption }}</span>
           </div>
           <div class="meta">
-            <span class="pill exiled">In exile</span>
-            <h4>Daniel Pérez Echeverría</h4>
-            <span class="sub">Now in Madrid · Exiled 2017</span>
+            <span class="pill {{ person.status_class }}">{{ person.status_label }}</span>
+            <h4>{{ person.name }}</h4>
+            <span class="sub">{{ person.subtitle }}</span>
           </div>
         </a>
-        <a href="#" class="person-card">
-          <div class="photo">
-            <span class="photo-cap">PLACEHOLDER — PROFILE PENDING</span>
-          </div>
-          <div class="meta">
-            <span class="pill family">Family of victim</span>
-            <h4>Pending profile</h4>
-            <span class="sub">Venezuela · Awaiting family consent</span>
-          </div>
-        </a>
+        {% endfor %}
       </div>
+      {% endif %}
     </div>
   </div>
 </section>
