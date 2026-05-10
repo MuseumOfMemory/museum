@@ -1,0 +1,198 @@
+{% extends "base.html" %}
+
+{% block title %}{{ person.name }} — Museum of Memory{% endblock %}
+
+{% block content %}
+<div class="wrap">
+  <div class="crumbs">
+    <a href="archive.html">The Archive</a> &nbsp;/&nbsp;
+    <a href="archive.html?country={{ person.country_code }}">{{ person.country }}</a> &nbsp;/&nbsp;
+    {{ person.status_category }} &nbsp;/&nbsp;
+    {{ person.name }}
+  </div>
+</div>
+
+<!-- HEAD -->
+<section class="profile-head">
+  <div class="wrap">
+    <div class="ph-grid">
+      <div class="photo">
+        <span class="photo-cap">{{ person.photo_caption }}</span>
+      </div>
+      <div class="ph-meta">
+        <span class="pill {{ person.status_class }}">{{ person.status_label }}</span>
+        <h1>{{ person.name }}</h1>
+        <div class="epithet">{{ person.epithet }}</div>
+        <p class="summary">{{ person.summary | safe }}</p>
+
+        <dl class="facts">
+          {% if person.age %}
+          <div class="fact">
+            <dt>Age</dt>
+            <dd>{{ person.age }}</dd>
+          </div>
+          {% endif %}
+
+          {% if person.country %}
+          <div class="fact">
+            <dt>Country</dt>
+            <dd>{{ person.country }}</dd>
+          </div>
+          {% endif %}
+
+          <div class="fact">
+            <dt>Status</dt>
+            <dd>{{ person.status_full }}{% if person.status_sub %} <span class="sub">{{ person.status_sub }}</span>{% endif %}</dd>
+          </div>
+
+          {% if person.connected_to %}
+          <div class="fact">
+            <dt>Connected to</dt>
+            <dd>{{ person.connected_to.name }} ({{ person.connected_to.relationship }}) <span class="sub">{{ person.connected_to.details }}</span></dd>
+          </div>
+          {% endif %}
+
+          {% if person.profile_added %}
+          <div class="fact"{% if person.profile_added.stub %} data-stub{% endif %}>
+            <dt>Profile added</dt>
+            <dd>{{ person.profile_added.date }}{% if person.profile_added.note %} <span class="sub">{{ person.profile_added.note }}</span>{% endif %}</dd>
+          </div>
+          {% endif %}
+
+          {% if person.last_verified %}
+          <div class="fact"{% if person.last_verified.stub %} data-stub{% endif %}>
+            <dt>Last verified</dt>
+            <dd>{{ person.last_verified.date }}{% if person.last_verified.note %} <span class="sub">{{ person.last_verified.note }}</span>{% endif %}</dd>
+          </div>
+          {% endif %}
+        </dl>
+
+        <div class="actions">
+          <a class="btn red" href="#support">How to stand with {{ person.first_name }}</a>
+          <a class="btn ghost" href="#">Share this profile</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HER STORY -->
+{% if person.story %}
+<section class="story">
+  <div class="wrap">
+    <div class="story-grid">
+      <div class="marker">{{ person.story.marker }}</div>
+      <div class="max">
+        <h2>{{ person.story.title }}</h2>
+
+        {% for paragraph in person.story.paragraphs %}
+        <p>{{ paragraph | safe }}</p>
+        {% endfor %}
+
+        {% if person.story.pull_quote %}
+        <div class="pull">
+          <div class="qmark" style="color: var(--blue);">"</div>
+          <p {% if person.story.pull_quote.stub %}data-stub{% endif %}>{{ person.story.pull_quote.text }}</p>
+          <cite>{{ person.story.pull_quote.attribution }}</cite>
+        </div>
+        {% endif %}
+
+        {% if person.story.subsections %}
+        {% for subsection in person.story.subsections %}
+        <h3>{{ subsection.title }}</h3>
+        {% for paragraph in subsection.paragraphs %}
+        <p>{{ paragraph | safe }}</p>
+        {% endfor %}
+        {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- TIMELINE -->
+{% if person.timeline %}
+<section class="section" style="border-top: 1px solid var(--gray-200);">
+  <div class="wrap">
+    <div class="story-grid">
+      <div class="marker">{{ person.timeline.marker }}</div>
+      <div class="max" style="max-width: 100%;">
+        <h2>{{ person.timeline.title }}</h2>
+        <div class="det-timeline">
+          {% for event in person.timeline.events %}
+          <div class="det-row{% if event.is_key %} is-key{% endif %}">
+            <div class="when">{{ event.when }}</div>
+            <div class="dot"></div>
+            <div class="what">
+              <h4>{{ event.title }}</h4>
+              <p>{{ event.description }}</p>
+              {% if event.source %}
+              <div class="src">{{ event.source }}</div>
+              {% endif %}
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- VOICES -->
+{% if person.voices %}
+<section class="section"{% if person.voices.stub %} data-stub{% endif %}>
+  <div class="wrap">
+    <div class="story-grid">
+      <div class="marker">{{ person.voices.marker }}</div>
+      <div class="max" style="max-width: 100%;">
+        <h2>{{ person.voices.title }}</h2>
+        {% if person.voices.description %}
+        <p style="color: var(--gray-700); font-size: 17px; line-height: 1.7; max-width: 64ch;">
+          {{ person.voices.description }}
+        </p>
+        {% endif %}
+        <div class="voices2" style="margin-top: 32px;">
+          {% for voice in person.voices.testimonies %}
+          <div class="voice">
+            <div class="qmark" style="color: var(--blue);">"</div>
+            <p class="text"{% if voice.pending %} style="color: var(--gray-500); font-style: italic;"{% endif %}>{{ voice.text }}</p>
+            <div class="who">
+              <div class="ph"></div>
+              <div>
+                <div class="name">{{ voice.name }}</div>
+                <div class="role">{{ voice.role }}</div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- SUPPORT -->
+{% if person.support %}
+<section class="support" id="support">
+  <div class="wrap">
+    <div class="t-mono" style="margin-bottom: 18px;">{{ person.support.label }}</div>
+    <h2 class="t-h2">{{ person.support.title }}</h2>
+    <p class="lede">{{ person.support.description }}</p>
+
+    <div class="support-grid"{% if person.support.stub %} data-stub{% endif %}>
+      {% for action in person.support.actions %}
+      <div>
+        <span class="num">{{ action.number }} — {{ action.label }}</span>
+        <h4>{{ action.title }}</h4>
+        <p>{{ action.description }}</p>
+        <a href="{{ action.link }}">{{ action.link_text }} →</a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

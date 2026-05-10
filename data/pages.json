@@ -9,6 +9,11 @@
       "template": "about.html",
       "data": "about.json",
       "output": "about.html"
+    },
+    {
+      "template": "person.html",
+      "data": "people/carmen-teresa-navas.json",
+      "output": "carmen-teresa-navas.html"
     }
   ]
 }

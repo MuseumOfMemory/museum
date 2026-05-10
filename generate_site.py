@@ -64,6 +64,10 @@ class StaticSiteGenerator:
         # Load data
         data = self.load_json_data(data_file)
 
+        # Wrap person data if using person template
+        if template_name == 'person.html':
+            data = {'person': data}
+
         # Render template
         html = self.render_template(template_name, data)
 
@@ -97,14 +101,18 @@ class StaticSiteGenerator:
 
 
 def main():
-    """Example usage of the static site generator."""
+    """Generate site from pages.json configuration."""
     generator = StaticSiteGenerator()
 
-    # Define pages to generate
+    # Load pages configuration from JSON
+    with open('data/pages.json', 'r', encoding='utf-8') as f:
+        config = json.load(f)
+
+    # Convert from dict format to tuple format
     # Format: (template_name, data_file, output_file)
     pages = [
-        ('index.html', 'home.json', 'index.html'),
-        ('about.html', 'about.json', 'about.html'),
+        (page['template'], page['data'], page['output'])
+        for page in config['pages']
     ]
 
     generator.generate(pages)
