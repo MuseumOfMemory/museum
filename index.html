@@ -273,6 +273,21 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
 
   /* Recent additions */
   .recent-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 28px; }
+  .recent-grid.is-single { grid-template-columns: minmax(0, 920px); }
+  .recent-grid.is-single .featured {
+    display: grid;
+    grid-template-columns: minmax(220px, 0.85fr) minmax(0, 1fr);
+  }
+  .recent-grid.is-single .featured .photo {
+    aspect-ratio: auto;
+    min-height: 320px;
+  }
+  .recent-grid.is-loading, .recent-grid.is-empty {
+    display: block;
+    border-top: 1px solid var(--gray-200);
+    padding-top: 24px;
+    color: var(--gray-600);
+  }
   .recent-grid .featured .photo { aspect-ratio: 4/5; }
   .recent-grid .featured .meta { padding: 24px 28px 28px; }
   .recent-grid .featured h3 { margin: 0 0 12px; font-size: 28px; font-weight: 800; letter-spacing: -0.01em; line-height: 1.15; }
@@ -406,6 +421,8 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
 
   @media (max-width: 900px) {
     .why, .recent-grid, .help-grid, .foot-grid { grid-template-columns: 1fr; gap: 40px; }
+    .recent-grid.is-single .featured { display: block; }
+    .recent-grid.is-single .featured .photo { aspect-ratio: 4/5; min-height: 0; }
     .nav-links { display: none; }
   }
 </style>
@@ -463,12 +480,11 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
       </p>
     </div>
 
-    <div class="meta-row" data-stub>
-      <!-- Mission stats: blend of real (Foro Penal numbers) and stubbed -->
+    <div class="meta-row">
       <div class="meta-item">
-        <div class="num">851</div>
+        <div class="num">457</div>
         <div class="lbl">Political prisoners currently held in Venezuela</div>
-        <div class="src">Foro Penal · April 2026</div>
+        <div class="src">Foro Penal · May 4, 2026</div>
       </div>
       <div class="meta-item">
         <div class="num">7.9M</div>
@@ -476,9 +492,9 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
         <div class="src">UN Refugee Agency · 2025</div>
       </div>
       <div class="meta-item">
-        <div class="num">312</div>
+        <div class="num" data-profile-count>1</div>
         <div class="lbl">People whose stories are kept in this archive</div>
-        <div class="src">Updated weekly · last 04.28.26</div>
+        <div class="src">Local profiles · updated from data</div>
       </div>
     </div>
 
@@ -534,67 +550,11 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
         <span class="num">02 — Recent additions</span>
         <h2 class="t-h2" style="margin-top:12px;">New stories in the archive</h2>
       </div>
-      <a href="archive.html" style="font-size:14px; font-weight:600; border-bottom:1px solid var(--black); padding-bottom:2px;">See all 312 →</a>
+      <a href="archive.html" data-profile-count-link style="font-size:14px; font-weight:600; border-bottom:1px solid var(--black); padding-bottom:2px;">See all 1 →</a>
     </div>
 
-    <div class="recent-grid" data-stub>
-      <a href="carmen.html" class="person-card featured">
-        <div class="photo" style="aspect-ratio: 4/5;">
-          <span class="photo-cap">PORTRAIT — CARMEN TERESA NAVAS · PHOTO PENDING FAMILY APPROVAL</span>
-        </div>
-        <div class="meta">
-          <span class="pill family">Family of a disappeared person</span>
-          <h3>Carmen Teresa Navas</h3>
-          <p>Carmen, 82, is the mother of Víctor Hugo Quero Navas. He was detained on January 1, 2025 and transferred to Tocorón Prison. Since then, the family has been given no official information about his whereabouts. Carmen is still waiting to be told the truth.</p>
-          <span class="t-small">Venezuela · Profile in progress</span>
-        </div>
-      </a>
-
-      <div class="stack">
-        <a href="#" class="person-card">
-          <div class="photo">
-            <span class="photo-cap">PORTRAIT — J. M. CONTRERAS</span>
-          </div>
-          <div class="meta">
-            <span class="pill liberated">Liberated</span>
-            <h4>Javier Martín Contreras</h4>
-            <span class="sub">Venezuela · Released 02.02.26 after 9 yrs</span>
-          </div>
-        </a>
-        <a href="#" class="person-card">
-          <div class="photo">
-            <span class="photo-cap">PORTRAIT — A. R. SUÁREZ</span>
-          </div>
-          <div class="meta">
-            <span class="pill imprisoned">Imprisoned</span>
-            <h4>Andrea Rodríguez Suárez</h4>
-            <span class="sub">Venezuela · Detained since 08.04.24</span>
-          </div>
-        </a>
-      </div>
-
-      <div class="stack">
-        <a href="#" class="person-card">
-          <div class="photo">
-            <span class="photo-cap">PORTRAIT — D. PÉREZ</span>
-          </div>
-          <div class="meta">
-            <span class="pill exiled">In exile</span>
-            <h4>Daniel Pérez Echeverría</h4>
-            <span class="sub">Now in Madrid · Exiled 2017</span>
-          </div>
-        </a>
-        <a href="#" class="person-card">
-          <div class="photo">
-            <span class="photo-cap">PLACEHOLDER — PROFILE PENDING</span>
-          </div>
-          <div class="meta">
-            <span class="pill family">Family of victim</span>
-            <h4>Pending profile</h4>
-            <span class="sub">Venezuela · Awaiting family consent</span>
-          </div>
-        </a>
-      </div>
+    <div class="recent-grid is-loading" data-recent-additions>
+      Loading recent profiles...
     </div>
   </div>
 </section>
@@ -772,6 +732,110 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
     return element;
   }
 
+  function textFromSegments(blocks) {
+    const firstBlock = Array.isArray(blocks) ? blocks[0] : null;
+    if (!firstBlock || !Array.isArray(firstBlock.segments)) return '';
+    return firstBlock.segments.map(segment => segment.text || '').join('').replace(/\s+/g, ' ').trim();
+  }
+
+  function profileStatusLabel(profile) {
+    const metadata = profile.metadata || {};
+    if (metadata.profile_status === 'in_review') return 'Profile in progress';
+    return metadata.last_update_note || 'Profile';
+  }
+
+  function profilePillClass(profile) {
+    const category = profile.person?.category || '';
+    if (category.includes('liberated')) return 'liberated';
+    if (category.includes('imprisoned')) return 'imprisoned';
+    if (category.includes('exile')) return 'exiled';
+    return 'family';
+  }
+
+  function profileSortDate(profile) {
+    const metadata = profile.metadata || {};
+    if (metadata.profile_added) return metadata.profile_added;
+    if (metadata.last_verified) return metadata.last_verified;
+
+    const datedEvent = (profile.timeline || []).find(event =>
+      typeof event.date === 'string' && /^\d{4}/.test(event.date)
+    );
+    return datedEvent ? datedEvent.date : '';
+  }
+
+  function createPersonCard(profile, featured = false) {
+    const person = profile.person || {};
+    const name = person.name || 'Untitled profile';
+    const card = document.createElement('a');
+    card.href = profile.public_path || `${profile.slug || 'profile'}.html`;
+    card.className = `person-card${featured ? ' featured' : ''}`;
+
+    const photo = document.createElement('div');
+    photo.className = 'photo';
+    if (featured) photo.style.aspectRatio = '4 / 5';
+    const portraitStatus = person.portrait_status || 'PHOTO PENDING';
+    appendTextElement(photo, 'span', 'photo-cap', `PORTRAIT — ${name.toUpperCase()} · ${portraitStatus}`);
+    card.appendChild(photo);
+
+    const meta = document.createElement('div');
+    meta.className = 'meta';
+    appendTextElement(meta, 'span', `pill ${profilePillClass(profile)}`, person.category_label || 'Profile');
+
+    if (featured) {
+      appendTextElement(meta, 'h3', '', name);
+      appendTextElement(meta, 'p', '', textFromSegments(profile.summary) || person.epithet || '');
+      appendTextElement(meta, 'span', 't-small', `${person.country || 'Venezuela'} · ${profileStatusLabel(profile)}`);
+    } else {
+      appendTextElement(meta, 'h4', '', name);
+      appendTextElement(meta, 'span', 'sub', `${person.country || 'Venezuela'} · ${profileStatusLabel(profile)}`);
+    }
+
+    card.appendChild(meta);
+    return card;
+  }
+
+  function hydrateProfileCounts(profiles) {
+    const count = profiles.length.toLocaleString('en-US');
+    document.querySelectorAll('[data-profile-count]').forEach(element => {
+      element.textContent = count;
+    });
+    document.querySelectorAll('[data-profile-count-link]').forEach(element => {
+      element.textContent = `See all ${count} →`;
+    });
+  }
+
+  function renderRecentAdditions(profiles) {
+    const target = document.querySelector('[data-recent-additions]');
+    if (!target) return;
+
+    target.replaceChildren();
+    if (!profiles.length) {
+      target.className = 'recent-grid is-empty';
+      target.textContent = 'No profiles have been added yet.';
+      return;
+    }
+
+    const recentProfiles = [...profiles]
+      .sort((a, b) => profileSortDate(b).localeCompare(profileSortDate(a)))
+      .slice(0, 5);
+
+    target.className = `recent-grid${recentProfiles.length === 1 ? ' is-single' : ''}`;
+    target.appendChild(createPersonCard(recentProfiles[0], true));
+
+    const remaining = recentProfiles.slice(1);
+    [0, 1].forEach(columnIndex => {
+      const columnProfiles = remaining.filter((_, index) => index % 2 === columnIndex);
+      if (!columnProfiles.length) return;
+
+      const stack = document.createElement('div');
+      stack.className = 'stack';
+      columnProfiles.forEach(profile => {
+        stack.appendChild(createPersonCard(profile));
+      });
+      target.appendChild(stack);
+    });
+  }
+
   function renderTimeline(target, nodes, countsByYear, totalRecords, mode) {
     const track = document.createElement('div');
     track.className = 'htl-track';
@@ -831,15 +895,12 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
     return profiles.filter(Boolean);
   }
 
-  async function hydrateTimelines() {
+  async function hydrateTimelines(profiles) {
     const targets = document.querySelectorAll('[data-timeline-target]');
     if (!targets.length) return;
 
     try {
-      const [timeline, profiles] = await Promise.all([
-        fetchJson(TIMELINE_DATA_URL),
-        loadMuseumProfiles()
-      ]);
+      const timeline = await fetchJson(TIMELINE_DATA_URL);
       const countsByYear = countRecordsByYear(profiles);
       const nodes = Array.isArray(timeline.nodes) ? timeline.nodes : [];
 
@@ -864,7 +925,20 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
     }
   }
 
-  hydrateTimelines();
+  async function hydratePageData() {
+    let profiles = [];
+    try {
+      profiles = await loadMuseumProfiles();
+    } catch (error) {
+      console.warn(error);
+    }
+
+    hydrateProfileCounts(profiles);
+    renderRecentAdditions(profiles);
+    hydrateTimelines(profiles);
+  }
+
+  hydratePageData();
 </script>
 </body>
 </html>
