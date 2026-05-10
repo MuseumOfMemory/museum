@@ -78,6 +78,7 @@ a { color: inherit; text-decoration: none; }
 .wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter); }
 .section { padding: 96px 0; border-top: 1px solid var(--gray-200); }
 .section.tight { padding: 64px 0; }
+section[id] { scroll-margin-top: 88px; }
 .section-head { display: flex; flex-direction: column; gap: 12px; margin-bottom: 48px; }
 .section-head .num { font-family: var(--font-mono); font-size: 12px; color: var(--gray-500); text-transform: uppercase; letter-spacing: 0.14em; }
 
@@ -520,7 +521,6 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
       <button class="on" aria-pressed="true">EN</button>
       <button aria-pressed="false">ES</button>
       </div>
-      <button class="preview-toggle" id="previewToggle"><span class="dot"></span>Preview · highlight stubs</button>
   </div>
 </div>
 
@@ -536,10 +536,12 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
     </a>
     <nav class="nav-links" aria-label="Primary">
       <a href="archive.html">The Archive</a>
-      <a href="#">Stories</a>
-      <a href="#">Countries</a>
-      <a href="#">Timeline</a>
-      <a href="#">About</a>
+      <a href="#why">Why</a>
+      <a href="#stories">Stories</a>
+      <a href="#collective">Collective</a>
+      <a href="#pillars">Pillars</a>
+      <a href="#help">How to Help</a>
+      <a href="#about">About</a>
     </nav>
     <div class="nav-actions">
       <button class="search-icon" aria-label="Search the archive">
@@ -603,7 +605,7 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
 </section>
 
 <!-- WHY THIS EXISTS -->
-<section class="section">
+<section class="section" id="why">
   <div class="wrap">
     <div class="section-head">
       <span class="num">01 — Why this archive exists</span>
@@ -647,7 +649,7 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
 </section>
 
 <!-- RECENT ADDITIONS -->
-<section class="section">
+<section class="section" id="stories">
   <div class="wrap">
     <div class="section-head" style="display:flex; flex-direction:row; justify-content:space-between; align-items:end;">
       <div>
@@ -664,7 +666,7 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
 </section>
 
 <!-- COLLECTIVE TRAUMA -->
-<section class="section">
+<section class="section" id="collective">
   <div class="wrap">
     <div class="section-head">
       <span class="num">03 — Collective trauma</span>
@@ -707,7 +709,7 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
 </section>
 
 <!-- HISTORICAL MEMORY -->
-<section class="section">
+<section class="section" id="pillars">
   <div class="wrap">
     <div class="section-head">
       <span class="num">04 — The 3 pillars of historical memory</span>
@@ -817,7 +819,7 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
 </section>
 
 <!-- ABOUT STRIP -->
-<section class="about-strip">
+<section class="about-strip" id="about">
   <div class="wrap">
     <div class="t-mono num" style="margin-bottom: 18px;">06 — About this work</div>
     <h2 class="t-h2" style="color: var(--cream);">We are the only organization in the world keeping a full record of Venezuela's political prisoners, the families who wait for them, and those who have come home.</h2>
@@ -880,9 +882,6 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
 </footer>
 
 <script>
-  // Preview toggle: highlights all data-stub regions
-  const ptg = document.getElementById('previewToggle');
-  if (ptg) ptg.addEventListener('click', ()=>{ document.body.classList.toggle('preview-on'); });
   // Lang toggle (visual only)
   document.querySelectorAll('.lang button').forEach(b => b.addEventListener('click', () => {
     document.querySelectorAll('.lang button').forEach(x => { x.classList.remove('on'); x.setAttribute('aria-pressed','false'); });
