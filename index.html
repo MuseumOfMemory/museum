@@ -447,20 +447,54 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
   /* How to help */
   .help-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
   .help-card {
-    background: var(--white); border: 1px solid var(--gray-200);
-    padding: 36px; display: flex; flex-direction: column; gap: 14px; min-height: 340px;
+    position: relative;
+    overflow: hidden;
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    padding: 30px 28px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    min-height: 294px;
   }
-  .help-card .num { font-family: var(--font-mono); font-size: 12px; color: var(--blue); letter-spacing: 0.14em; text-transform: uppercase; }
+  .help-card[href]:hover { border-color: var(--black); }
+  .help-card .num {
+    font-family: var(--font-mono); font-size: 12px; font-weight: 700;
+    color: var(--blue); letter-spacing: 0.18em; text-transform: uppercase;
+  }
+  .help-ribbon {
+    position: absolute;
+    top: 17px;
+    right: -46px;
+    width: 170px;
+    padding: 9px 0 8px;
+    transform: rotate(42deg);
+    transform-origin: center;
+    background: var(--yellow);
+    color: var(--black);
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.14);
+  }
   .help-visual {
-    min-height: 112px; border: 1px solid var(--gray-200); background: var(--cream);
-    display: grid; place-items: center; overflow: hidden; margin-bottom: 4px;
+    min-height: 150px;
+    background: var(--cream-2);
+    display: grid;
+    place-items: center;
+    overflow: hidden;
   }
-  .help-visual svg { width: 100%; height: 112px; display: block; }
-  .help-symbol { font-size: 56px; line-height: 1; font-weight: 800; color: var(--blue); }
-  .help-card h4 { font-size: 22px; font-weight: 800; letter-spacing: -0.005em; margin: 0; }
-  .help-card p { color: var(--gray-700); margin: 0; font-size: 15px; line-height: 1.6; flex: 1; }
-  .help-card .status { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-500); flex: 0; }
-  .help-card a { font-size: 14px; font-weight: 600; color: var(--black); border-bottom: 1px solid var(--black); padding-bottom: 2px; align-self: flex-start; overflow-wrap: anywhere; }
+  .help-visual svg { width: 100%; height: 150px; display: block; }
+  .help-symbol {
+    font-size: 54px;
+    line-height: 1;
+    font-weight: 800;
+    color: rgba(0, 56, 147, 0.48);
+  }
+  .help-card h4 { font-size: 28px; font-weight: 800; letter-spacing: -0.01em; line-height: 1; margin: 0; }
 
   /* About strip */
   .about-strip { background: var(--true-black); color: var(--cream); padding: 96px 0; }
@@ -743,39 +777,41 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
     </div>
 
     <div class="help-grid" data-stub>
-      <div class="help-card">
-        <span class="num">01 — Submit</span>
+      <div class="help-card" aria-disabled="true">
+        <span class="help-ribbon">Coming soon</span>
+        <span class="num">01 - Submit</span>
         <div class="help-visual" aria-hidden="true">
-          <svg viewBox="0 0 320 112" xmlns="http://www.w3.org/2000/svg">
-            <rect width="320" height="112" fill="#F0EDE8"/>
-            <rect x="52" y="25" width="86" height="62" fill="#FFFFFF" stroke="#D0CCC8"/>
-            <path d="M70 44H120M70 57H112M70 70H99" stroke="#003893" stroke-width="4" stroke-linecap="square"/>
-            <rect x="174" y="26" width="94" height="60" fill="#FFFFFF" stroke="#D0CCC8"/>
-            <circle cx="202" cy="52" r="13" fill="#FCD116"/>
-            <path d="M184 78C190 66 213 66 220 78" stroke="#003893" stroke-width="5" fill="none"/>
-            <path d="M231 43H253M242 32V54" stroke="#CF142B" stroke-width="5" stroke-linecap="square"/>
+          <svg viewBox="0 0 320 150" xmlns="http://www.w3.org/2000/svg">
+            <rect width="320" height="150" fill="#E8E4DC"/>
+            <rect x="104" y="51" width="35" height="37" fill="#F8F7F4" stroke="#8099C8" stroke-width="3"/>
+            <path d="M112 62H132M112 72H130M112 82H124" stroke="#8099C8" stroke-width="3"/>
+            <rect x="150" y="51" width="42" height="37" fill="#F8F7F4" stroke="#8099C8" stroke-width="3"/>
+            <circle cx="166" cy="66" r="6" fill="#FCD116" stroke="#8099C8" stroke-width="2"/>
+            <path d="M157 84C160 76 173 76 177 84" stroke="#8099C8" stroke-width="3" fill="none"/>
+            <path d="M181 60H193M187 54V66" stroke="#CF142B" stroke-width="3"/>
           </svg>
         </div>
         <h4>Submit</h4>
-        <p class="status">Coming soon.</p>
       </div>
-      <div class="help-card">
-        <span class="num">02 — Donate</span>
+      <div class="help-card" aria-disabled="true">
+        <span class="help-ribbon">Coming soon</span>
+        <span class="num">02 - Donate</span>
         <div class="help-visual" aria-hidden="true">
-          <span class="help-symbol">₿</span>
+          <span class="help-symbol">&#8383;</span>
         </div>
         <h4>Donate</h4>
-        <p class="status">Coming soon.</p>
       </div>
-      <div class="help-card">
-        <span class="num">03 — Contact</span>
+      <a class="help-card" href="mailto:contact@memoryvenezuela.org">
+        <span class="num">03 - Contact</span>
         <div class="help-visual" aria-hidden="true">
-          <span class="help-symbol">@</span>
+          <svg viewBox="0 0 320 150" xmlns="http://www.w3.org/2000/svg">
+            <rect width="320" height="150" fill="#E8E4DC"/>
+            <text x="160" y="88" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="44" font-weight="700" fill="#003893">@</text>
+            <circle cx="160" cy="75" r="20" fill="none" stroke="#003893" stroke-width="4"/>
+          </svg>
         </div>
         <h4>Contact</h4>
-        <p>Reach the Memory of Venezuela team directly.</p>
-        <a href="mailto:contact@memoryvenezuela.org">contact@memoryvenezuela.org</a>
-      </div>
+      </a>
     </div>
   </div>
 </section>
