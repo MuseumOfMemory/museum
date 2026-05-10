@@ -1,6 +1,6 @@
 ## Linked Issue
 
-Closes #
+Closes # 
 
 ## Profile Change
 
