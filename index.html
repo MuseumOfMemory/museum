@@ -448,12 +448,19 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
   .help-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
   .help-card {
     background: var(--white); border: 1px solid var(--gray-200);
-    padding: 36px; display: flex; flex-direction: column; gap: 14px; min-height: 320px;
+    padding: 36px; display: flex; flex-direction: column; gap: 14px; min-height: 340px;
   }
   .help-card .num { font-family: var(--font-mono); font-size: 12px; color: var(--blue); letter-spacing: 0.14em; text-transform: uppercase; }
+  .help-visual {
+    min-height: 112px; border: 1px solid var(--gray-200); background: var(--cream);
+    display: grid; place-items: center; overflow: hidden; margin-bottom: 4px;
+  }
+  .help-visual svg { width: 100%; height: 112px; display: block; }
+  .help-symbol { font-size: 56px; line-height: 1; font-weight: 800; color: var(--blue); }
   .help-card h4 { font-size: 22px; font-weight: 800; letter-spacing: -0.005em; margin: 0; }
   .help-card p { color: var(--gray-700); margin: 0; font-size: 15px; line-height: 1.6; flex: 1; }
-  .help-card a { font-size: 14px; font-weight: 600; color: var(--black); border-bottom: 1px solid var(--black); padding-bottom: 2px; align-self: flex-start; }
+  .help-card .status { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray-500); flex: 0; }
+  .help-card a { font-size: 14px; font-weight: 600; color: var(--black); border-bottom: 1px solid var(--black); padding-bottom: 2px; align-self: flex-start; overflow-wrap: anywhere; }
 
   /* About strip */
   .about-strip { background: var(--true-black); color: var(--cream); padding: 96px 0; }
@@ -732,27 +739,42 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
   <div class="wrap">
     <div class="section-head">
       <span class="num">05 — How to help</span>
-      <h2 class="t-h2" style="margin-top:12px;">Three things you can do today</h2>
+      <h2 class="t-h2" style="margin-top:12px;">Turn emotion into action.</h2>
     </div>
 
     <div class="help-grid" data-stub>
       <div class="help-card">
-        <span class="num">01 — Write</span>
-        <h4>Write a letter to a prisoner</h4>
-        <p>Letters reach the families, who carry them in. Even when censors hold them, the families know that someone, somewhere, has written their name. We provide the addresses, the templates, and the translations.</p>
-        <a href="#">Start a letter →</a>
+        <span class="num">01 — Submit</span>
+        <div class="help-visual" aria-hidden="true">
+          <svg viewBox="0 0 320 112" xmlns="http://www.w3.org/2000/svg">
+            <rect width="320" height="112" fill="#F0EDE8"/>
+            <rect x="52" y="25" width="86" height="62" fill="#FFFFFF" stroke="#D0CCC8"/>
+            <path d="M70 44H120M70 57H112M70 70H99" stroke="#003893" stroke-width="4" stroke-linecap="square"/>
+            <rect x="174" y="26" width="94" height="60" fill="#FFFFFF" stroke="#D0CCC8"/>
+            <circle cx="202" cy="52" r="13" fill="#FCD116"/>
+            <path d="M184 78C190 66 213 66 220 78" stroke="#003893" stroke-width="5" fill="none"/>
+            <path d="M231 43H253M242 32V54" stroke="#CF142B" stroke-width="5" stroke-linecap="square"/>
+          </svg>
+        </div>
+        <h4>Submit</h4>
+        <p class="status">Coming soon.</p>
       </div>
       <div class="help-card">
-        <span class="num">02 — Share</span>
-        <h4>Share a person's story</h4>
-        <p>The archive lives on attention. Share a profile to your audience, your church, your union, your group chat. Each profile has a clean shareable card and a short version in both languages.</p>
-        <a href="#">Get a story to share →</a>
+        <span class="num">02 — Donate</span>
+        <div class="help-visual" aria-hidden="true">
+          <span class="help-symbol">₿</span>
+        </div>
+        <h4>Donate</h4>
+        <p class="status">Coming soon.</p>
       </div>
       <div class="help-card">
-        <span class="num">03 — Sustain</span>
-        <h4>Sustain the archive</h4>
-        <p>This archive is built by hand by a small staff in Caracas and Miami. A monthly gift of any size keeps the work going — verification, family interviews, legal review, translation.</p>
-        <a href="#">Give monthly →</a>
+        <span class="num">03 — Contact</span>
+        <div class="help-visual" aria-hidden="true">
+          <span class="help-symbol">@</span>
+        </div>
+        <h4>Contact</h4>
+        <p>Reach the Memory of Venezuela team directly.</p>
+        <a href="mailto:contact@memoryvenezuela.org">contact@memoryvenezuela.org</a>
       </div>
     </div>
   </div>
@@ -799,10 +821,9 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
       <div class="foot-col">
         <h5>How to help</h5>
         <ul>
-          <li><a href="#help">Write a letter</a></li>
-          <li><a href="#help">Share a story</a></li>
-          <li><a href="#help">Sustain the archive</a></li>
-          <li><a href="#">Submit a name</a></li>
+          <li><a href="#help">Submit</a></li>
+          <li><a href="#help">Donate</a></li>
+          <li><a href="mailto:contact@memoryvenezuela.org">Contact</a></li>
         </ul>
       </div>
       <div class="foot-col">
