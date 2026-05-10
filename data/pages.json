@@ -1,14 +1,9 @@
 {
   "pages": [
     {
-      "template": "index.html",
+      "template": "home.html",
       "data": "home.json",
       "output": "index.html"
-    },
-    {
-      "template": "about.html",
-      "data": "about.json",
-      "output": "about.html"
     },
     {
       "template": "person.html",

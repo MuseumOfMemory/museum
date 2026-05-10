@@ -1,0 +1,542 @@
+{% extends "base.html" %}
+
+{% block title %}Museum of Memory — Honoring the families of Venezuela{% endblock %}
+
+{% block extra_styles %}
+<style>
+  /* Home-only */
+  .hero { padding: 88px 0 96px; }
+  .hero .lede { max-width: 920px; }
+  .hero h1 { margin: 24px 0 28px; }
+  .hero .meta-row { display: flex; gap: 32px; margin-top: 56px; padding-top: 32px; border-top: 1px solid var(--gray-200); flex-wrap: wrap; }
+  .hero .meta-row .meta-item { min-width: 220px; }
+  .hero .meta-row .num { font-size: 44px; font-weight: 800; letter-spacing: -0.02em; line-height: 1; }
+  .hero .meta-row .lbl { font-size: 13px; color: var(--gray-500); margin-top: 6px; max-width: 240px; }
+  .hero .meta-row .src { font-size: 11px; color: var(--gray-400); margin-top: 8px; font-style: italic; }
+  .hero-timeline {
+    margin-top: 56px;
+    padding-top: 32px;
+    border-top: 1px solid var(--gray-200);
+  }
+  .hero-timeline-head {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  .hero-timeline h2 {
+    margin: 8px 0 0;
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.005em;
+    line-height: 1.15;
+  }
+  .hero-timeline .t-small {
+    max-width: 320px;
+    text-align: right;
+  }
+  .hero-timeline .htl-track { margin-top: 24px; }
+
+  .why { display: grid; grid-template-columns: 1fr 1.4fr; gap: 80px; align-items: start; }
+  .why p { font-size: 17px; line-height: 1.7; color: var(--gray-700); margin: 0 0 18px; }
+  .why p strong { color: var(--black); font-weight: 600; }
+
+  /* Recent additions */
+  .recent-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 28px; }
+  .recent-grid .featured .photo { aspect-ratio: 4/5; }
+  .recent-grid .featured .meta { padding: 24px 28px 28px; }
+  .recent-grid .featured h3 { margin: 0 0 12px; font-size: 28px; font-weight: 800; letter-spacing: -0.01em; line-height: 1.15; }
+  .recent-grid .featured p { font-size: 16px; color: var(--gray-700); line-height: 1.6; margin: 0 0 18px; }
+  .recent-grid .featured .pill { margin-bottom: 12px; }
+  .recent-grid .stack { display: flex; flex-direction: column; gap: 28px; }
+  .recent-grid .stack .person-card .photo { aspect-ratio: 4/3; }
+
+  /* Timeline */
+  .tl { position: relative; padding: 0 0 0 0; }
+  .tl-row { display: grid; grid-template-columns: 140px 1fr; gap: 48px; padding: 28px 0; border-top: 1px solid var(--gray-200); align-items: start; }
+  .tl-row:last-child { border-bottom: 1px solid var(--gray-200); }
+  .tl-row .yr { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.08em; color: var(--gray-700); padding-top: 4px; }
+  .tl-row .yr .count { display: block; font-family: var(--font-sans); font-size: 11px; color: var(--gray-400); margin-top: 4px; letter-spacing: 0.06em; text-transform: uppercase; }
+  .tl-row .body h4 { margin: 0 0 8px; font-size: 20px; font-weight: 700; letter-spacing: -0.005em; }
+  .tl-row .body p { margin: 0; color: var(--gray-700); font-size: 15px; line-height: 1.6; max-width: 720px; }
+  .tl-row .body .links { margin-top: 12px; display: flex; gap: 16px; flex-wrap: wrap; font-size: 13px; }
+  .tl-row .body .links a { color: var(--gray-700); border-bottom: 1px solid var(--gray-300); padding-bottom: 1px; }
+  .tl-row .body .links a:hover { color: var(--black); border-color: var(--black); }
+  .tl-row.is-active .body h4 { color: var(--red); }
+
+  /* Horizontal hero timeline */
+  .htl { padding: 16px 0 0; }
+  .htl-track {
+    --htl-gap: 24px;
+    --htl-dot-center: 9px;
+    --htl-column: calc((100% - (4 * var(--htl-gap))) / 5);
+    position: relative;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: var(--htl-gap);
+    margin-top: 32px;
+  }
+  .htl-track::before {
+    content: ""; position: absolute;
+    left: var(--htl-dot-center);
+    right: calc(var(--htl-column) - var(--htl-dot-center));
+    top: 28px;
+    height: 2px; background: var(--gray-200);
+    z-index: 0;
+  }
+  .htl-track::after {
+    content: ""; position: absolute;
+    left: var(--htl-dot-center);
+    top: 27px;
+    width: calc(4 * (var(--htl-column) + var(--htl-gap)));
+    height: 4px; background: var(--blue);
+    z-index: 1;
+  }
+  .htl-node { position: relative; z-index: 2; padding-top: 0; }
+  .htl-dot {
+    width: 18px; height: 18px; border-radius: 999px;
+    background: var(--gray-200); border: 4px solid var(--cream);
+    margin: 20px 0 16px;
+    box-shadow: 0 0 0 1px var(--gray-300);
+  }
+  .htl-node.is-key .htl-dot { background: var(--blue); box-shadow: 0 0 0 1px var(--blue); }
+  .htl-node.is-now .htl-dot { background: var(--yellow); box-shadow: 0 0 0 1px var(--yellow-deep); width: 22px; height: 22px; margin-top: 18px; }
+  .htl-node .yr {
+    font-family: var(--font-mono); font-size: 13px; font-weight: 500;
+    letter-spacing: 0.06em; color: var(--gray-500);
+    margin-bottom: 6px;
+  }
+  .htl-node.is-key .yr, .htl-node.is-now .yr { color: var(--black); }
+  .htl-node h4 {
+    margin: 0 0 8px; font-size: 17px; font-weight: 800; letter-spacing: -0.005em;
+    line-height: 1.2;
+  }
+  .htl-node p {
+    margin: 0; font-size: 13px; color: var(--gray-700); line-height: 1.55;
+  }
+  .htl-node .htl-meta {
+    margin-top: 10px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    color: var(--gray-500);
+  }
+  .htl-node .htl-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .htl-node a {
+    display: inline-block; margin-top: 10px; font-size: 12px; font-weight: 600;
+    color: var(--gray-700); border-bottom: 1px solid var(--gray-300); padding-bottom: 1px;
+  }
+  .htl-node .htl-note {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--gray-500);
+  }
+  .htl-track.is-loading {
+    display: block;
+    margin-top: 24px;
+    border-top: 1px solid var(--gray-200);
+    padding-top: 20px;
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gray-500);
+  }
+  .htl-node a:hover { color: var(--black); border-color: var(--black); }
+  @media (max-width: 900px) {
+    .hero-timeline .t-small { text-align: left; }
+    .htl-track { grid-template-columns: 1fr; gap: 0; }
+    .htl-track::before, .htl-track::after { display: none; }
+    .htl-node { border-top: 1px solid var(--gray-200); padding: 20px 0; }
+    .htl-dot { margin: 0 0 12px; }
+  }
+
+  /* How to help */
+  .help-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .help-card {
+    background: var(--white); border: 1px solid var(--gray-200);
+    padding: 36px; display: flex; flex-direction: column; gap: 14px; min-height: 320px;
+  }
+  .help-card .num { font-family: var(--font-mono); font-size: 12px; color: var(--blue); letter-spacing: 0.14em; text-transform: uppercase; }
+  .help-card h4 { font-size: 22px; font-weight: 800; letter-spacing: -0.005em; margin: 0; }
+  .help-card p { color: var(--gray-700); margin: 0; font-size: 15px; line-height: 1.6; flex: 1; }
+  .help-card a { font-size: 14px; font-weight: 600; color: var(--black); border-bottom: 1px solid var(--black); padding-bottom: 2px; align-self: flex-start; }
+
+  /* About strip */
+  .about-strip { background: var(--true-black); color: var(--cream); padding: 96px 0; }
+  .about-strip h2 { margin: 0 0 28px; max-width: 900px; }
+  .about-strip p { font-size: 18px; color: rgba(240,237,232,0.75); line-height: 1.7; max-width: 760px; margin: 0 0 18px; }
+  .about-strip .num { color: var(--gray-400); }
+
+  @media (max-width: 900px) {
+    .why, .recent-grid, .help-grid, .foot-grid { grid-template-columns: 1fr; gap: 40px; }
+    .nav-links { display: none; }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- HERO / MISSION -->
+<section class="hero">
+  <div class="wrap">
+    <div class="lede">
+      <div class="t-mono">Museum of Memory · Edition 2026</div>
+      <h1 class="t-hero">Every name<br/>matters. Every<br/>story is kept.</h1>
+      <p class="t-lead" style="max-width: 760px;">
+        We document the lives of political prisoners, exiles and the families who wait for them.
+        We record what happened, who it happened to, and what it cost — so that one day,
+        when the cells are emptied and the ledgers opened, no one will be missing from the record.
+      </p>
+    </div>
+
+    <div class="meta-row" data-stub>
+      <!-- Mission stats: blend of real (Foro Penal numbers) and stubbed -->
+      <div class="meta-item">
+        <div class="num">851</div>
+        <div class="lbl">Political prisoners currently held in Venezuela</div>
+        <div class="src">Foro Penal · April 2026</div>
+      </div>
+      <div class="meta-item">
+        <div class="num">7.9M</div>
+        <div class="lbl">Venezuelans who have left the country since 2014</div>
+        <div class="src">UN Refugee Agency · 2025</div>
+      </div>
+      <div class="meta-item">
+        <div class="num">312</div>
+        <div class="lbl">People whose stories are kept in this archive</div>
+        <div class="src">Updated weekly · last 04.28.26</div>
+      </div>
+    </div>
+
+    <div class="hero-timeline">
+      <div class="hero-timeline-head">
+        <div>
+          <div class="t-mono">The years, in brief</div>
+          <h2>Follow the record by year</h2>
+        </div>
+        <span class="t-small">A quick path into the archive's major periods.</span>
+      </div>
+
+      <div class="htl" data-timeline-target="hero">
+        <div class="htl-track is-loading">Loading sourced timeline...</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY THIS EXISTS -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="num">01 — Why this archive exists</span>
+    </div>
+    <div class="why">
+      <h2 class="t-h2">A record kept by hand,<br/>one person at a time.</h2>
+      <div>
+        <p>
+          For more than a decade, families across Venezuela have searched
+          for the people they love — through prison gates, across borders, into silence.
+          Many have been told to forget. Many have refused.
+        </p>
+        <p>
+          The Museum of Memory exists to keep their record. <strong>Each profile is built from
+          court documents, family testimony and the words of those who have lived it.</strong>
+          Nothing is dramatized. Nothing is invented. Names are added only with the consent
+          of the person or their family.
+        </p>
+        <p>
+          We are the only organization documenting all three at once — the people still imprisoned, the families and exiles who carry the weight outside, and those who have come home.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RECENT ADDITIONS -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head" style="display:flex; flex-direction:row; justify-content:space-between; align-items:end;">
+      <div>
+        <span class="num">02 — Recent additions</span>
+        <h2 class="t-h2" style="margin-top:12px;">New stories in the archive</h2>
+      </div>
+      <a href="archive.html" style="font-size:14px; font-weight:600; border-bottom:1px solid var(--black); padding-bottom:2px;">See all 312 →</a>
+    </div>
+
+    <div class="recent-grid" data-stub>
+      <a href="carmen.html" class="person-card featured">
+        <div class="photo" style="aspect-ratio: 4/5;">
+          <span class="photo-cap">PORTRAIT — CARMEN TERESA NAVAS · PHOTO PENDING FAMILY APPROVAL</span>
+        </div>
+        <div class="meta">
+          <span class="pill family">Family of a disappeared person</span>
+          <h3>Carmen Teresa Navas</h3>
+          <p>Carmen, 82, is the mother of Víctor Hugo Quero Navas. He was detained on January 1, 2025 and transferred to Tocorón Prison. Since then, the family has been given no official information about his whereabouts. Carmen is still waiting to be told the truth.</p>
+          <span class="t-small">Venezuela · Profile in progress</span>
+        </div>
+      </a>
+
+      <div class="stack">
+        <a href="#" class="person-card">
+          <div class="photo">
+            <span class="photo-cap">PORTRAIT — J. M. CONTRERAS</span>
+          </div>
+          <div class="meta">
+            <span class="pill liberated">Liberated</span>
+            <h4>Javier Martín Contreras</h4>
+            <span class="sub">Venezuela · Released 02.02.26 after 9 yrs</span>
+          </div>
+        </a>
+        <a href="#" class="person-card">
+          <div class="photo">
+            <span class="photo-cap">PORTRAIT — A. R. SUÁREZ</span>
+          </div>
+          <div class="meta">
+            <span class="pill imprisoned">Imprisoned</span>
+            <h4>Andrea Rodríguez Suárez</h4>
+            <span class="sub">Venezuela · Detained since 08.04.24</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="stack">
+        <a href="#" class="person-card">
+          <div class="photo">
+            <span class="photo-cap">PORTRAIT — D. PÉREZ</span>
+          </div>
+          <div class="meta">
+            <span class="pill exiled">In exile</span>
+            <h4>Daniel Pérez Echeverría</h4>
+            <span class="sub">Now in Madrid · Exiled 2017</span>
+          </div>
+        </a>
+        <a href="#" class="person-card">
+          <div class="photo">
+            <span class="photo-cap">PLACEHOLDER — PROFILE PENDING</span>
+          </div>
+          <div class="meta">
+            <span class="pill family">Family of victim</span>
+            <h4>Pending profile</h4>
+            <span class="sub">Venezuela · Awaiting family consent</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIMELINE / BROWSE BY YEAR -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head" style="display:flex; flex-direction:row; justify-content:space-between; align-items:end;">
+      <div>
+        <span class="num">04 — Browse by year</span>
+        <h2 class="t-h2" style="margin-top:12px;">The years, in brief</h2>
+      </div>
+      <span class="t-small">Sourced context; record counts come from local profiles</span>
+    </div>
+
+    <div class="htl" data-timeline-target="section">
+      <div class="htl-track is-loading">Loading sourced timeline...</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW TO HELP -->
+<section class="section" id="help">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="num">05 — How to help</span>
+      <h2 class="t-h2" style="margin-top:12px;">Three things you can do today</h2>
+    </div>
+
+    <div class="help-grid" data-stub>
+      <div class="help-card">
+        <span class="num">01 — Write</span>
+        <h4>Write a letter to a prisoner</h4>
+        <p>Letters reach the families, who carry them in. Even when censors hold them, the families know that someone, somewhere, has written their name. We provide the addresses, the templates, and the translations.</p>
+        <a href="#">Start a letter →</a>
+      </div>
+      <div class="help-card">
+        <span class="num">02 — Share</span>
+        <h4>Share a person's story</h4>
+        <p>The archive lives on attention. Share a profile to your audience, your church, your union, your group chat. Each profile has a clean shareable card and a short version in both languages.</p>
+        <a href="#">Get a story to share →</a>
+      </div>
+      <div class="help-card">
+        <span class="num">03 — Sustain</span>
+        <h4>Sustain the archive</h4>
+        <p>This archive is built by hand by a small staff in Caracas and Miami. A monthly gift of any size keeps the work going — verification, family interviews, legal review, translation.</p>
+        <a href="#">Give monthly →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT STRIP -->
+<section class="about-strip">
+  <div class="wrap">
+    <div class="t-mono num" style="margin-bottom: 18px;">06 — About this work</div>
+    <h2 class="t-h2" style="color: var(--cream);">We are the only organization in the world keeping a full record of Venezuela's political prisoners, the families who wait for them, and those who have come home.</h2>
+    <p>The Museum of Memory is an independent, non-partisan archive. We do not endorse parties or candidates in any country. We document state repression as a matter of public record. Our methodology, sources, and ethics policy are published openly.</p>
+    <div style="margin-top: 36px; display:flex; gap:16px; flex-wrap:wrap;">
+      <a class="btn red" href="#">Read the methodology</a>
+      <a class="btn ghost" style="color: var(--cream); border-color: var(--cream);" href="#">Independent ethics review</a>
+    </div>
+  </div>
+</section>
+
+<script>
+  const TIMELINE_DATA_URL = 'data/context/timeline.json';
+  const PEOPLE_INDEX_URL = 'data/people/index.json';
+
+  async function fetchJson(url) {
+    const response = await fetch(url, { cache: 'no-store' });
+    if (!response.ok) throw new Error(`Could not load ${url}`);
+    return response.json();
+  }
+
+  function getRecordYear(profile) {
+    const metadata = profile.metadata || {};
+    const explicitYear = metadata.archive_year || metadata.timeline_year || profile.archive_year;
+    if (explicitYear) return String(explicitYear);
+
+    const datedEvent = (profile.timeline || []).find(event =>
+      typeof event.date === 'string' && /^\d{4}/.test(event.date)
+    );
+    return datedEvent ? datedEvent.date.slice(0, 4) : null;
+  }
+
+  function countRecordsByYear(profiles) {
+    return profiles.reduce((counts, profile) => {
+      const year = getRecordYear(profile);
+      if (year) counts[year] = (counts[year] || 0) + 1;
+      return counts;
+    }, {});
+  }
+
+  function recordLabel(count) {
+    return `${count} Museum ${count === 1 ? 'record' : 'records'}`;
+  }
+
+  function sourceUrlFor(node) {
+    const source = (node.sources || []).find(item => item.url);
+    return source ? source.url : null;
+  }
+
+  function countForNode(node, countsByYear, totalRecords) {
+    if (node.count_scope === 'all_records') return totalRecords;
+    if (node.year) return countsByYear[String(node.year)] || 0;
+    return 0;
+  }
+
+  function appendTextElement(parent, tag, className, text) {
+    const element = document.createElement(tag);
+    if (className) element.className = className;
+    element.textContent = text;
+    parent.appendChild(element);
+    return element;
+  }
+
+  function renderTimeline(target, nodes, countsByYear, totalRecords, mode) {
+    const track = document.createElement('div');
+    track.className = 'htl-track';
+
+    nodes.forEach(node => {
+      const item = document.createElement('div');
+      item.className = `htl-node ${node.count_scope === 'all_records' ? 'is-now' : 'is-key'}`;
+
+      appendTextElement(item, 'div', 'htl-dot', '');
+      appendTextElement(item, 'div', 'yr', node.display_year);
+      appendTextElement(item, 'h4', '', mode === 'hero' ? (node.hero_title || node.title) : node.title);
+      appendTextElement(item, 'p', '', mode === 'hero' ? node.summary : (node.section_summary || node.summary));
+
+      if (node.external_metric && node.count_scope !== 'all_records') {
+        appendTextElement(item, 'div', 'htl-meta', node.external_metric.short_label);
+      }
+
+      const actions = document.createElement('div');
+      actions.className = 'htl-actions';
+
+      const recordCount = countForNode(node, countsByYear, totalRecords);
+      if (recordCount > 0) {
+        const archiveLink = document.createElement('a');
+        archiveLink.href = node.archive_filter_href || 'archive.html';
+        archiveLink.textContent = `${recordLabel(recordCount)} →`;
+        actions.appendChild(archiveLink);
+      }
+
+      const sourceUrl = sourceUrlFor(node);
+      if (sourceUrl) {
+        const sourceLink = document.createElement('a');
+        sourceLink.href = sourceUrl;
+        sourceLink.target = '_blank';
+        sourceLink.rel = 'noopener';
+        sourceLink.textContent = 'Source ↗';
+        actions.appendChild(sourceLink);
+      }
+
+      item.appendChild(actions);
+      track.appendChild(item);
+    });
+
+    target.replaceChildren(track);
+  }
+
+  async function loadMuseumProfiles() {
+    const index = await fetchJson(PEOPLE_INDEX_URL);
+    const entries = Array.isArray(index.people) ? index.people : [];
+    const profiles = await Promise.all(entries.map(async entry => {
+      try {
+        return await fetchJson(entry.path);
+      } catch (error) {
+        console.warn(error);
+        return null;
+      }
+    }));
+    return profiles.filter(Boolean);
+  }
+
+  async function hydrateTimelines() {
+    const targets = document.querySelectorAll('[data-timeline-target]');
+    if (!targets.length) return;
+
+    try {
+      const [timeline, profiles] = await Promise.all([
+        fetchJson(TIMELINE_DATA_URL),
+        loadMuseumProfiles()
+      ]);
+      const countsByYear = countRecordsByYear(profiles);
+      const nodes = Array.isArray(timeline.nodes) ? timeline.nodes : [];
+
+      targets.forEach(target => {
+        renderTimeline(
+          target,
+          nodes,
+          countsByYear,
+          profiles.length,
+          target.dataset.timelineTarget
+        );
+      });
+    } catch (error) {
+      console.warn(error);
+      targets.forEach(target => {
+        target.replaceChildren();
+        const message = document.createElement('div');
+        message.className = 'htl-track is-loading';
+        message.textContent = 'Timeline data unavailable';
+        target.appendChild(message);
+      });
+    }
+  }
+
+  hydrateTimelines();
+</script>
+{% endblock %}
