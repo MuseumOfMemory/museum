@@ -134,6 +134,21 @@
 
   /* Recent additions */
   .recent-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 28px; }
+  .recent-grid.is-single { grid-template-columns: minmax(0, 920px); }
+  .recent-grid.is-single .featured {
+    display: grid;
+    grid-template-columns: minmax(220px, 0.85fr) minmax(0, 1fr);
+  }
+  .recent-grid.is-single .featured .photo {
+    aspect-ratio: auto;
+    min-height: 320px;
+  }
+  .recent-grid.is-loading, .recent-grid.is-empty {
+    display: block;
+    border-top: 1px solid var(--gray-200);
+    padding-top: 24px;
+    color: var(--gray-600);
+  }
   .recent-grid .featured .photo { aspect-ratio: 4/5; }
   .recent-grid .featured .meta { padding: 24px 28px 28px; }
   .recent-grid .featured h3 { margin: 0 0 12px; font-size: 28px; font-weight: 800; letter-spacing: -0.01em; line-height: 1.15; }
@@ -292,6 +307,8 @@
   @media (max-width: 900px) {
     .hero-main { grid-template-columns: 1fr; gap: 40px; }
     .why, .pillar-grid, .recent-grid, .help-grid, .foot-grid { grid-template-columns: 1fr; gap: 40px; }
+    .recent-grid.is-single .featured { display: block; }
+    .recent-grid.is-single .featured .photo { aspect-ratio: 4/5; min-height: 0; }
     .nav-links { display: none; }
   }
 </style>
@@ -322,7 +339,7 @@
 
       <figure class="hero-media">
         <img
-          src="https://www.hrw.org/sites/default/files/styles/opengraph/public/media_2023/12/202312americas_venezuela_wr.jpg?h=c6980913&amp;itok=huCeAE41"
+          src="static/heros.jpg"
           alt="Venezuelans gathered at a public demonstration"
           fetchpriority="high"
           decoding="async"
@@ -469,10 +486,13 @@
       <a href="archive.html" style="font-size:14px; font-weight:600; border-bottom:1px solid var(--black); padding-bottom:2px;">See all {{ people|length }} →</a>
     </div>
 
-    <div class="recent-grid" data-stub>
+    <div class="recent-grid">
       {% if recent_additions and recent_additions.featured %}
       <a href="{{ recent_additions.featured.slug }}.html" class="person-card featured">
         <div class="photo" style="aspect-ratio: 4/5;">
+          {% if recent_additions.featured.photo_url %}
+          <img src="{{ recent_additions.featured.photo_url }}" alt="{{ recent_additions.featured.name }}">
+          {% endif %}
           <span class="photo-cap">{{ recent_additions.featured.photo_caption }}</span>
         </div>
         <div class="meta">
@@ -489,6 +509,9 @@
         {% for person in recent_additions.others[:2] %}
         <a href="{{ person.slug }}.html" class="person-card">
           <div class="photo">
+            {% if person.photo_url %}
+            <img src="{{ person.photo_url }}" alt="{{ person.name }}">
+            {% endif %}
             <span class="photo-cap">{{ person.photo_caption }}</span>
           </div>
           <div class="meta">
@@ -504,6 +527,9 @@
         {% for person in recent_additions.others[2:4] %}
         <a href="{{ person.slug }}.html" class="person-card">
           <div class="photo">
+            {% if person.photo_url %}
+            <img src="{{ person.photo_url }}" alt="{{ person.name }}">
+            {% endif %}
             <span class="photo-cap">{{ person.photo_caption }}</span>
           </div>
           <div class="meta">

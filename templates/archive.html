@@ -113,7 +113,12 @@
   <div class="grid">
     {% for person in people %}
     <a href="{{ person.slug }}.html" class="card2">
-      <div class="photo"><span class="photo-cap">{{ person.photo_caption }}</span></div>
+      <div class="photo">
+        {% if person.photo_url %}
+        <img src="{{ person.photo_url }}" alt="{{ person.name }}">
+        {% endif %}
+        <span class="photo-cap">{{ person.photo_caption }}</span>
+      </div>
       <span class="pill {{ person.status_class }}">{{ person.status_label }}</span>
       <h4>{{ person.name }}</h4>
       <div class="row">

@@ -17,6 +17,9 @@
   <div class="wrap">
     <div class="ph-grid">
       <div class="photo">
+        {% if person.photo_url %}
+        <img src="{{ person.photo_url }}" alt="{{ person.name }}">
+        {% endif %}
         <span class="photo-cap">{{ person.photo_caption }}</span>
       </div>
       <div class="ph-meta">
