@@ -1,6 +1,6 @@
-# Museum of Memory
+# Memory of Venezuela
 
-A static prototype for the Museum of Memory public archive and editorial
+A static prototype for the Memory of Venezuela public archive and editorial
 workspace. Profile content lives in structured JSON so public pages and
 agent/editor review screens can be built from one source of truth.
 
@@ -51,7 +51,7 @@ Then open http://localhost:8000 in your browser.
 ## Pull Request Previews
 
 This repository includes a `netlify.toml` file for Netlify Deploy Previews.
-After connecting `MuseumOfMemory/museum` to Netlify, pull requests will build
+After connecting this repository to Netlify, pull requests will build
 with:
 
 ```bash

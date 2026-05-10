@@ -106,7 +106,7 @@
       "count_scope": "all_records",
       "external_metric": {
         "short_label": "Museum records",
-        "label": "This count is generated from local Museum of Memory profile records."
+        "label": "This count is generated from local Memory of Venezuela profile records."
       },
       "sources": [
         {
