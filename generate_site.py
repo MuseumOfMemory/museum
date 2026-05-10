@@ -63,6 +63,20 @@ class StaticSiteGenerator:
             print(f"Warning: Could not load person '{slug}': {e}")
             return None
 
+    def load_all_people(self):
+        """Load all people from data/people directory."""
+        people = []
+        people_dir = self.data_dir / 'people'
+
+        if people_dir.exists():
+            for json_file in people_dir.glob('*.json'):
+                slug = json_file.stem
+                person_data = self.load_person_by_slug(slug)
+                if person_data:
+                    people.append(person_data)
+
+        return people
+
     def hydrate_person_references(self, data):
         """
         Hydrate person references in the data.
@@ -98,19 +112,25 @@ class StaticSiteGenerator:
 
         Args:
             template_name: Name of the template file
-            data_file: Name of the JSON data file
+            data_file: Name of the JSON data file (can be None for archive)
             output_file: Path to output HTML file (relative to output_dir)
         """
-        # Load data
-        data = self.load_json_data(data_file)
+        # Special handling for archive template
+        if template_name == 'archive.html':
+            data = {'people': self.load_all_people()}
+        else:
+            # Load data
+            data = self.load_json_data(data_file)
 
-        # Hydrate person references for home template
-        if template_name == 'home.html':
-            data = self.hydrate_person_references(data)
+            # Hydrate person references for home template
+            if template_name == 'home.html':
+                data = self.hydrate_person_references(data)
+                # Add people count for "See all X" link
+                data['people'] = self.load_all_people()
 
-        # Wrap person data if using person template
-        if template_name == 'person.html':
-            data = {'person': data}
+            # Wrap person data if using person template
+            if template_name == 'person.html':
+                data = {'person': data}
 
         # Render template
         html = self.render_template(template_name, data)

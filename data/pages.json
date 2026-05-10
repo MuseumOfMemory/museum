@@ -6,6 +6,11 @@
       "output": "index.html"
     },
     {
+      "template": "archive.html",
+      "data": null,
+      "output": "archive.html"
+    },
+    {
       "template": "person.html",
       "data": "people/carmen-teresa-navas.json",
       "output": "carmen-teresa-navas.html"
