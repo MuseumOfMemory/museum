@@ -322,6 +322,38 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
   .why p { font-size: 17px; line-height: 1.7; color: var(--gray-700); margin: 0 0 18px; }
   .why p strong { color: var(--black); font-weight: 600; }
 
+  .pillars { display: flex; flex-direction: column; gap: 32px; }
+  .pillars > .t-h2 { margin: 0; max-width: 680px; }
+  .pillar-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; align-items: stretch; }
+  .pillar-card {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-top: 5px solid var(--blue);
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .pillar-card .num {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gray-500);
+  }
+  .pillar-card h3 { margin: 0; font-size: 28px; font-weight: 800; letter-spacing: -0.01em; line-height: 1.1; }
+  .pillar-copy { display: flex; flex-direction: column; gap: 16px; }
+  .pillar-copy p { margin: 0; font-size: 16px; line-height: 1.65; color: var(--gray-700); }
+  .pillar-copy p:first-child { color: var(--black); }
+  .pillar-summary {
+    max-width: 880px;
+    border-top: 1px solid var(--gray-200);
+    padding-top: 24px;
+  }
+  .pillar-summary p { margin: 0 0 14px; font-size: 17px; line-height: 1.65; color: var(--gray-700); }
+  .pillar-summary p:last-child { margin-bottom: 0; }
+
   /* Recent additions */
   .recent-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr; gap: 28px; }
   .recent-grid.is-single { grid-template-columns: minmax(0, 920px); }
@@ -507,7 +539,7 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
   .help-card h4 { font-size: 28px; font-weight: 800; letter-spacing: -0.01em; line-height: 1; margin: 0; }
 
   @media (max-width: 900px) {
-    .why, .recent-grid, .help-grid, .foot-grid { grid-template-columns: 1fr; gap: 40px; }
+    .why, .pillar-grid, .recent-grid, .help-grid, .foot-grid { grid-template-columns: 1fr; gap: 40px; }
     .recent-grid.is-single .featured { display: block; }
     .recent-grid.is-single .featured .photo { aspect-ratio: 4/5; min-height: 0; }
     .nav-links { display: none; }
@@ -724,50 +756,65 @@ body.preview-on .preview-toggle .dot { background: var(--yellow); }
     <div class="section-head">
       <span class="num">04 — The 3 pillars of historical memory</span>
     </div>
-    <div class="why">
+    <div class="pillars">
       <h2 class="t-h2">What happened must be known</h2>
-      <div>
-        <p>
-          <strong>1 — Truth</strong>
-        </p>
-        <p>
-          A country cannot move forward without first establishing the full, documented truth of what occurred. Historical memory creates an official, permanent, irrefutable record that no regime can rewrite, deny, or erase. It names the victims, identifies the perpetrators, and establishes the timeline of violations.
-        </p>
-        <p>
-          <em>"The truth is not just a right of the victims — it is an obligation of the State and a need of society."</em><br/>
-          — UN Commission on Human Rights
-        </p>
-        <p>
-          Without truth, crimes repeat themselves. Without a documented record, oppressors rewrite history and future generations inherit lies.
-        </p>
-        <p>
-          <strong>2 — Justice</strong><br/>
-          <em>"Accountability must follow"</em>
-        </p>
-        <p>
-          Historical memory is the foundation of legal accountability. Every name documented, every testimony preserved, every photograph archived becomes evidence — before national courts, before the International Criminal Court, before the tribunal of history itself. Memory transforms victims into witnesses and witnesses into the driving force of justice.
-        </p>
-        <p>
-          <em>"Where there is no justice, there can be no lasting peace."</em><br/>
-          — Nelson Mandela
-        </p>
-        <p>
-          Without memory, there is impunity. With impunity, perpetrators are emboldened to do it again. Historical memory makes impunity impossible.
-        </p>
-        <p>
-          <strong>3 — Non-repetition</strong><br/>
-          <em>"It must never happen again"</em>
-        </p>
-        <p>
-          The deepest purpose of historical memory is not the past — it is the future. By documenting what happened, a society builds the moral and educational foundation to ensure it never happens again. It becomes a school of dignity, a warning to future generations, a compass for building free and just institutions.
-        </p>
-        <p>
-          <em>"Those who cannot remember the past are condemned to repeat it."</em><br/>
-          — George Santayana
-        </p>
-        <p>
-          This is why the Holocaust Museum exists. This is why Mandela's Robben Island became a monument. This is why The Memory of Venezuela must exist — so that a free Venezuela is built, never again, on silence.
-        </p>
+      <div class="pillar-grid">
+        <article class="pillar-card truth">
+          <span class="num">1 — Truth</span>
+          <h3>Truth</h3>
+          <div class="pillar-copy">
+            <p>
+              A country cannot move forward without first establishing the full, documented truth of what occurred. Historical memory creates an official, permanent, irrefutable record that no regime can rewrite, deny, or erase. It names the victims, identifies the perpetrators, and establishes the timeline of violations.
+            </p>
+            <p>
+              <em>"The truth is not just a right of the victims — it is an obligation of the State and a need of society."</em><br/>
+              — UN Commission on Human Rights
+            </p>
+            <p>
+              Without truth, crimes repeat themselves. Without a documented record, oppressors rewrite history and future generations inherit lies.
+            </p>
+          </div>
+        </article>
+        <article class="pillar-card justice">
+          <span class="num">2 — Justice</span>
+          <h3>Justice</h3>
+          <div class="pillar-copy">
+            <p>
+              Accountability must follow
+            </p>
+            <p>
+              Historical memory is the foundation of legal accountability. Every name documented, every testimony preserved, every photograph archived becomes evidence — before national courts, before the International Criminal Court, before the tribunal of history itself. Memory transforms victims into witnesses and witnesses into the driving force of justice.
+            </p>
+            <p>
+              <em>"Where there is no justice, there can be no lasting peace."</em><br/>
+              — Nelson Mandela
+            </p>
+            <p>
+              Without memory, there is impunity. With impunity, perpetrators are emboldened to do it again. Historical memory makes impunity impossible.
+            </p>
+          </div>
+        </article>
+        <article class="pillar-card memory">
+          <span class="num">3 — Non-repetition</span>
+          <h3>Memory</h3>
+          <div class="pillar-copy">
+            <p>
+              It must never happen again
+            </p>
+            <p>
+              The deepest purpose of historical memory is not the past — it is the future. By documenting what happened, a society builds the moral and educational foundation to ensure it never happens again. It becomes a school of dignity, a warning to future generations, a compass for building free and just institutions.
+            </p>
+            <p>
+              <em>"Those who cannot remember the past are condemned to repeat it."</em><br/>
+              — George Santayana
+            </p>
+            <p>
+              This is why the Holocaust Museum exists. This is why Mandela's Robben Island became a monument. This is why The Memory of Venezuela must exist — so that a free Venezuela is built, never again, on silence.
+            </p>
+          </div>
+        </article>
+      </div>
+      <div class="pillar-summary">
         <p>
           <strong>In one sentence:</strong><br/>
           Truth tells us what happened. Justice holds accountable those who did it. Non-repetition ensures it never happens again.
