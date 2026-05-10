@@ -5,73 +5,125 @@
 {% block extra_styles %}
 <style>
   /* Archive page styles */
-  .archive-hero { padding: 64px 0 48px; }
-  .archive-hero h1 { margin: 16px 0 12px; font-size: clamp(40px, 5vw, 56px); font-weight: 800; letter-spacing: -0.02em; line-height: 1.1; }
-  .archive-hero p { font-size: 18px; color: var(--gray-700); line-height: 1.65; max-width: 720px; margin: 0; }
-
-  .archive-meta {
-    display: flex;
-    gap: 24px;
-    margin-top: 32px;
-    padding-top: 32px;
+  .filter-bar {
     border-top: 1px solid var(--gray-200);
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
+    border-bottom: 1px solid var(--gray-200);
+    background: var(--white);
+    position: sticky;
+    top: 0;
+    z-index: 10;
   }
-  .archive-meta .count { font-size: 32px; font-weight: 800; letter-spacing: -0.02em; }
-  .archive-meta .label { font-size: 13px; color: var(--gray-500); margin-top: 4px; }
-
-  /* Archive grid */
-  .archive-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 28px;
-    margin-top: 48px;
+  .filter-bar .wrap { display: flex; align-items: center; gap: 28px; padding-top: 14px; padding-bottom: 14px; flex-wrap: wrap; }
+  .filter-group { display: flex; align-items: center; gap: 10px; }
+  .filter-group .lbl { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray-500); }
+  .chip {
+    font-size: 12px; font-weight: 600; padding: 6px 12px;
+    border: 1px solid var(--gray-200); background: transparent;
+    cursor: pointer; border-radius: 4px; transition: all 0.15s ease;
   }
-  .archive-grid .person-card .photo { aspect-ratio: 4/5; }
+  .chip:hover { border-color: var(--black); color: var(--black); }
+  .chip.on { background: var(--black); color: var(--cream); border-color: var(--black); }
+  .chip.on.red { background: var(--red); border-color: var(--red); color: var(--white); }
 
-  @media (max-width: 900px) {
-    .archive-grid { grid-template-columns: 1fr; }
+  .search-box {
+    margin-left: auto;
+    display: flex; align-items: center; gap: 10px;
+    border: 1px solid var(--gray-200); padding: 8px 14px; border-radius: 4px;
+    background: var(--cream);
+  }
+  .search-box input { border: 0; background: transparent; outline: none; font: inherit; flex: 1; font-size: 13px; }
+
+  .results-info { display: flex; justify-content: space-between; align-items: center; padding: 28px 0 24px; }
+  .results-info .count { font-size: 14px; color: var(--gray-700); }
+  .results-info .count strong { color: var(--black); }
+  .results-info .sort { font-size: 13px; color: var(--gray-500); display: flex; align-items: center; gap: 12px; }
+  .results-info .sort select { font: inherit; border: 0; background: transparent; color: var(--black); font-weight: 600; }
+
+  .grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--gray-200);
+    border-left: 1px solid var(--gray-200);
+    margin-bottom: 96px;
+  }
+  .card2 {
+    border-right: 1px solid var(--gray-200);
+    border-bottom: 1px solid var(--gray-200);
+    padding: 20px;
+    display: flex; flex-direction: column; gap: 12px;
+    background: var(--white);
+    transition: background 0.15s ease;
+  }
+  .card2:hover { background: var(--cream-2); }
+  .card2 .photo { aspect-ratio: 4/5; }
+  .card2 .pill { align-self: flex-start; }
+  .card2 h4 { margin: 0; font-size: 18px; font-weight: 700; letter-spacing: -0.005em; line-height: 1.2; }
+  .card2 .row { display: flex; align-items: center; gap: 8px; font-size: 12px; color: var(--gray-500); flex-wrap: wrap; }
+  .card2 .age { color: var(--gray-700); font-weight: 600; }
+  .card2 .since { font-family: var(--font-mono); font-size: 11px; color: var(--gray-700); letter-spacing: 0.06em; padding-top: 2px; border-top: 1px solid var(--gray-200); }
+
+  @media (max-width: 1100px) {
+    .grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 760px) {
+    .grid { grid-template-columns: repeat(2, 1fr); }
+    .filter-bar { position: static; }
   }
 </style>
 {% endblock %}
 
 {% block content %}
-<!-- ARCHIVE HERO -->
-<section class="archive-hero">
+<!-- FILTER BAR -->
+<div class="filter-bar">
   <div class="wrap">
-    <div class="t-mono">The Archive</div>
-    <h1>Every person documented</h1>
-    <p>A living record of political prisoners, exiles, and families affected by state repression in Venezuela. Each profile is built from court documents, family testimony, and verified sources.</p>
+    <div class="filter-group">
+      <span class="lbl">Status</span>
+      <button class="chip on">All</button>
+      <button class="chip">Imprisoned</button>
+      <button class="chip">Liberated</button>
+      <button class="chip">In exile</button>
+      <button class="chip">Killed</button>
+      <button class="chip">Family</button>
+    </div>
+    <div class="filter-group">
+      <span class="lbl">Country</span>
+      <button class="chip on">All</button>
+      <button class="chip">Venezuela</button>
+    </div>
+    <div class="search-box">
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" style="color: var(--gray-500);"><circle cx="7" cy="7" r="5"/><path d="M11 11l3 3"/></svg>
+      <input placeholder="Search by name, place, year…" />
+    </div>
+  </div>
+</div>
 
-    <div class="archive-meta">
-      <div>
-        <div class="count">{{ people|length }}</div>
-        <div class="label">People documented</div>
+<!-- RESULTS -->
+<div class="wrap">
+  <div class="results-info">
+    <div class="count">Showing <strong>1–{{ people|length }}</strong> of <strong>{{ people|length }}</strong> · sorted by most recently added</div>
+    <div class="sort">Sort
+      <select>
+        <option>Most recently added</option>
+        <option>Alphabetical</option>
+        <option>Date of detention</option>
+        <option>Time held (longest first)</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="grid">
+    {% for person in people %}
+    <a href="{{ person.slug }}.html" class="card2">
+      <div class="photo"><span class="photo-cap">{{ person.photo_caption }}</span></div>
+      <span class="pill {{ person.status_class }}">{{ person.status_label }}</span>
+      <h4>{{ person.name }}</h4>
+      <div class="row">
+        {% if person.age %}<span class="age">{{ person.age }} years old</span> · {% endif %}
+        <span>{{ person.country }}</span>
       </div>
-    </div>
+      <div class="since">{{ person.epithet }}</div>
+    </a>
+    {% endfor %}
   </div>
-</section>
-
-<!-- ARCHIVE GRID -->
-<section class="section">
-  <div class="wrap">
-    <div class="archive-grid">
-      {% for person in people %}
-      <a href="{{ person.slug }}.html" class="person-card">
-        <div class="photo">
-          <span class="photo-cap">{{ person.photo_caption }}</span>
-        </div>
-        <div class="meta">
-          <span class="pill {{ person.status_class }}">{{ person.status_label }}</span>
-          <h4>{{ person.name }}</h4>
-          <span class="sub">{{ person.epithet }}</span>
-        </div>
-      </a>
-      {% endfor %}
-    </div>
-  </div>
-</section>
+</div>
 
 {% endblock %}
