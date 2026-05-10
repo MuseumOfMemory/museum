@@ -1,0 +1,131 @@
+{
+  "name": "Leopoldo López",
+  "first_name": "Leopoldo",
+  "country": "Venezuela",
+  "country_code": "ve",
+  "status_category": "Liberated",
+  "status_class": "liberated",
+  "status_label": "Liberated",
+  "status_full": "Liberated",
+  "status_sub": "Opposition leader",
+  "photo_caption": "PORTRAIT — LEOPOLDO LÓPEZ",
+  "photo_url": "static/leopoldo-lopez.jpg",
+  "epithet": "Opposition leader, founder of Popular Will. The most emblematic case of political persecution in Venezuela.",
+  "age": 55,
+  "summary": "Leopoldo López is an opposition leader and founder of the Popular Will (Voluntad Popular) party. <strong>He was detained on February 18, 2014</strong> and sentenced to 13 years and 9 months in prison. In July 2017, he was granted house arrest. In 2019, he took refuge in the Chilean embassy in Caracas and later departed to Spain. <strong>The UN declared his detention arbitrary.</strong> His case is the most emblematic of political persecution in Venezuela. Today he lives in exile in Spain, active in international politics.",
+  "connected_to": null,
+  "profile_added": {
+    "date": "2026-05-10",
+    "note": "Initial profile creation",
+    "stub": false
+  },
+  "last_verified": {
+    "date": "2026-05-10",
+    "note": "Based on historical record",
+    "stub": false
+  },
+  "story": {
+    "marker": "What is known",
+    "title": "The most emblematic case of political persecution",
+    "paragraphs": [
+      "Leopoldo López is an opposition leader and the founder of Popular Will (Voluntad Popular), one of Venezuela's most prominent opposition political parties. On February 18, 2014, he was detained and charged in connection with anti-government protests.",
+      "He was sentenced to 13 years and 9 months in prison. In July 2017, after international pressure, he was transferred to house arrest. In 2019, during political upheaval, he took refuge in the Chilean embassy in Caracas and later left for Spain, where he remains in exile."
+    ],
+    "subsections": [
+      {
+        "title": "International recognition",
+        "paragraphs": [
+          "The United Nations Working Group on Arbitrary Detention declared Leopoldo López's detention arbitrary and called for his immediate release. His case became a symbol of the political repression faced by opposition leaders in Venezuela.",
+          "Today, from exile in Spain, López continues to be active in international politics, advocating for democratic change in Venezuela and raising awareness of human rights violations in the country."
+        ]
+      }
+    ]
+  },
+  "timeline": {
+    "marker": "Chronology",
+    "title": "The years, in brief",
+    "events": [
+      {
+        "when": "February 18, 2014",
+        "title": "Detained",
+        "description": "Leopoldo López is detained in connection with anti-government protests.",
+        "source": "Source: public record",
+        "is_key": true
+      },
+      {
+        "when": "2014–2017",
+        "title": "Sentenced to 13 years and 9 months",
+        "description": "López is sentenced to prison. The UN declares his detention arbitrary and calls for his release.",
+        "source": "Source: UN Working Group on Arbitrary Detention",
+        "is_key": true
+      },
+      {
+        "when": "July 2017",
+        "title": "House arrest",
+        "description": "After international pressure, López is transferred from prison to house arrest.",
+        "source": "Source: public record",
+        "is_key": true
+      },
+      {
+        "when": "2019",
+        "title": "Refuge and exile",
+        "description": "López takes refuge in the Chilean embassy in Caracas and later departs to Spain.",
+        "source": "Source: public record",
+        "is_key": true
+      },
+      {
+        "when": "Today",
+        "title": "Active in exile",
+        "description": "Leopoldo López lives in Spain and remains active in international politics, advocating for democracy and human rights in Venezuela.",
+        "source": "Last update: 2026-05-10",
+        "is_key": false
+      }
+    ]
+  },
+  "voices": {
+    "marker": "Voices",
+    "title": "Voices — pending",
+    "description": "Direct testimonies and statements will appear here when collected and consented to. We do not publish voices without explicit, recorded consent. This space is intentionally left open.",
+    "stub": true,
+    "testimonies": [
+      {
+        "text": "Awaiting recorded testimony.",
+        "name": "Leopoldo López",
+        "role": "Pending interview · with consent",
+        "pending": true
+      }
+    ]
+  },
+  "support": {
+    "label": "How to stand with Leopoldo",
+    "title": "Three things you can do, today.",
+    "description": "No one in this archive asks for your sympathy. They ask only that the truth be told, and that those persecuted not be forgotten. Here are three concrete things you can do — none of them take more than ten minutes.",
+    "stub": true,
+    "actions": [
+      {
+        "number": "01",
+        "label": "Ask",
+        "title": "Demand accountability",
+        "description": "Send a written request to the relevant authorities calling for an end to arbitrary detention and political persecution in Venezuela. We provide the addresses and a template letter in two languages.",
+        "link": "#",
+        "link_text": "Open the template"
+      },
+      {
+        "number": "02",
+        "label": "Carry the name",
+        "title": "Share Leopoldo's profile",
+        "description": "A short shareable card in two languages. The smallest form of solidarity is the act of someone, somewhere, knowing the story.",
+        "link": "#",
+        "link_text": "Get the share card"
+      },
+      {
+        "number": "03",
+        "label": "Sustain",
+        "title": "Sustain the work that holds the record",
+        "description": "This archive is built by hand by a small staff. A monthly gift sustains the work — verification, interviews, legal review, and translation in both languages.",
+        "link": "#",
+        "link_text": "Give monthly"
+      }
+    ]
+  }
+}
